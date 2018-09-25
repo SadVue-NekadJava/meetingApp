@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import FooterMeeting from './components/footer.vue'
+  import FooterMeeting from './components/footerMeeting.vue'
 
   export default {
     components:{

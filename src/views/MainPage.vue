@@ -1,19 +1,19 @@
 <template>
   <div >
-
+    <nav-bar></nav-bar>
     <div  class="pt-5 container" >
       <div class="text-center mb-3">
-        <button class="btn  dugme">Daily</button>
-        <button class="btn dugme">Weekly</button>
+        <button class="btn  dugme mr-3">Daily</button>
+        <button @click="weekButtons=!weekButtons" class="btn dugme mr-3">Weekly</button>
         <button class="btn  dugme">All meetings</button>
       </div>
-      <div class="text-center mb-3 dani">
-        <button class="btn  dugme">Monday</button>
-        <button class="btn  dugme">Tuesday</button>
-        <button class="btn  dugme">Wednesday</button>
-        <button class="btn  dugme">Thursday</button>
-        <button class="btn  dugme">Friday</button>
-        <button class="btn  dugme">Saturday</button>
+      <div  v-show="weekButtons" class="text-center mb-3 dani">
+        <button class="btn  dugme mr-3">Monday</button>
+        <button class="btn  dugme mr-3">Tuesday</button>
+        <button class="btn  dugme mr-3">Wednesday</button>
+        <button class="btn  dugme mr-3">Thursday</button>
+        <button class="btn  dugme mr-3">Friday</button>
+        <button class="btn  dugme mr-3">Saturday</button>
         <button class="btn  dugme">Sunday</button>
       </div>
       <div class="skrol" >
@@ -210,9 +210,17 @@
 </template>
 
 <script>
-
+import Navbar from '../components/navbar.vue'
   export default {
-    name: 'mainPage'
+    name: 'mainPage',
+    components:{
+      'nav-bar':Navbar
+    },
+    data(){
+      return{
+        weekButtons:false
+      }
+    }
   }
 
 </script>
@@ -280,7 +288,7 @@ line-height: 38px;
 .skrol {
   padding-top: 2px;
   padding-left: 25px;
-  height:51vh;
+  height:63vh;
    overflow:auto;
    overflow-x:hidden;
    width: 100%;
