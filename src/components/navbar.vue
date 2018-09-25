@@ -5,7 +5,13 @@
         <div class="col-lg-10 pl-5 text-white" ></div>
         <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
           <form id="demo-2" class="my-auto">
-            <input type="search" placeholder="Search">
+
+          <input @keyup="searchUsers"    v-model="keyUserSearch" type="search" class="form-control" placeholder="Search">
+              <ul class="lista" >
+                  <li v-for="user in foundUsers"id="padajuciUseri" class="dropdown-item  "  >{{user.usr_email}}  <hr> </li>
+
+            </ul>
+
           </form>
           <div class="dropdown ">
           <i  v-if="!hasNotif"  class="fas fa-envelope px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -45,6 +51,8 @@ export default {
     return{
       back:true,
       hasNotif:false,
+      keyUserSearch:'',
+      foundUsers:[],
       notifications:
        ['pera ti je poslao zahtev za prijateljstvo',
         'zile ti je poslao zahtev za prijateljstvo',
@@ -55,27 +63,43 @@ export default {
   },
   mounted(){
 
-        // this.  newNotif();
-        // setInterval(this.notif,1000);
+         //this.  newNotif();
+         setInterval(this.notif,1000);
   },
   methods:{
+
+
+    searchUsers(){
+      if(this.keyUserSearch!=''){
+    axios.get("http://800q121.mars-t.mars-hosting.com/search", {
+            params:{ search:this.keyUserSearch},
+              }).then(response => {
+                this.foundUsers=response.data.result;
+                 console.log(this.foundUsers);
+                             });
+                }
+                else
+                     {
+                       this.foundUsers=[];
+                     }
+    },
     logout(){
-        
+
           window.localStorage.removeItem("sessionid");
           },
 
-    newNotif(){
-      // axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
-      //         params:{sid:localStorage.getItem("sessionid")},
-      //           }).then(response => {});
-
-
-          },
+    // newNotif(){
+    //   // axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
+    //   //         params:{sid:localStorage.getItem("sessionid")},
+    //   //           }).then(response => {});
+    //
+    //
+    //       },
 
 
     notif(){
 
-      axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
+      axios.get("http://800q121.mars-t.mars-hosting.com/checkNotifications", {
               params:{      sid:localStorage.getItem("sessionid")},
                 }).then(response => {
                         if(response.data.result.length>0){
@@ -88,9 +112,21 @@ export default {
 }
 
 
+
 </script>
 
 <style scoped>
+
+#demo-2{
+  position: relative;
+}
+.lista{
+  position: absolute;
+}
+.sakriveno{
+  visibility: hidden;
+}
+
 .navChat {
   background: #6ab4d1;
   width: 100%;

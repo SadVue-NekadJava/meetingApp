@@ -211,7 +211,21 @@
         <div class="prviPutOmot">
           <h3 class="lead display-4">Welcome to meeting app, <br> connect with your friends</h3>
           <div class="text-center">
-            <input @keyup="searchUsers" v-model="keyUserSearch" type="text" class="form-control" placeholder="Type e-mail you want to search">
+              <!-- <div class="dropdown ">
+            <input @keyup="searchUsers"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-model="keyUserSearch" type="text" class="form-control" placeholder="Type e-mail you want to search">
+            <div class="dropdown-menu sakriveno  " id="padajuciUseri" aria-labelledby="dropdownMenuButton">
+                <ul>
+                  <div v-for="user in foundUsers">  <li  class="dropdown-item " >{{user.usr_email}} </li>
+                        <hr>
+                  </div>
+              </ul>
+            </div>
+           </div> -->
+           <input @keyup="searchUsers"    v-model="keyUserSearch" type="search" class="form-control" placeholder="Search">
+               <ul class="lista" >
+                   <li v-for="user in foundUsers"id="padajuciUseri" class="dropdown-item  "  >{{user.usr_email}}  <hr> </li>
+
+             </ul>
           </div>
         </div>
       </div>
@@ -229,7 +243,8 @@ import Navbar from '../components/navbar.vue'
     data(){
       return{
         weekButtons:false,
-        keyUserSearch:''
+        keyUserSearch:'',
+        foundUsers:[]
       }
     },
     mounted(){
@@ -238,29 +253,34 @@ import Navbar from '../components/navbar.vue'
         this.$router.push('/');
     },
     methods:{
-        searchUsers(){
-
-
-          axios.get("http://800q121.mars-t.mars-hosting.com/search", {
-                  params:{ slovo:this.keyUserSearch},
-                    }).then(response => {
-                          
-                                   });
-
-
-        }
+      searchUsers(){
+        if(this.keyUserSearch!=''){
+      axios.get("http://800q121.mars-t.mars-hosting.com/search", {
+              params:{ search:this.keyUserSearch},
+                }).then(response => {
+                  this.foundUsers=response.data.result;
+                   console.log(this.foundUsers);
+                               });
+                  }
+                  else
+                       {
+                         this.foundUsers=[];
+                       }
+      }
     }
   }
 
 </script>
 
 <style scoped>
-
+.sakriveno{
+  visibility: hidden;
+}
 .prviPutOmot {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-30%);
 }
 .sastanak{
   border-radius: 20px;
