@@ -8,14 +8,14 @@
             <input type="search" placeholder="Search">
           </form>
           <div class="dropdown ">
-          <i  v-if="!hasNotif" class="fas fa-envelope px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-          <i  v-else class="fas fa-envelope-open px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
+          <i  v-if="!hasNotif"  class="fas fa-envelope px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+          <i  v-else @click="newNotif" class="fas fa-envelope-open px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
             <div class="dropdown-menu pozadinaPadajuci " aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item text-white" href="#">Nov zahtev za prijateljstvo</a>
-              <hr>
-              <a class="dropdown-item text-white" href="#">Imate novi sastanak</a>
-              <hr>
-              <a class="dropdown-item text-white" href="#">Marko je prihvatio vas zahtev</a>
+                <ul>
+                  <div v-for="notification in notifications">  <li  class="dropdown-item text-white" >{{notification}} </li>
+                        <hr>
+                  </div>
+              </ul>
             </div>
           </div>
           <div class="dropdown ">
@@ -43,16 +43,36 @@ export default {
   data(){
     return{
       back:true,
-      hasNotif:false
+      hasNotif:false,
+      notifications:
+       ['pera ti je poslao zahtev za prijateljstvo',
+        'zile ti je poslao zahtev za prijateljstvo',
+        'imate novi sastanak',
+        'zika je prihvatio tvoj zahtev']
 
      }
   },
-
   mounted(){
-
+        this.initialCheckNotif();
         setInterval(this.notif,1000);
-},
+  },
   methods:{
+    initialCheckNotif(){
+      // axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
+      //         params:{sid:localStorage.getItem("sessionid")},
+      //           }).then(response => {});
+
+
+    },
+    newNotif(){
+      // axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
+      //         params:{sid:localStorage.getItem("sessionid")},
+      //           }).then(response => {});
+
+
+    },
+
+
     notif(){
 
       axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
@@ -66,7 +86,7 @@ export default {
                         }
                                });
           }
-  }
+        }
 }
 
 
@@ -92,7 +112,7 @@ a {
   background: #6ab4d1;
   margin-right: 130px;
   margin-top:1vh;
-  padding: 30px;
+  padding: 10px 20px;
   text-align: center;
   border-radius: 0 0 20px 20px;
   border: 0;
