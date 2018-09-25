@@ -1,0 +1,317 @@
+<template>
+  <div >
+
+    <div  class="pt-5 container" >
+      <div class="text-center mb-3">
+        <button class="btn  dugme">Daily</button>
+        <button class="btn dugme">Weekly</button>
+        <button class="btn  dugme">All meetings</button>
+      </div>
+      <div class="text-center mb-3 dani">
+        <button class="btn  dugme">Monday</button>
+        <button class="btn  dugme">Tuesday</button>
+        <button class="btn  dugme">Wednesday</button>
+        <button class="btn  dugme">Thursday</button>
+        <button class="btn  dugme">Friday</button>
+        <button class="btn  dugme">Saturday</button>
+        <button class="btn  dugme">Sunday</button>
+      </div>
+      <div class="skrol" >
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10">
+            <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment" ></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10">
+            <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10">
+            <p class="pl-2">Lorem ipsum dolor sit amet.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10">
+            <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment" ></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10">
+            <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment" ></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10">
+            <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment" ></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+        <div class="row sastanak2 mb-3">
+          <div class="col-md-10 ">
+            <p class="pl-2">Lorem ipsum dolor.</p>
+          </div>
+          <div class=" text-right">
+             <p > 12:00 AM</p>
+           </div>
+         <div class="col-md-1">
+              <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+  export default {
+    name: 'mainPage'
+  }
+
+</script>
+
+<style scoped>
+
+
+.sastanak{
+  border-radius: 20px;
+  width: 100%;
+  color:black;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border:1px solid rgba(37,168,46,1);
+  outline: 0;
+  -webkit-box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
+-moz-box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
+box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
+height: 40px;
+font-size: 18px;
+font-family: 'Lato', sans-serif;
+line-height: 38px;
+}
+
+.sastanak2{
+  border-radius: 20px;
+  width: 100%;
+  color:black;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border:2px solid #aec6cf;
+  outline: 0;
+  -webkit-box-shadow: -2px 2px 14px -1px #6ab4d1;
+  -moz-box-shadow: -2px 2px 14px -1px #6ab4d1;
+  box-shadow: -2px 2px 14px -1px #6ab4d1;
+height: 40px;
+font-size: 18px;
+font-family: 'Lato', sans-serif;
+line-height: 38px;
+}
+
+
+.sastanak i {
+  font-size: 30px;
+  line-height: 38px;
+}
+
+.sastanak2 i {
+  font-size: 30px;
+  line-height: 38px;
+  color:#6ab4d1;
+}
+
+.dugme  {
+  width: 120px;
+  background: #6ab4d1;
+  color:#fff;
+  outline: 0;
+}
+
+.dugme:hover {
+  border: 1px solid #aec6cf;
+}
+
+.skrol {
+  padding-top: 2px;
+  padding-left: 25px;
+  height:51vh;
+   overflow:auto;
+   overflow-x:hidden;
+   width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.5);
+    border-radius:4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #aec6cf;
+    border-radius:4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.5);
+
+}
+
+.dani {
+  visibility: visible;
+}
+
+</style>

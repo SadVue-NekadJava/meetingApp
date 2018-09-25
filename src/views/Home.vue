@@ -105,7 +105,7 @@ export default {
                   window.localStorage.setItem("sessionid", sid);
                   //console.log(response.data[0].usr_access);
                   if (response.data.status) {
-                      this.$router.push('friends');
+                      this.$router.push('mainPage');
                       }
                                });
 

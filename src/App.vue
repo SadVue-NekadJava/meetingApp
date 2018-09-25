@@ -2,8 +2,19 @@
   <div>
 
     <router-view/>
+    <footer-meeting></footer-meeting>
   </div>
 </template>
+
+<script>
+  import FooterMeeting from './components/footer.vue'
+
+  export default {
+    components:{
+      "footer-meeting": FooterMeeting
+    }
+  }
+</script>
 
 <style lang="scss">
 body {
