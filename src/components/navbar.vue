@@ -25,7 +25,8 @@
                 <hr>
                 <a class="dropdown-item text-white" href="#">Settings</a>
                 <hr>
-                <a class="dropdown-item text-white" href="#">Logout</a>
+            <label  @click="logout">  <router-link to="/"  class="dropdown-item text-white" >Logout</router-link></label>
+
               </div>
           </div>
         </div>
@@ -53,24 +54,23 @@ export default {
      }
   },
   mounted(){
-        this.initialCheckNotif();
-        setInterval(this.notif,1000);
+
+        // this.  newNotif();
+        // setInterval(this.notif,1000);
   },
   methods:{
-    initialCheckNotif(){
-      // axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
-      //         params:{sid:localStorage.getItem("sessionid")},
-      //           }).then(response => {});
+    logout(){
+        
+          window.localStorage.removeItem("sessionid");
+          },
 
-
-    },
     newNotif(){
       // axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
       //         params:{sid:localStorage.getItem("sessionid")},
       //           }).then(response => {});
 
 
-    },
+          },
 
 
     notif(){
@@ -78,11 +78,9 @@ export default {
       axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
               params:{      sid:localStorage.getItem("sessionid")},
                 }).then(response => {
-
                         if(response.data.result.length>0){
                           this.hasNotif=true;
-
-                      console.log(response.data.result);
+                          console.log(response.data.result);
                         }
                                });
           }

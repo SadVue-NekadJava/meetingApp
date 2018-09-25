@@ -210,7 +210,9 @@
       <div class="container">
         <div class="prviPutOmot">
           <h3 class="lead display-4">Welcome to meeting app, <br> connect with your friends</h3>
-          <div class="text-center"><input type="text" class="form-control" placeholder="Type e-mail you want to search"></div>
+          <div class="text-center">
+            <input @keyup="searchUsers" v-model="keyUserSearch" type="text" class="form-control" placeholder="Type e-mail you want to search">
+          </div>
         </div>
       </div>
     </div>
@@ -226,8 +228,27 @@ import Navbar from '../components/navbar.vue'
     },
     data(){
       return{
-        weekButtons:false
+        weekButtons:false,
+        keyUserSearch:''
       }
+    },
+    mounted(){
+
+      if(window.localStorage.getItem("sessionid")==null)
+        this.$router.push('/');
+    },
+    methods:{
+        searchUsers(){
+
+
+          axios.get("http://800q121.mars-t.mars-hosting.com/search", {
+                  params:{ slovo:this.keyUserSearch},
+                    }).then(response => {
+                          
+                                   });
+
+
+        }
     }
   }
 

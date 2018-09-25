@@ -54,8 +54,13 @@
   				<label>Username</label>
   			</div>
   			<br>
+        <div class="input-box ">
+          <input class=" form-control" type="email" name="" required="" v-model="regEmail">
+          <label>Email</label>
+        </div>
+        	<br>
   			<div class="input-box ">
-  				<input class=" form-control" type="text" name="" required="" v-model="regPass">
+  				<input class=" form-control" type="password" name="" required="" v-model="regPass">
   				<label>Password</label>
   			</div>
   			<br>
@@ -89,6 +94,7 @@ export default {
         logUsername:'',
         logPassword:'',
         regUsername:'',
+        regEmail:'',
         regPass:'',
         regPass2:''
 
@@ -96,7 +102,7 @@ export default {
   },
   methods:{
     login(){
-      axios.post("http://760b121.mars-e1.mars-hosting.com/login", {
+      axios.post("http://800q121.mars-t.mars-hosting.com/login", {
                       username:this.logUsername,
                       password:this.logPassword
                 }).then(response => {
@@ -111,10 +117,12 @@ export default {
 
    },
     register(){
-      axios.post("http://760b121.mars-e1.mars-hosting.com/register", {
+      axios.post("http://800q121.mars-t.mars-hosting.com/register", {
                       username:this.regUsername,
+                        email:this.regEmail,
                       password:this.regPass,
                       passwordCheck:this.regPass2
+
 
                  }).then(response => {
 
