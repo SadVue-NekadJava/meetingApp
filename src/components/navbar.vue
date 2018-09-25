@@ -77,7 +77,7 @@ export default {
   background: #6ab4d1;
   width: 100%;
   height: 7vh;
-  box-shadow: 1px 1px 5px #6ab4d1;
+
 
 }
 .navChat i {
@@ -91,13 +91,20 @@ a {
 .pozadinaPadajuci {
   background: #6ab4d1;
   margin-right: 130px;
-  margin-top: 15px;
-  border-radius: 20px;
+  margin-top:1vh;
+  padding: 30px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+  border: 0;
 }
 .dropdown-item:hover {
-  background: gray;
-  border-radius: 20px;
+  background: #49a7cc;
+  display: inherit;
+  border-radius: 30px;
+
+
 }
+
 .pozicijaIkoniceNav{
   line-height: 30px;
 }
