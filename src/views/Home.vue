@@ -44,10 +44,15 @@
   	<div class="signup">
   		<div class="form-group">
   			<h3 class="py-3 text-center">Sign up</h3>
-  			<!-- <div class="input-box ">
-  				<input class=" form-control" type="text" name="" required="" v-model="regName">
-  				<label>Name </label>
-  			</div> -->
+  			<div class="input-box ">
+  				<input class=" form-control" type="text" name="" required="" v-model="regFirstName">
+  				<label>First Name </label>
+  			</div>
+        <br>
+        <div class="input-box ">
+  				<input class=" form-control" type="text" name="" required="" v-model="regLastName">
+  				<label>Last name </label>
+  			</div>
   			<br>
   			<div class="input-box ">
   				<input class=" form-control" type="text" name="" required="" v-model="regUsername">
@@ -55,7 +60,7 @@
   			</div>
   			<br>
         <div class="input-box ">
-          <input class=" form-control" type="email" name="" required="" v-model="regEmail">
+          <input class=" form-control" type="text" name="" required="" v-model="regEmail">
           <label>Email</label>
         </div>
         	<br>
@@ -93,6 +98,8 @@ export default {
     return{
         logUsername:'',
         logPassword:'',
+        regFirstName:'',
+        regLastName:'',
         regUsername:'',
         regEmail:'',
         regPass:'',
@@ -119,15 +126,19 @@ export default {
     register(){
       axios.post("http://800q121.mars-t.mars-hosting.com/register", {
                       username:this.regUsername,
-                        email:this.regEmail,
+                      firstname:this.regFirstName,
+                      lastname:this.regLastName,
+                      email:this.regEmail,
                       password:this.regPass,
                       passwordCheck:this.regPass2
 
-
                  }).then(response => {
-
-                   this.$router.push('/')
+                   if (response.data.status) {
+                     alert ("Uspesna registracija");
+                     location.reload();
+                   }
                  });
+
     }
    }
 
