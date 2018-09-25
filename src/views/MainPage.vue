@@ -3,9 +3,9 @@
     <nav-bar></nav-bar>
     <div  class="pt-5 container" >
       <div class="text-center mb-3">
-        <button class="btn  dugme mr-3">Daily</button>
-        <button @click="weekButtons=!weekButtons" class="btn dugme mr-3">Weekly</button>
-        <button class="btn  dugme">All meetings</button>
+        <button @click="weekButtons=false" class="btn  dugme mr-3">Daily</button>
+        <button @click="weekButtons=true" class="btn dugme mr-3">Weekly</button>
+        <button @click="weekButtons=false" class="btn  dugme">All meetings</button>
       </div>
       <div  v-show="weekButtons" class="text-center mb-3 dani">
         <button class="btn  dugme mr-3">Monday</button>
