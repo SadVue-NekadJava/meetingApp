@@ -1,7 +1,7 @@
 <template>
   <div >
     <nav-bar></nav-bar>
-    <div  class="pt-5 container" >
+    <!-- <div  class="pt-5 container" >
       <div class="text-center mb-3">
         <button @click="weekButtons=false" class="btn  dugme mr-3">Daily</button>
         <button @click="weekButtons=true" class="btn dugme mr-3">Weekly</button>
@@ -205,9 +205,14 @@
          </div>
         </div>
       </div>
-    </div>
-    <div class="prviPutNaStrani">
-
+    </div> -->
+<!-- *************************** PRVI PUT NA STRANI ***************-->
+      <div class="container">
+        <div class="prviPutOmot">
+          <h3 class="lead display-4">Welcome to meeting app, <br> connect with your friends</h3>
+          <div class="text-center"><input type="text" class="form-control" placeholder="Type e-mail you want to search"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -230,7 +235,12 @@ import Navbar from '../components/navbar.vue'
 
 <style scoped>
 
-
+.prviPutOmot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
 .sastanak{
   border-radius: 20px;
   width: 100%;
