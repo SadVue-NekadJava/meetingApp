@@ -387,7 +387,7 @@ import Navbar from '../components/navbar.vue'
     letter-spacing: 1px;
 }
 .lista li:hover{
-    background: #aec6cf;
+    background: #6ab4d1;
     cursor: pointer;
     color:white;
     text-shadow: 1px 1px 5px black;
