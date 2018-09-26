@@ -14,8 +14,8 @@
 
           </form>
           <div class="dropdown ">
-          <i  v-if="!hasNotif"  class="fas fa-envelope px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-          <i  v-else  class="fas fa-envelope-open px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
+          <i  v-if="!hasNotif"  class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+          <i  v-else  class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
             <div class="dropdown-menu pozadinaPadajuci " aria-labelledby="dropdownMenuButton">
                 <ul>
                   <div v-for="notification in notifications">
