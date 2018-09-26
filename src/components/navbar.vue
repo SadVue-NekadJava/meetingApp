@@ -15,10 +15,10 @@
           </form>
           <div class="dropdown ">
           <i  v-if="!hasNotif"  class="fas fa-envelope px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-          <i  v-else @click="newNotif" class="fas fa-envelope-open px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
+          <i  v-else  class="fas fa-envelope-open px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
             <div class="dropdown-menu pozadinaPadajuci " aria-labelledby="dropdownMenuButton">
                 <ul>
-                  <div v-for="notification in notifications">  <li  class="dropdown-item text-white" >{{notification}} </li>
+                  <div v-for="notification in notifications">  <li @click="statusRead(notification.not_id)"  class="dropdown-item "   v-bind:class="[notification.not_confirm ? 'text-white' :'text-danger'] ">{{notification.usr_firstname}} {{notification.usr_lastname}} {{notification.nst_text}} </li>
                         <hr>
                   </div>
               </ul>
@@ -53,11 +53,8 @@ export default {
       hasNotif:false,
       keyUserSearch:'',
       foundUsers:[],
-      notifications:
-       ['pera ti je poslao zahtev za prijateljstvo',
-        'zile ti je poslao zahtev za prijateljstvo',
-        'imate novi sastanak',
-        'zika je prihvatio tvoj zahtev']
+      notifications:[],
+      notifSound: new Audio(require('../assets/notification.mp3'))
 
      }
   },
@@ -68,6 +65,18 @@ export default {
   },
   methods:{
 
+      statusRead(not_id){
+
+        axios.post("http://800q121.mars-t.mars-hosting.com/postNotification", {
+                  not_id
+                  }).then(response => {
+
+                     console.log('bravo');
+                                 });
+
+
+
+      },
 
     searchUsers(){
       if(this.keyUserSearch!=''){
@@ -99,13 +108,29 @@ export default {
 
     notif(){
 
-      axios.get("http://800q121.mars-t.mars-hosting.com/checkNotifications", {
+      axios.get("http://800q121.mars-t.mars-hosting.com/getNotifications", {
               params:{      sid:localStorage.getItem("sessionid")},
                 }).then(response => {
-                        if(response.data.result.length>0){
-                          this.hasNotif=true;
+
+                this.notifications=response.data.result;
+                 var tempNotification=false;
+                for(var i=0;i<this.notifications.length;i++){
+                  if(this.notifications[i].not_confirm==0){
+                        tempNotification=true;
                           console.log(response.data.result);
                         }
+                      }
+                      if(tempNotification){
+                        if(!this.hasNotif){
+                          this.notifSound.play();
+                        }
+                        this.hasNotif=true;
+
+                      }
+                      else{
+                          this.hasNotif=false;
+                      }
+
                                });
           }
         }
