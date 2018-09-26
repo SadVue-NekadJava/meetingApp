@@ -4,15 +4,13 @@
       <div class="row pt-3">
         <div class="col-lg-10 pl-5 text-white" ></div>
         <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
-          <form id="demo-2" class="my-auto">
-
-          <input @keyup="searchUsers"    v-model="keyUserSearch" type="search" class="form-control" placeholder="Search">
+          <form id="demo-2" class="my-auto ">
+            <input id="lupa" @keyup="searchUsers" v-model="keyUserSearch" type="search" class="form-control" placeholder="Search">
               <ul class="lista" >
                   <li v-for="user in foundUsers"id="padajuciUseri" class="dropdown-item  "  >{{user.usr_email}}  <hr> </li>
-
-            </ul>
-
+              </ul>
           </form>
+          <router-link :to="{ name: 'chat' }"><i class="far fa-comments" style="color:black"></i></router-link>
           <div class="dropdown ">
           <i  v-if="!hasNotif"  class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <i  v-else  class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
@@ -35,7 +33,7 @@
             </div>
           </div>
           <div class="dropdown ">
-            <i class="fas fa-user"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <i class="far fa-user"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
               <div class="dropdown-menu pozadinaPadajuci" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item text-white" href="#">Profile</a>
                 <hr>
@@ -174,15 +172,17 @@ export default {
 </script>
 
 <style scoped>
+#lupa {
+  display: flex;
+}
+
 #da:hover{
   color:lightgreen;
 }
 #ne:hover{
   color:red;
 }
-#demo-2{
-  position: relative;
-}
+
 .lista{
   position: absolute;
   right: 0;
