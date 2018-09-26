@@ -221,10 +221,10 @@
               </ul>
             </div>
           </div> <-->
-           <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class="form-control prviPutLista" placeholder="Search">
+           <input  @keyup="searchUsers"  v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users...">
            <ul class="lista">
               <a data-toggle="modal" title="User" data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
-                <li  class="pb-2"  id="padajuciUseri" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span> {{user.usr_email}}</li>
+                <li  class="pb-2"  id="padajuciUseri" :usrId="user.usr_id" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span> {{user.usr_email}}</li>
               </a>
           </ul>
           </div>
@@ -251,7 +251,7 @@
 
     		  </div>
     		  <div class="modal-footer">
-    			    <button class="btn dugme">Add user</button>
+    			    <button class="btn dugme" @click="addUser(userId)">Add user</button>
     		  </div>
     		</div>
   	  </div>
@@ -276,7 +276,8 @@ import Navbar from '../components/navbar.vue'
         firstname: '',
         lastname:'',
         mail:'',
-        username:''
+        username:'',
+        userId:''
       }
     },
     mounted(){
@@ -304,10 +305,21 @@ import Navbar from '../components/navbar.vue'
           this.lastname=n.srcElement.attributes.prezime.value;
           this.mail=n.srcElement.attributes.mail.value;
           this.username=n.srcElement.attributes.username.value;
+          this.userId=n.srcElement.attributes.usrId.value;
 
-      }
+      },
+      addUser(id){
+        axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
+            sid:  window.localStorage.getItem("sessionid"),
+            id
+                  }).then(response => {
+                  console.log(response.data.status)
+                                 });
+                    }
+
     }
   }
+
 
 </script>
 
@@ -337,19 +349,38 @@ import Navbar from '../components/navbar.vue'
   font-size: 0.9rem;
 }
 
+.prviPutLista::placeholder{
+  font-weight: 600;
+}
+.prviPutLista{
+  border-top: 2px solid #aec6cf;
+  border-left: 2px solid #aec6cf;
+  border-right:2px solid #aec6cf;
+  background: #fff;
+  outline: none;
+  width: 100%;
+}
+.prviPutLista:valid{
+  border-bottom: 0;
+  outline: none;
+  width: 100%;
+  border-radius: 10px 10px 0 0 ;
+}
+
 .lista {
   position: absolute;
   width: 100%;
   padding: 0;
   border-radius:0 0 10px 10px ;
   border: 2px solid #aec6cf;
+  border-top: 0;
   overflow: hidden;
 }
 
 .lista li{
     list-style: none;
     width: 100%;
-    background: #f1f1f1;
+    background: #fff;
     margin: 0;
     padding: 0;
     font-size: 20px;
@@ -358,6 +389,8 @@ import Navbar from '../components/navbar.vue'
 .lista li:hover{
     background: #aec6cf;
     cursor: pointer;
+    color:white;
+    text-shadow: 1px 1px 5px black;
 }
 
 
