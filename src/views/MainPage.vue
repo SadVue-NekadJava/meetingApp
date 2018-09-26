@@ -209,7 +209,7 @@
 <!-- *************************** PRVI PUT NA STRANI ***************-->
       <div class="container">
         <div class="prviPutOmot">
-          <h3 class="lead display-4">Welcome to meeting app, <br> connect with your friends</h3>
+          <h3 class="lead display-4">Welcome to meeting app! <br> Connect with your friends...</h3>
           <div class="text-center">
               <!-- <div class="dropdown ">
             <input @keyup="searchUsers"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-model="keyUserSearch" type="text" class="form-control" placeholder="Type e-mail you want to search">
@@ -220,16 +220,44 @@
                   </div>
               </ul>
             </div>
-           </div> -->
-           <input @keyup="searchUsers"    v-model="keyUserSearch" type="search" class="form-control" placeholder="Search">
-               <ul class="lista" >
-                   <li v-for="user in foundUsers"id="padajuciUseri" class="dropdown-item  "  >{{user.usr_email}}  <hr> </li>
-
-             </ul>
+          </div> <-->
+           <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class="form-control prviPutLista" placeholder="Search">
+           <ul class="lista">
+              <a data-toggle="modal" title="User" data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
+                <li  class="pb-2"  id="padajuciUseri" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span> {{user.usr_email}}</li>
+              </a>
+          </ul>
           </div>
         </div>
       </div>
-    </div>
+
+
+    <!-- ************ MODALI *************-->
+    <div class="modal fade text-center text-center" id="userSearched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  	  <div class="modal-dialog" role="document">
+    		<div class="modal-content">
+    		  <div class="modal-header">
+      			<h5 class="modal-title" id="exampleModalLabel"><div class="velikaSlova">
+              <i class="fas fa-user"></i><h5>{{firstname}} {{lastname}}</h5>
+            </div></h5>
+      			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      			  <span aria-hidden="true">&times;</span>
+      			</button>
+    		  </div>
+    		  <div class="modal-body form-group ">
+
+            <p class="mt-2">E-mail: {{mail}}</p>
+            <p class="mt-2">Username: {{username}}</p>
+
+    		  </div>
+    		  <div class="modal-footer">
+    			    <button class="btn dugme">Add user</button>
+    		  </div>
+    		</div>
+  	  </div>
+	  </div>
+
+  <!-- ************ KRAJ MODALI *************-->
   </div>
 </template>
 
@@ -244,7 +272,11 @@ import Navbar from '../components/navbar.vue'
       return{
         weekButtons:false,
         keyUserSearch:'',
-        foundUsers:[]
+        foundUsers:[],
+        firstname: '',
+        lastname:'',
+        mail:'',
+        username:''
       }
     },
     mounted(){
@@ -266,6 +298,13 @@ import Navbar from '../components/navbar.vue'
                        {
                          this.foundUsers=[];
                        }
+      },
+      ispis(n){
+        this.firstname=n.srcElement.attributes.ime.value;
+          this.lastname=n.srcElement.attributes.prezime.value;
+          this.mail=n.srcElement.attributes.mail.value;
+          this.username=n.srcElement.attributes.username.value;
+
       }
     }
   }
@@ -276,12 +315,52 @@ import Navbar from '../components/navbar.vue'
 .sakriveno{
   visibility: hidden;
 }
+
+.velikaSlova{
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+}
+.velikaSlova i{
+  font-size: 30px;
+  padding-right: 0.5em;
+}
 .prviPutOmot {
   position: absolute;
   top: 30%;
   left: 50%;
   transform: translateX(-50%) translateY(-30%);
 }
+.ime {
+  font-style: italic;
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+
+.lista {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  border-radius:0 0 10px 10px ;
+  border: 2px solid #aec6cf;
+  overflow: hidden;
+}
+
+.lista li{
+    list-style: none;
+    width: 100%;
+    background: #f1f1f1;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+.lista li:hover{
+    background: #aec6cf;
+    cursor: pointer;
+}
+
+
 .sastanak{
   border-radius: 20px;
   width: 100%;
@@ -291,12 +370,12 @@ import Navbar from '../components/navbar.vue'
   border:1px solid rgba(37,168,46,1);
   outline: 0;
   -webkit-box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
--moz-box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
-box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
-height: 40px;
-font-size: 18px;
-font-family: 'Lato', sans-serif;
-line-height: 38px;
+  -moz-box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
+  box-shadow: -2px 2px 14px -1px rgba(37,168,46,1);
+  height: 40px;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  line-height: 38px;
 }
 
 .sastanak2{
