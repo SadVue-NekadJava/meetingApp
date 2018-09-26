@@ -351,6 +351,8 @@ import Navbar from '../components/navbar.vue'
 
 .prviPutLista::placeholder{
   font-weight: 600;
+  line-height: 30px;
+  font-size: 18px;
 }
 .prviPutLista{
   border-top: 2px solid #aec6cf;
@@ -359,6 +361,10 @@ import Navbar from '../components/navbar.vue'
   background: #fff;
   outline: none;
   width: 100%;
+  padding: 5px 0;
+  padding-left: 5px;
+  font-size: 18px;
+  
 }
 .prviPutLista:valid{
   border-bottom: 0;
