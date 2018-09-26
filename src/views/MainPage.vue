@@ -251,7 +251,7 @@
 
     		  </div>
     		  <div class="modal-footer">
-    			    <button class="btn dugme" @click="addUser(userId)">Add user</button>
+    			    <button class="btn dugme" @click="addUser(userId)"  data-dismiss="modal">Add user</button>
     		  </div>
     		</div>
   	  </div>
