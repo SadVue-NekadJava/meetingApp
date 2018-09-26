@@ -25,7 +25,7 @@
                          {{notification.nst_text}}
                          <div  v-if="notification.nst_id==1" class="friend-req">
                            <i id="da" @click="confirmReq(notification.usr_id_send)" class="fas fa-check"></i>
-                           <i id="ne" @click="denyReq(notification.usr_id_send)" class="pl-2 fas fa-times"></i>
+                           <i id="ne" @click="denyReq(notification.usr_id_send)" class="pl-5 fas fa-times"></i>
                          </div>
 
                         </li>
