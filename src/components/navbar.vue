@@ -18,7 +18,17 @@
           <i  v-else  class="fas fa-envelope-open px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" ></i>
             <div class="dropdown-menu pozadinaPadajuci " aria-labelledby="dropdownMenuButton">
                 <ul>
-                  <div v-for="notification in notifications">  <li @click="statusRead(notification.not_id)"  class="dropdown-item "   v-bind:class="[notification.not_confirm ? 'text-white' :'text-danger'] ">{{notification.usr_firstname}} {{notification.usr_lastname}} {{notification.nst_text}} </li>
+                  <div v-for="notification in notifications">
+                      <li @click="statusRead(notification.not_id)"  class="dropdown-item "
+                         v-bind:class="[notification.not_confirm ? 'text-white' :'text-danger'] ">
+                         {{notification.usr_firstname}} {{notification.usr_lastname}}
+                         {{notification.nst_text}}
+                         <div  v-if="notification.nst_id==1" class="friend-req">
+                           <i id="da" @click="confirmReq(notification.usr_id)" class="fas fa-check"></i>
+                           <i id="ne" @click="denyReq(notification.usr_id)" class="pl-2 fas fa-times"></i>
+                         </div>
+
+                        </li>
                         <hr>
                   </div>
               </ul>
@@ -64,6 +74,29 @@ export default {
          setInterval(this.notif,1000);
   },
   methods:{
+
+    denyReq(id){
+      axios.post("http://800q121.mars-t.mars-hosting.com/friendDenied", {
+                sid:  window.localStorage.getItem("sessionid"),
+                id
+                }).then(response => {
+
+                   console.log('bravo');
+                               });
+
+
+    },
+      confirmReq(id){
+        axios.post("http://800q121.mars-t.mars-hosting.com/friendConfirm", {
+                  sid:  window.localStorage.getItem("sessionid"),
+                  id
+                  }).then(response => {
+
+                     console.log('bravo');
+                                 });
+
+
+      },
 
       statusRead(not_id){
 
@@ -141,16 +174,20 @@ export default {
 </script>
 
 <style scoped>
-
+#da:hover{
+  color:lightgreen;
+}
+#ne:hover{
+  color:red;
+}
 #demo-2{
   position: relative;
 }
 .lista{
   position: absolute;
+  right: 0;
 }
-.sakriveno{
-  visibility: hidden;
-}
+
 
 .navChat {
   background: #6ab4d1;
@@ -169,7 +206,7 @@ a {
 }
 .pozadinaPadajuci {
   background: #6ab4d1;
-  margin-right: 130px;
+  margin-right: 530px;
   margin-top:1vh;
   padding: 10px 20px;
   text-align: center;
