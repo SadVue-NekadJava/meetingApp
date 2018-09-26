@@ -1,7 +1,7 @@
 <template>
   <div >
     <nav-bar></nav-bar>
-    <!-- <div  class="pt-5 container" >
+    <div  class="pt-5 container" >
       <div class="text-center mb-3">
         <button @click="weekButtons=false" class="btn  dugme mr-3">Daily</button>
         <button @click="weekButtons=true" class="btn dugme mr-3">Weekly</button>
@@ -207,21 +207,12 @@
       </div>
     </div> -->
 <!-- *************************** PRVI PUT NA STRANI ***************-->
-      <div class="container">
+      <!-- <div class="container">
         <div class="prviPutOmot">
           <h3 class="lead display-4">Welcome to meeting app! <br> Connect with your friends...</h3>
+          <h3 class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
           <div class="text-center">
-              <!-- <div class="dropdown ">
-            <input @keyup="searchUsers"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-model="keyUserSearch" type="text" class="form-control" placeholder="Type e-mail you want to search">
-            <div class="dropdown-menu sakriveno  " id="padajuciUseri" aria-labelledby="dropdownMenuButton">
-                <ul>
-                  <div v-for="user in foundUsers">  <li  class="dropdown-item " >{{user.usr_email}} </li>
-                        <hr>
-                  </div>
-              </ul>
-            </div>
-          </div> <-->
-           <input  @keyup="searchUsers"  v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users...">
+           <input  @keyup="searchUsers"  v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users by mail">
            <ul class="lista">
               <a data-toggle="modal" title="User" data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
                 <li  class="pb-2"  id="padajuciUseri" :usrId="user.usr_id" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span> {{user.usr_email}}</li>
@@ -229,7 +220,7 @@
           </ul>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
     <!-- ************ MODALI *************-->
@@ -364,7 +355,7 @@ import Navbar from '../components/navbar.vue'
   padding: 5px 0;
   padding-left: 5px;
   font-size: 18px;
-  
+
 }
 .prviPutLista:valid{
   border-bottom: 0;
