@@ -2,10 +2,20 @@
 <div>
   <div class="navChat">
     <div class="row pt-3">
-      <div class="col-lg-10 pl-5 text-white"></div>
+      <div class="col-lg-2 pl-5">
+        <form class="searchbox">
+         <input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
+         <input type="submit" class="searchbox-submit">
+         <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+     </form>
+      </div>
+      <div class="col-lg-8 pl-5 text-white">
+          <h3 class="text-center text-white">LOGO</h3>
+      </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
-        <!-- Nav bar lupa -->
-        <div class="search-bar">
+
+
+        <!-- <div class="search-bar">
 
 
         <i class="fas fa-search">  </i>
@@ -17,7 +27,7 @@
           </a>
         </ul>
 
-            </div>
+            </div> -->
     <!-- Nav bar lupa -->
     <!-- ************ MODALI *************-->
     <div class="modal fade text-center text-center" id="userSearched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -209,18 +219,56 @@ export default {
     }
   }
 }
-$('.search-bar .icon').on('click',function(){
-  $(this).parent().toggleClass('active');
 
-});
+$(document).ready(function(){
+            var submitIcon = $('.searchbox-icon');
+            var inputBox = $('.searchbox-input');
+            var searchBox = $('.searchbox');
+            var isOpen = false;
+            submitIcon.click(function(){
+                if(isOpen == false){
+                    searchBox.addClass('searchbox-open');
+                    inputBox.focus();
+                    isOpen = true;
+                } else {
+                    searchBox.removeClass('searchbox-open');
+                    inputBox.focusout();
+                    isOpen = false;
+                }
+            });
+             submitIcon.mouseup(function(){
+                    return false;
+                });
+            searchBox.mouseup(function(){
+                    return false;
+                });
+            $(document).mouseup(function(){
+                    if(isOpen == true){
+                        $('.searchbox-icon').css('display','block');
+                        submitIcon.click();
+                    }
+                });
+        });
+            function buttonUp(){
+                var inputVal = $('.searchbox-input').val();
+                inputVal = $.trim(inputVal).length;
+                if( inputVal !== 0){
+                    $('.searchbox-icon').css('display','none');
+                } else {
+                    $('.searchbox-input').val('');
+                    $('.searchbox-icon').css('display','block');
+                }
+            }
 
 </script>
 
 <style scoped>
-.navChat i:hover{
+
+
+/* .navChat i:hover{
   transform: scale(1.2);
 
-}
+} */
 
 
 #da:hover {
@@ -358,4 +406,73 @@ input::-webkit-input-placeholder {
 #demo-2 input::-webkit-input-placeholder {
   color: transparent;
 } */
+
+.searchbox{
+    position:relative;
+    min-width:50px;
+    width:0%;
+    height:50px;
+    float:right;
+    overflow:hidden;
+
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    -ms-transition: width 0.3s;
+    -o-transition: width 0.3s;
+    transition: width 0.3s;
+}
+
+.searchbox-input{
+    top:0;
+    right:0;
+    border:0;
+    outline:0;
+    border-radius: 20px;
+    background:#fff;
+    width:90%;
+    height:80%;
+    margin:0;
+    margin-left: 14px;
+    padding:0px 55px 0px 20px;
+    font-size:20px;
+    color:#000;
+
+}
+.searchbox-input::-webkit-input-placeholder {
+    color: #000;
+}
+.searchbox-input:-moz-placeholder {
+    color: #000;
+}
+.searchbox-input::-moz-placeholder {
+    color: #000;
+}
+.searchbox-input:-ms-input-placeholder {
+    color: #000;
+}
+
+.searchbox-icon,
+.searchbox-submit{
+    width:50px;
+    height:50px;
+    display:block;
+    position:absolute;
+    top:0;
+    font-family:verdana;
+    font-size:22px;
+    right:0;
+    padding:0;
+    margin:0;
+    border:0;
+    outline:0;
+    line-height:50px;
+    text-align:center;
+    cursor:pointer;
+    color:#FFFFFF;
+    background:#6ab4d1  ;
+}
+
+.searchbox-open{
+    width:100%;
+}
 </style>
