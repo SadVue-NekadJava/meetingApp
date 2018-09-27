@@ -4,14 +4,56 @@
     <div class="row pt-3">
       <div class="col-lg-10 pl-5 text-white"></div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
-        <form id="demo-2" class="my-auto ">
-          <input id="lupa" @keyup="searchUsers" v-model="keyUserSearch" type="search" class="form-control" placeholder="Search">
-          <ul class="lista">
-            <li v-for="user in foundUsers" id="padajuciUseri" class="dropdown-item  ">{{user.usr_email}}
-              <hr>
-            </li>
-          </ul>
-        </form>
+        <!-- Nav bar lupa -->
+        <div class="search-bar">
+
+
+        <i class="fas fa-search">  </i>
+        <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class=" prviPutLista" >
+        <ul class="lista">
+          <a data-toggle="modal" title="User" data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
+            <li class="pb-2" id="padajuciUseri" :usrId="user.usr_id" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
+              {{user.usr_email}}</li>
+          </a>
+        </ul>
+
+            </div>
+    <!-- Nav bar lupa -->
+    <!-- ************ MODALI *************-->
+    <div class="modal fade text-center text-center" id="userSearched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <div class="velikaSlova">
+                <i class="fas fa-user"></i>
+                <h5>{{firstname}} {{lastname}}</h5>
+              </div>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body form-group ">
+
+            <p class="mt-2">E-mail: {{mail}}</p>
+            <p class="mt-2">Username: {{username}}</p>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn dugme" @click="addUser(userId)" data-dismiss="modal">Add user</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ************ KRAJ MODALI *************-->
+
+
+
+
+
+
         <router-link :to="{ name: 'chat' }"><i class="far fa-comments" style="color:black"></i></router-link>
         <div class="dropdown ">
           <i v-if="!hasNotif" class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -167,12 +209,19 @@ export default {
     }
   }
 }
+$('.search-bar .icon').on('click',function(){
+  $(this).parent().toggleClass('active');
+
+});
+
 </script>
 
 <style scoped>
-#lupa {
-  display: flex;
+.navChat i:hover{
+  transform: scale(1.2);
+
 }
+
 
 #da:hover {
   color: lightgreen;
@@ -232,7 +281,7 @@ a:hover {
   color: #F1f1f1;
 }
 
-input {
+/* input {
   outline: none;
 }
 
@@ -283,7 +332,7 @@ input::-webkit-input-placeholder {
 }
 
 /* SEARCH BAR */
-#demo-2 input[type=search] {
+/* #demo-2 input[type=search] {
   width: 15px;
   padding-left: 10px;
   color: transparent;
@@ -308,5 +357,5 @@ input::-webkit-input-placeholder {
 
 #demo-2 input::-webkit-input-placeholder {
   color: transparent;
-}
+} */
 </style>
