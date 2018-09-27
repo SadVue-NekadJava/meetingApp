@@ -86,7 +86,7 @@
 </div>
 <div v-else class="text-center form-group">
   <h3  class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
-<button class="btn btn-primary form-control" type="button" name="button">Create new Meeting</button>
+<button  class="btn btn-outline-primary form-control"  type="button" name="button">Create new Meeting</button>
 </div>
 
 
@@ -227,7 +227,18 @@ export default {
 
 }
 
+.btn-outline-primary {
+  margin-top: 20px;
+  border: 1px solid #6ab4d1;
+  color:black;
+  font-weight: 600;
+}
 
+.btn-outline-primary:hover {
+  background: #6ab4d1;
+  color:#fff;
+
+}
 
 .sakriveno {
   visibility: hidden;

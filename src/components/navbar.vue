@@ -325,7 +325,6 @@ export default {
   width: 100%;
   color: #fff;
   text-shadow: 0 0 5px black;
-
   margin: 0;
   font-size: 20px;
   letter-spacing: 1px;
@@ -362,7 +361,7 @@ export default {
   padding: 0;
   border-radius: 20px;
   margin-left: 2vw;
-  padding: 2px;
+  padding: 0;
   text-align: center;
 }
 
