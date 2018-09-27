@@ -13,6 +13,7 @@
   </div>
   <div class="container ">
 
+
     <div class="loginPozcija">
       <div class="promena mx-auto">
         <input type="radio" id="promena_levo" name="switch_2" checked />
@@ -37,6 +38,7 @@
             <a data-toggle="modal" data-target="#prijava">
               <button @click="login" class="btn dugme form-control">Sign in</button>
             </a>
+            <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
           </div>
         </div>
       </div>
@@ -78,6 +80,7 @@
             <a data-toggle="modal" data-target="#registracija">
               <button @click="register" class="btn form-control dugme">Register</button>
             </a>
+                <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
           </div>
         </div>
       </div>
@@ -100,7 +103,8 @@ export default {
       regUsername: '',
       regEmail: '',
       regPass: '',
-      regPass2: ''
+      regPass2: '',
+      errorMessage:null
 
     }
   },
@@ -117,6 +121,10 @@ export default {
         if (response.data.status) {
           this.$router.push('mainPage');
         }
+        else{
+          this.errorMessage=response.data.msg;
+            setTimeout(()=>{this.errorMessage=null},2000);
+        }
       });
 
     },
@@ -130,9 +138,15 @@ export default {
         passwordCheck: this.regPass2
 
       }).then(response => {
+      console.log(response.data.msg);
         if (response.data.status) {
+
           alert("Uspesna registracija");
           location.reload();
+        }
+        else{
+          this.errorMessage=response.data.msg;
+          // setTimeout(()=>{this.errorMessage=null},2000);
         }
       });
 
