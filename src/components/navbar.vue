@@ -3,13 +3,13 @@
   <div class="navChat">
     <div class="row pt-3">
       <div class="col-lg-2 pl-5">
-        <form class="search-box" >
+        <form class="search-box">
 
-          <input type="search" id="pretragaNav" required="" placeholder="Search" @keyup="searchUsers" v-model="keyUserSearch"  class=" prviPutLista">
+          <input type="search" id="pretragaNav" required="" placeholder="Search" @keyup="searchUsers" v-model="keyUserSearch" class=" prviPutLista">
           <ul class="lista">
 
-              <li data-target="#userSearchedNav" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri" ><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
-                {{user.usr_email}}</li>
+            <li data-target="#userSearchedNav" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
+              {{user.usr_email}}</li>
 
 
           </ul>
@@ -17,42 +17,72 @@
 
       </div>
       <div class="col-lg-8 pl-5 text-white">
-          <h3 class="text-center text-white">LOGO</h3>
+        <h3 class="text-center text-white">LOGO</h3>
       </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
 
 
 
-    <!-- Nav bar lupa -->
-    <!-- ************ MODALI *************-->
-    <div class="modal fade text-center text-center" id="userSearchedNav" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              <div class="velikaSlova">
-                <i class="fas fa-user"></i>
-                <h5>{{usrInfo.usr_firstname}} {{usrInfo.usr_lastname}} </h5>
+        <!-- Nav bar lupa -->
+        <!-- ************ MODALI *************-->
+              <!-- ************ MODAL search *************-->
+        <div class="modal fade text-center text-center" id="userSearchedNav" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <div class="velikaSlova">
+                    <i class="fas fa-user"></i>
+                    <h5>{{usrInfo.usr_firstname}} {{usrInfo.usr_lastname}} </h5>
+                  </div>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body form-group ">
+              <div class="modal-body form-group ">
 
-            <p class="mt-2">E-mail: {{usrInfo.usr_email}}</p>
-            <p class="mt-2">Username: {{usrInfo.usr_username}}</p>
+                <p class="mt-2">E-mail: {{usrInfo.usr_email}}</p>
+                <p class="mt-2">Username: {{usrInfo.usr_username}}</p>
 
-          </div>
-          <div class="modal-footer">
-            <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
+              </div>
+              <div class="modal-footer">
+                <button  class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+          <!-- ************ MODAL MyProfile *************-->
+          <div class="modal fade text-center text-center" id="myProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    <div class="velikaSlova">
+                      <i class="fas fa-user"></i>
+                      <h5>{{myProfileInfo.usr_firstname}} {{myProfileInfo.usr_lastname}} </h5>
+                    </div>
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body form-group ">
 
-    <!-- ************ KRAJ MODALI *************-->
+                  <p class="mt-2">E-mail: {{myProfileInfo.usr_email}}</p>
+                  <p class="mt-2">Username: {{myProfileInfo.usr_username}}</p>
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        <!-- ************ KRAJ MODALI *************-->
 
 
 
@@ -60,7 +90,7 @@
 
         <router-link :to="{ name: 'chat' }"><i class="far fa-comments" style="color:black"></i></router-link>
         <div class="dropdown ">
-          <i v-if="!hasNotif"  class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+          <i v-if="!hasNotif" class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <i v-else class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <div class="dropdown-menu pozadinaPadajuci " aria-labelledby="dropdownMenuButton">
             <ul>
@@ -82,7 +112,7 @@
         <div class="dropdown ">
           <i class="far fa-user" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <div class="dropdown-menu pozadinaPadajuci" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item text-white" href="#">Profile</a>
+            <a data-target="#myProfile" data-toggle="modal" @click="myProfile" class="dropdown-item text-white" href="#">Profile</a>
             <hr>
             <a class="dropdown-item text-white" href="#">Settings</a>
             <hr>
@@ -113,7 +143,8 @@ export default {
       userId: '',
       foundUsers: [],
       notifications: [],
-      usrInfo:[],
+      usrInfo: [],
+      myProfileInfo:[],
       notifSound: new Audio(require('../assets/notification.mp3'))
 
     }
@@ -124,13 +155,15 @@ export default {
     setInterval(this.notif, 10000);
   },
   methods: {
-    getUserInfo(id){
+    myProfile(){
+
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
         params: {
-          id
+          sid: window.localStorage.getItem("sessionid"),
+
         },
       }).then(response => {
-            this.usrInfo=response.data.result[0];
+        this.myProfileInfo = response.data.result[0];
       });
     },
     denyReq(id) {
@@ -139,7 +172,29 @@ export default {
         id
       }).then(response => {
 
-        console.log('bravo');
+
+      });
+
+
+
+    },
+
+    getUserInfo(id) {
+      axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
+        params: {
+          id
+        },
+      }).then(response => {
+        this.usrInfo = response.data.result[0];
+      });
+    },
+    denyReq(id) {
+      axios.post("http://800q121.mars-t.mars-hosting.com/friendDenied", {
+        sid: window.localStorage.getItem("sessionid"),
+        id
+      }).then(response => {
+
+
       });
 
 
@@ -150,7 +205,7 @@ export default {
         id
       }).then(response => {
 
-        console.log('bravo');
+
       });
 
 
@@ -162,7 +217,7 @@ export default {
         not_id
       }).then(response => {
 
-        console.log('bravo');
+
       });
 
 
@@ -214,6 +269,9 @@ export default {
       }).then(response => {
 
         this.notifications = response.data.result;
+        if (!response.data.status) {
+          this.$router.push('/');
+        }
         var tempNotification = false;
         for (var i = 0; i < this.notifications.length; i++) {
           if (this.notifications[i].not_confirm == 0) {
@@ -235,7 +293,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
@@ -244,10 +301,11 @@ export default {
   outline: 0;
   border: 0;
   padding: 2%;
-  width:60%;
+  width: 60%;
   opacity: 0.5;
   transition: 0.5s;
 }
+
 #pretragaNav:hover,
 #pretragaNav:focus,
 #pretragaNav:valid {
@@ -255,7 +313,7 @@ export default {
   outline: 0;
   border: 0;
   padding: 2%;
-  width:100%;
+  width: 100%;
   opacity: 1;
 }
 
@@ -265,7 +323,7 @@ export default {
   padding: 3px;
   list-style: none;
   width: 100%;
-  color:#fff;
+  color: #fff;
   text-shadow: 0 0 5px black;
 
   margin: 0;
@@ -283,7 +341,7 @@ export default {
 }
 
 
-.navChat i:hover{
+.navChat i:hover {
   transform: scale(1.2);
 }
 
@@ -351,5 +409,4 @@ a {
 a:hover {
   color: #F1f1f1;
 }
-
 </style>

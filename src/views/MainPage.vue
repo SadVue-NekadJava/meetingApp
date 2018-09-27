@@ -192,11 +192,12 @@ export default {
     },
 
     addUser(id) {
+
       axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-        console.log(response.data.status)
+        console.log(response.data.status);
       });
     }
 
