@@ -1,186 +1,174 @@
 <template>
-  <div >
-    <div class="navChat">
-      <div class="row pt-3">
-        <div class="col-lg-6">
-          <div class="pl-5" style="height:50px;width:50px;background:grey;"></div>
-        </div>
-        <div class="col-lg-6">
-            <p  class="text-right text-white display-4 pr-5" style="line-height:50px;">Meeting App</p>
-          </div>
+<div>
+  <div class="navChat">
+    <div class="row pt-3">
+      <div class="col-lg-6">
+        <div class="pl-5" style="height:50px;width:50px;background:grey;"></div>
+      </div>
+      <div class="col-lg-6">
+        <p class="text-right text-white display-4 pr-5" style="line-height:50px;">Meeting App</p>
+      </div>
 
+    </div>
+  </div>
+  <div class="container ">
+
+    <div class="loginPozcija">
+      <div class="promena mx-auto">
+        <input type="radio" id="promena_levo" name="switch_2" checked />
+        <label for="promena_levo">Sign in</label>
+        <input type="radio" id="promena_desno" name="switch_2" />
+        <label for="promena_desno">Sign up</label>
+      </div>
+      <div class="login">
+        <div class="form-group">
+          <h3 class="py-3 text-center">Sign in</h3>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="logUsername">
+            <label>Username</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="password" name="" required="" v-model="logPassword">
+            <label>Password</label>
+          </div>
+          <br>
+          <div class="text-center">
+            <a data-toggle="modal" data-target="#prijava">
+              <button @click="login" class="btn dugme form-control">Sign in</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- ************************************SIGNUP*********************************** -->
+      <div class="signup">
+        <div class="form-group">
+          <h3 class="py-3 text-center">Sign up</h3>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regFirstName">
+            <label>First Name </label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regLastName">
+            <label>Last name </label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regUsername">
+            <label>Username</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regEmail">
+            <label>Email</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="password" name="" required="" v-model="regPass">
+            <label>Password</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="password" name="" required="" v-model="regPass2">
+            <label>Confirm password</label>
+          </div>
+          <br>
+          <div class="text-center">
+            <a data-toggle="modal" data-target="#registracija">
+              <button @click="register" class="btn form-control dugme">Register</button>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-<div class="container ">
-
-  <div class="loginPozcija">
-  <div class="promena mx-auto">
-  	      <input type="radio" id="promena_levo" name="switch_2" checked/>
-  	      <label for="promena_levo">Sign in</label>
-  	      <input type="radio" id="promena_desno" name="switch_2" />
-  	      <label for="promena_desno">Sign up</label>
-      </div>
-  	<div class="login">
-  		<div class="form-group" >
-  			<h3 class="py-3 text-center">Sign in</h3>
-  			<div class="input-box ">
-  				<input class=" form-control" type="text" name="" required="" v-model="logUsername"  >
-  				<label>Username</label>
-  			</div>
-  			<br>
-  			<div class="input-box ">
-  				<input class=" form-control" type="password" name="" required="" v-model="logPassword"  >
-  				<label>Password</label>
-  			</div>
-  			<br>
-  			<div class="text-center">
-      			<a data-toggle="modal"  data-target="#prijava" >
-      			    <button @click="login" class="btn dugme form-control">Sign in</button>
-      			</a>
-  			</div>
-  		</div>
-  	</div>
-  	<!-- ************************************SIGNUP*********************************** -->
-  	<div class="signup">
-  		<div class="form-group">
-  			<h3 class="py-3 text-center">Sign up</h3>
-  			<div class="input-box ">
-  				<input class=" form-control" type="text" name="" required="" v-model="regFirstName">
-  				<label>First Name </label>
-  			</div>
-        <br>
-        <div class="input-box ">
-  				<input class=" form-control" type="text" name="" required="" v-model="regLastName">
-  				<label>Last name </label>
-  			</div>
-  			<br>
-  			<div class="input-box ">
-  				<input class=" form-control" type="text" name="" required="" v-model="regUsername">
-  				<label>Username</label>
-  			</div>
-  			<br>
-        <div class="input-box ">
-          <input class=" form-control" type="text" name="" required="" v-model="regEmail">
-          <label>Email</label>
-        </div>
-        	<br>
-  			<div class="input-box ">
-  				<input class=" form-control" type="password" name="" required="" v-model="regPass">
-  				<label>Password</label>
-  			</div>
-  			<br>
-  			<div class="input-box ">
-  				<input class=" form-control" type="password" name="" required="" v-model="regPass2">
-  				<label>Confirm password</label>
-  			</div>
-  			<br>
-  			<div class="text-center">
-      			<a data-toggle="modal"  data-target="#registracija">
-      		    	<button @click="register" class="btn form-control dugme">Register</button>
-      		    </a>
-  		    </div>
-  		</div>
-  	</div>
-</div>
   </div>
   <footer class="fixed-bottom lead text-center">Copyright 2018 meetingApp</footer>
 </div>
 </template>
 
 <script>
-
-
-
 export default {
   name: 'home',
 
-  data(){
-    return{
-        logUsername:'',
-        logPassword:'',
-        regFirstName:'',
-        regLastName:'',
-        regUsername:'',
-        regEmail:'',
-        regPass:'',
-        regPass2:''
-
-     }
-  },
-  methods:{
-    login(){
-      axios.post("http://800q121.mars-t.mars-hosting.com/login", {
-                      username:this.logUsername,
-                      password:this.logPassword
-                }).then(response => {
-                  var sid = response.data.sid;
-
-                  window.localStorage.setItem("sessionid", sid);
-                  //console.log(response.data[0].usr_access);
-                  if (response.data.status) {
-                      this.$router.push('mainPage');
-                      }
-                               });
-
-   },
-    register(){
-      axios.post("http://800q121.mars-t.mars-hosting.com/register", {
-                      username:this.regUsername,
-                      firstname:this.regFirstName,
-                      lastname:this.regLastName,
-                      email:this.regEmail,
-                      password:this.regPass,
-                      passwordCheck:this.regPass2
-
-                 }).then(response => {
-                   if (response.data.status) {
-                     alert ("Uspesna registracija");
-                     location.reload();
-                   }
-                 });
+  data() {
+    return {
+      logUsername: '',
+      logPassword: '',
+      regFirstName: '',
+      regLastName: '',
+      regUsername: '',
+      regEmail: '',
+      regPass: '',
+      regPass2: ''
 
     }
-   }
+  },
+  methods: {
+    login() {
+      axios.post("http://800q121.mars-t.mars-hosting.com/login", {
+        username: this.logUsername,
+        password: this.logPassword
+      }).then(response => {
+        var sid = response.data.sid;
 
+        window.localStorage.setItem("sessionid", sid);
+        //console.log(response.data[0].usr_access);
+        if (response.data.status) {
+          this.$router.push('mainPage');
+        }
+      });
+
+    },
+    register() {
+      axios.post("http://800q121.mars-t.mars-hosting.com/register", {
+        username: this.regUsername,
+        firstname: this.regFirstName,
+        lastname: this.regLastName,
+        email: this.regEmail,
+        password: this.regPass,
+        passwordCheck: this.regPass2
+
+      }).then(response => {
+        if (response.data.status) {
+          alert("Uspesna registracija");
+          location.reload();
+        }
+      });
+
+    }
   }
 
+}
 
 
-$(document).ready(function()
-{
+
+$(document).ready(function() {
   $('.signup').hide();
-  $('#promena_desno').click(function()
-  {
-  $('.login').slideUp('slow');
-  $('.signup').slideDown('slow');
+  $('#promena_desno').click(function() {
+    $('.login').slideUp('slow');
+    $('.signup').slideDown('slow');
   });
-  $('#promena_levo').click(function()
-  {
-      $('.signup').slideUp('slow');
-      $('.login').slideDown('slow');
+  $('#promena_levo').click(function() {
+    $('.signup').slideUp('slow');
+    $('.login').slideDown('slow');
   });
 });
 
-$(document).ready(function()
-{
+$(document).ready(function() {
   $('.mobSignup').hide();
-  $('#promena_desno_mob').click(function()
-  {
-  $('.mobLogin').slideUp('slow');
-  $('.mobSignup').slideDown('slow');
+  $('#promena_desno_mob').click(function() {
+    $('.mobLogin').slideUp('slow');
+    $('.mobSignup').slideDown('slow');
   });
-  $('#promena_levo_mob').click(function()
-  {
-      $('.mobSignup').slideUp('slow');
-      $('.mobLogin').slideDown('slow');
+  $('#promena_levo_mob').click(function() {
+    $('.mobSignup').slideUp('slow');
+    $('.mobLogin').slideDown('slow');
   });
 });
 </script>
 
 <style scoped>
-
-
-
 .navChat {
   background: #6ab4d1;
   width: 100vw;
@@ -188,10 +176,12 @@ $(document).ready(function()
   box-shadow: 1px 1px 5px #6ab4d1;
 
 }
+
 input {
   font-size: 20px;
 }
-input:focus{
+
+input:focus {
   outline-color: #6ab4d1;
 }
 
@@ -199,13 +189,13 @@ input:focus{
 
 
 .loginPozcija {
- position: absolute;
- top: 50%;
- left: 50%;
- transform: translateX(-50%) translateY(-50%);
- -webkit-box-shadow: -3px 2px 25px 3px rgba(0,0,0,0.75);
-  -moz-box-shadow: -3px 2px 25px 3px rgba(0,0,0,0.75);
-  box-shadow: -3px 2px 25px 3px rgba(0,0,0,0.75);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-box-shadow: -3px 2px 25px 3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -3px 2px 25px 3px rgba(0, 0, 0, 0.75);
+  box-shadow: -3px 2px 25px 3px rgba(0, 0, 0, 0.75);
   padding: 50px 60px;
   border-radius: 20px;
 
@@ -226,65 +216,64 @@ input:focus{
 }
 
 .input-box input:focus~label,
-.input-box input:valid~label{
-  top:-22px;
+.input-box input:valid~label {
+  top: -22px;
   left: 0;
   font-size: 12px;
-  color:#fff;
+  color: #fff;
   text-shadow: 1px 1px 5px #000;
 }
 
 
 .promena input {
-   position: absolute;
-   opacity: 0;
+  position: absolute;
+  opacity: 0;
 }
 
 .promena label {
-   display: inline-block;
-   width: 48%;
-   background-color: #fff;
-   color: #000;
-   font-size: 14px;
-   text-align: center;
-   padding: 6px 14px;
-   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-   -webkit-transition: all 0.1s ease-in-out;
-   -moz-transition:    all 0.1s ease-in-out;
-   -ms-transition:     all 0.1s ease-in-out;
-   -o-transition:      all 0.1s ease-in-out;
-   transition:         all 0.1s ease-in-out;
-   border-radius: 5%;
+  display: inline-block;
+  width: 48%;
+  background-color: #fff;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  padding: 6px 14px;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  border-radius: 5%;
 }
 
 .promena label:hover {
-   cursor: pointer;
-   background-color: rgb(230,230,230);
+  cursor: pointer;
+  background-color: rgb(230, 230, 230);
 }
 
-.promena input:checked + label:hover {
-    background-color: #6ab4d1;
+.promena input:checked+label:hover {
+  background-color: #6ab4d1;
 }
 
-.promena input:checked + label {
-   background-color: #6ab4d1;
-   -webkit-box-shadow: none;
-   text-shadow: 1px 1px 5px #000;
-   box-shadow: none;
-   color: #fff;
+.promena input:checked+label {
+  background-color: #6ab4d1;
+  -webkit-box-shadow: none;
+  text-shadow: 1px 1px 5px #000;
+  box-shadow: none;
+  color: #fff;
 }
 
 
-.dugme  {
+.dugme {
   width: 120px;
   background: #6ab4d1;
-  color:#fff;
+  color: #fff;
   outline: 0;
 }
 
 .dugme:hover {
   border: 1px solid #aec6cf;
 }
-
 </style>
