@@ -276,7 +276,7 @@ export default {
         for (var i = 0; i < this.notifications.length; i++) {
           if (this.notifications[i].not_confirm == 0) {
             tempNotification = true;
-          
+
           }
         }
         if (tempNotification) {
@@ -362,6 +362,8 @@ export default {
   padding: 0;
   border-radius: 20px;
   margin-left: 2vw;
+  padding: 2px;
+  text-align: center;
 }
 
 

@@ -158,12 +158,14 @@ export default {
   methods: {
     getMeetings(){
       this.isMeetings=true;
+      this.chatSelected=false;
     },
     getFriends(){
       this.isMeetings=false;
+      this.chatSelected=false;
     },
     listChat(){
-      this.chatSelected=true
+      this.chatSelected=true;
     },
 
     // prikazi() {

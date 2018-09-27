@@ -66,12 +66,16 @@
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
-  <div  class="container">
+
     <div class="prviPutOmot">
-      <h3 v-if="!hasFriends"  class="lead display-4">Welcome to meeting app! <br> Connect with your friends...</h3>
-      <h3 v-else class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
+      <div v-if="!hasFriends" class="">
+
+
+
+
+      <h3   class="lead display-4">Welcome to meeting app! <br> Connect with your friends...</h3>
+      <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users by mail">
       <div class="text-center">
-        <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users by mail">
         <ul class="lista">
 
             <li data-target="#userSearched" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri" ><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
@@ -79,8 +83,15 @@
 
         </ul>
       </div>
+</div>
+<div v-else class="text-center form-group">
+  <h3  class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
+<button class="btn btn-primary form-control" type="button" name="button">Create new Meeting</button>
+</div>
+
+
     </div>
-  </div>
+
 
 
   <!-- ************ MODALI *************-->
