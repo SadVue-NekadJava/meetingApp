@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div v-if="hasFriends" class="pt-5 container">
+  <div v-if="0==1"  class="pt-5 container">
     <div class="text-center mb-3">
       <button @click="weekButtons=false" class="btn  dugme mr-3">Daily</button>
       <button @click="weekButtons=true" class="btn dugme mr-3">Weekly</button>
@@ -66,10 +66,10 @@
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
-  <div v-else class="container">
+  <div  class="container">
     <div class="prviPutOmot">
-      <h3 class="lead display-4">Welcome to meeting app! <br> Connect with your friends...</h3>
-      <h3 class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
+      <h3 v-if="!hasFriends"  class="lead display-4">Welcome to meeting app! <br> Connect with your friends...</h3>
+      <h3 v-else class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
       <div class="text-center">
         <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users by mail">
         <ul class="lista">
@@ -139,7 +139,7 @@ export default {
       mail: '',
       username: '',
       userId: '',
-      hasFriends: '',
+      hasFriends: false,
       ukj:0,
       usrInfo:[]
     }
@@ -197,7 +197,7 @@ export default {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-      
+
       });
     }
 
