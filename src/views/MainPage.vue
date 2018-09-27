@@ -173,7 +173,7 @@ export default {
         } else {
           this.hasFriends = false;
         }
-        console.log(response.data.result)
+
       });
     },
     searchUsers() {
@@ -184,7 +184,7 @@ export default {
           },
         }).then(response => {
           this.foundUsers = response.data.result;
-          console.log(this.foundUsers);
+
         });
       } else {
         this.foundUsers = [];
@@ -197,7 +197,7 @@ export default {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-        console.log(response.data.status);
+      
       });
     }
 

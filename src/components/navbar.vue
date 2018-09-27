@@ -17,7 +17,7 @@
 
       </div>
       <div class="col-lg-8 pl-5 text-white">
-        <router-link to="/mainPage"><h3 class="text-center text-white">LOGO</h3></router-link>  
+        <router-link to="/mainPage"><h3 class="text-center text-white">LOGO</h3></router-link>
       </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
 
@@ -232,7 +232,7 @@ export default {
           },
         }).then(response => {
           this.foundUsers = response.data.result;
-          console.log(this.foundUsers);
+
         });
       } else {
         this.foundUsers = [];
@@ -243,7 +243,7 @@ export default {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-        console.log(response.data.status)
+
       });
     },
     logout() {
@@ -276,7 +276,7 @@ export default {
         for (var i = 0; i < this.notifications.length; i++) {
           if (this.notifications[i].not_confirm == 0) {
             tempNotification = true;
-            console.log(response.data.result);
+          
           }
         }
         if (tempNotification) {

@@ -108,6 +108,11 @@ export default {
 
     }
   },
+   mounted() {
+
+      if (window.localStorage.getItem("sessionid") != null)
+        this.$router.push('/mainPage');
+    },
   methods: {
     login() {
       axios.post("http://800q121.mars-t.mars-hosting.com/login", {
