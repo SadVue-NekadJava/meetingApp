@@ -17,7 +17,7 @@
 
       </div>
       <div class="col-lg-8 pl-5 text-white">
-        <h3 class="text-center text-white">LOGO</h3>
+        <router-link to="/mainPage"><h3 class="text-center text-white">LOGO</h3></router-link>  
       </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
 
