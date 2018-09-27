@@ -73,10 +73,10 @@
       <div class="text-center">
         <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users by mail">
         <ul class="lista">
-          <a data-toggle="modal" title="User" data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
-            <li class="pb-2" id="padajuciUseri" :usrId="user.usr_id" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
+
+            <li data-target="#userSearched" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri" ><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
               {{user.usr_email}}</li>
-          </a>
+
         </ul>
       </div>
     </div>
@@ -91,7 +91,7 @@
           <h5 class="modal-title" id="exampleModalLabel">
             <div class="velikaSlova">
               <i class="fas fa-user"></i>
-              <h5>{{firstname}} {{lastname}}</h5>
+              <h5>{{usrInfo.usr_firstname}}{{usrInfo.usr_lastname}} </h5>
             </div>
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -100,18 +100,25 @@
         </div>
         <div class="modal-body form-group ">
 
-          <p class="mt-2">E-mail: {{mail}}</p>
-          <p class="mt-2">Username: {{username}}</p>
+          <p class="mt-2">E-mail: {{usrInfo.usr_email}}</p>
+          <p class="mt-2">Username: {{usrInfo.usr_username}}</p>
 
         </div>
         <div class="modal-footer">
-          <button class="btn dugme" @click="addUser(userId)" data-dismiss="modal">Add user</button>
+          <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ************ KRAJ MODALI *************-->
+
+
+
+
+
+
+
 </div>
 </template>
 
@@ -132,7 +139,9 @@ export default {
       mail: '',
       username: '',
       userId: '',
-      hasFriends: ''
+      hasFriends: '',
+      ukj:0,
+      usrInfo:[]
     }
   },
   mounted() {
@@ -141,7 +150,18 @@ export default {
     if (window.localStorage.getItem("sessionid") == null)
       this.$router.push('/');
   },
+
   methods: {
+    getUserInfo(id){
+      axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
+        params: {
+          id
+        },
+      }).then(response => {
+            this.usrInfo=response.data.result[0];
+      });
+    },
+
     friends() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriends", {
         params: {
@@ -170,14 +190,7 @@ export default {
         this.foundUsers = [];
       }
     },
-    ispis(n) {
-      this.firstname = n.srcElement.attributes.ime.value;
-      this.lastname = n.srcElement.attributes.prezime.value;
-      this.mail = n.srcElement.attributes.mail.value;
-      this.username = n.srcElement.attributes.username.value;
-      this.userId = n.srcElement.attributes.usrId.value;
 
-    },
     addUser(id) {
       axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
         sid: window.localStorage.getItem("sessionid"),
@@ -192,6 +205,18 @@ export default {
 </script>
 
 <style scoped>
+.klasaModal{
+  position: absolute;
+  text-align: center;
+  font-size: 50px;
+  width: 400px;
+  background: gray;
+
+
+}
+
+
+
 .sakriveno {
   visibility: hidden;
 }

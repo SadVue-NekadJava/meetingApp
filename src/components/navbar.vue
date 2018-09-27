@@ -7,11 +7,11 @@
 
           <input type="search" id="pretragaNav" required="" placeholder="Search" @keyup="searchUsers" v-model="keyUserSearch"  class=" prviPutLista">
           <ul class="lista">
-            <a data-toggle="modal"  data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
-              <li id="padajuciUseri" :usrId="user.usr_id" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username">
-                <p class="text-center ">{{user.usr_firstname}} {{user.usr_lastname}}
-                {{user.usr_email}}</p></li>
-            </a>
+
+              <li data-target="#userSearchedNav" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri" ><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
+                {{user.usr_email}}</li>
+
+
           </ul>
         </form>
 
@@ -25,14 +25,14 @@
 
     <!-- Nav bar lupa -->
     <!-- ************ MODALI *************-->
-    <div class="modal fade text-center text-center" id="userSearched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-center text-center" id="userSearchedNav" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
               <div class="velikaSlova">
-                <i class="fas fa-user"  aria-hidden="true" tabindex="1"></i>
-                <h5>{{firstname}} {{lastname}}</h5>
+                <i class="fas fa-user"></i>
+                <h5>{{usrInfo.usr_firstname}} {{usrInfo.usr_lastname}} </h5>
               </div>
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -41,19 +41,18 @@
           </div>
           <div class="modal-body form-group ">
 
-            <p class="mt-2">E-mail: {{mail}}</p>
-            <p class="mt-2">Username: {{username}}</p>
+            <p class="mt-2">E-mail: {{usrInfo.usr_email}}</p>
+            <p class="mt-2">Username: {{usrInfo.usr_username}}</p>
 
           </div>
           <div class="modal-footer">
-            <button class="btn dugme" @click="addUser(userId)" data-dismiss="modal">Add user</button>
+            <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ************ KRAJ MODALI *************-->
-
 
 
 
@@ -107,8 +106,14 @@ export default {
       back: true,
       hasNotif: false,
       keyUserSearch: '',
+      firstname: '',
+      lastname: '',
+      mail: '',
+      username: '',
+      userId: '',
       foundUsers: [],
       notifications: [],
+      usrInfo:[],
       notifSound: new Audio(require('../assets/notification.mp3'))
 
     }
@@ -119,7 +124,15 @@ export default {
     setInterval(this.notif, 10000);
   },
   methods: {
-
+    getUserInfo(id){
+      axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
+        params: {
+          id
+        },
+      }).then(response => {
+            this.usrInfo=response.data.result[0];
+      });
+    },
     denyReq(id) {
       axios.post("http://800q121.mars-t.mars-hosting.com/friendDenied", {
         sid: window.localStorage.getItem("sessionid"),
@@ -169,6 +182,14 @@ export default {
       } else {
         this.foundUsers = [];
       }
+    },
+    addUser(id) {
+      axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
+        sid: window.localStorage.getItem("sessionid"),
+        id
+      }).then(response => {
+        console.log(response.data.status)
+      });
     },
     logout() {
 
