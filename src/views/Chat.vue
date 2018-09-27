@@ -4,61 +4,27 @@
   <div class="row mt-3">
     <div class="col-lg-3">
       <h3 class="text-center  mb-3"> Chat rooms</h3>
-      <div class="text-center mb-3"><button class="btn dugme">Meetings</button><button class="ml-2 btn dugme">Friends</button></div>
+      <div class="text-center mb-3">
+        <button  class="btn dugme ":class="{'active':isMeetings}" @click="getMeetings">Meetings</button>
+        <button  class="ml-2 btn dugme" :class="{'active':!isMeetings}" @click="getFriends">Friends</button>
+      </div>
+        <!-- ********** Chatrooms *************** -->
       <div class="omotOstaliChatovi ">
-
-        <span class="">
+        <span @click="listChat" class="">
           <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
           <div class="ostaliChatovi mb-3"><span class="pl-2">Pivo sa osnovcima</span></div>
         </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3">Filip</div>
-          <div class="kolikoNovihPoruka mt-2">2</div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3">Projekat takser</div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3">Lorem ipsum dolor.</div>
-          <div class="kolikoNovihPoruka">5</div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3">Lorem ipsum dolor sit amet.</div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3">Lorem.</div>
-          <div class="kolikoNovihPoruka">1</div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
-        <span class=""><i class="fas fa-user-tie pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"></div>
-        </span>
+
+
       </div>
     </div>
-    <div class="col-lg-6 ">
+    <!-- ************No chat room selected  ************ -->
+<div v-if="!chatSelected" class="col-lg-6 ">
+
+  <h1 class="text-center pt-5">Pick chat room</h1>
+</div>
+    <!-- ************Chat room selected  ************ -->
+    <div v-else class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
 
@@ -91,8 +57,8 @@
         <input type="text" v-model="poruka" class="form-control" placeholder="Your message:" required>
       </form>
     </div>
-    <div class="col-lg-3">
-      <h3 class="text-center  mb-3"> Chat window</h3>
+    <div v-if="isMeetings" class="col-lg-3">
+      <h3 class="text-center  mb-3"> Chat members</h3>
       <div class="omotOstaliChatovi members">
         <h4 class="text-center">Pivo sa osnovcima</h4>
         <p class="lead">Members: </p>
@@ -170,9 +136,7 @@
 <script>
 import Navbar from '../components/navbar.vue';
 
-$(function() {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+
 
 export default {
   props: ['ime'],
@@ -187,9 +151,21 @@ export default {
       msgs: [],
       interval: null,
       poruka: '',
+      chatSelected:false,
+      isMeetings:true
     }
   },
   methods: {
+    getMeetings(){
+      this.isMeetings=true;
+    },
+    getFriends(){
+      this.isMeetings=false;
+    },
+    listChat(){
+      this.chatSelected=true
+    },
+
     // prikazi() {
     //         this.prikaz = !this.prikaz;
     //         if (this.prikaz) {
@@ -233,14 +209,18 @@ export default {
     }
   },
   mounted() {
-    this.provera();
-    setInterval(this.provera, 1000);
-    setTimeout(this.funkcija, 100);
+    // this.provera();
+    // setInterval(this.provera, 1000);
+    // setTimeout(this.funkcija, 100);
   }
 }
 </script>
 
 <style scoped>
+.dugme.active{
+  background: green;
+},
+
 .member span:hover {
   cursor: pointer;
 }
@@ -331,6 +311,9 @@ input:focus {
 .dugme:hover {
   border: 1px solid #aec6cf;
 }
+/* .dugme:focus{
+  background: green;
+} */
 
 
 .ostaliChatovi {
