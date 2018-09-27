@@ -3,11 +3,18 @@
   <div class="navChat">
     <div class="row pt-3">
       <div class="col-lg-2 pl-5">
-        <form class="searchbox">
-         <input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
-         <input type="submit" class="searchbox-submit">
-         <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
-     </form>
+        <form class="search-box" >
+
+          <input type="search" id="pretragaNav" required="" placeholder="Search" @keyup="searchUsers" v-model="keyUserSearch"  class=" prviPutLista">
+          <ul class="lista">
+            <a data-toggle="modal"  data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
+              <li id="padajuciUseri" :usrId="user.usr_id" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username">
+                <p class="text-center ">{{user.usr_firstname}} {{user.usr_lastname}}
+                {{user.usr_email}}</p></li>
+            </a>
+          </ul>
+        </form>
+
       </div>
       <div class="col-lg-8 pl-5 text-white">
           <h3 class="text-center text-white">LOGO</h3>
@@ -15,19 +22,7 @@
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
 
 
-        <!-- <div class="search-bar">
 
-
-        <i class="fas fa-search">  </i>
-        <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class=" prviPutLista" >
-        <ul class="lista">
-          <a data-toggle="modal" title="User" data-target="#userSearched" class="mx-auto" v-for="user in foundUsers" @click="ispis($event)">
-            <li class="pb-2" id="padajuciUseri" :usrId="user.usr_id" :ime="user.usr_firstname" :prezime="user.usr_lastname" :mail="user.usr_email" :username="user.usr_username"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
-              {{user.usr_email}}</li>
-          </a>
-        </ul>
-
-            </div> -->
     <!-- Nav bar lupa -->
     <!-- ************ MODALI *************-->
     <div class="modal fade text-center text-center" id="userSearched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -36,7 +31,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
               <div class="velikaSlova">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user"  aria-hidden="true" tabindex="1"></i>
                 <h5>{{firstname}} {{lastname}}</h5>
               </div>
             </h5>
@@ -66,7 +61,7 @@
 
         <router-link :to="{ name: 'chat' }"><i class="far fa-comments" style="color:black"></i></router-link>
         <div class="dropdown ">
-          <i v-if="!hasNotif" class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+          <i v-if="!hasNotif"  class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <i v-else class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <div class="dropdown-menu pozadinaPadajuci " aria-labelledby="dropdownMenuButton">
             <ul>
@@ -220,56 +215,56 @@ export default {
   }
 }
 
-$(document).ready(function(){
-            var submitIcon = $('.searchbox-icon');
-            var inputBox = $('.searchbox-input');
-            var searchBox = $('.searchbox');
-            var isOpen = false;
-            submitIcon.click(function(){
-                if(isOpen == false){
-                    searchBox.addClass('searchbox-open');
-                    inputBox.focus();
-                    isOpen = true;
-                } else {
-                    searchBox.removeClass('searchbox-open');
-                    inputBox.focusout();
-                    isOpen = false;
-                }
-            });
-             submitIcon.mouseup(function(){
-                    return false;
-                });
-            searchBox.mouseup(function(){
-                    return false;
-                });
-            $(document).mouseup(function(){
-                    if(isOpen == true){
-                        $('.searchbox-icon').css('display','block');
-                        submitIcon.click();
-                    }
-                });
-        });
-            function buttonUp(){
-                var inputVal = $('.searchbox-input').val();
-                inputVal = $.trim(inputVal).length;
-                if( inputVal !== 0){
-                    $('.searchbox-icon').css('display','none');
-                } else {
-                    $('.searchbox-input').val('');
-                    $('.searchbox-icon').css('display','block');
-                }
-            }
-
 </script>
 
 <style scoped>
+#pretragaNav {
+  border-radius: 20px;
+  outline: 0;
+  border: 0;
+  padding: 2%;
+  width:60%;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+#pretragaNav:hover,
+#pretragaNav:focus,
+#pretragaNav:valid {
+  border-radius: 20px;
+  outline: 0;
+  border: 0;
+  padding: 2%;
+  width:100%;
+  opacity: 1;
+}
 
 
-/* .navChat i:hover{
+
+.lista li {
+  padding: 3px;
+  list-style: none;
+  width: 100%;
+  color:#fff;
+  text-shadow: 0 0 5px black;
+
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 1px;
+
+}
+
+.lista li:hover {
+  background: #3aa1c9;
+  cursor: pointer;
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  border-radius: 20px;
+}
+
+
+.navChat i:hover{
   transform: scale(1.2);
-
-} */
-
+}
 
 #da:hover {
   color: lightgreen;
@@ -282,6 +277,12 @@ $(document).ready(function(){
 .lista {
   position: absolute;
   right: 0;
+  z-index: 100;
+  margin-top: 20px;
+  background: #6ab4d1;
+  padding: 0;
+  border-radius: 20px;
+  margin-left: 2vw;
 }
 
 
@@ -296,6 +297,7 @@ $(document).ready(function(){
 .navChat i {
   cursor: pointer;
   font-size: 28px;
+  transition: all 0.1s;
 }
 
 a {
@@ -329,150 +331,4 @@ a:hover {
   color: #F1f1f1;
 }
 
-/* input {
-  outline: none;
-}
-
-input[type=search] {
-  -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
-  font-family: inherit;
-  font-size: 100%;
-}
-
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-  display: none;
-}
-
-
-input[type=search] {
-  background: #6ab4d1 url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
-  border: solid 1px #6ab4d1;
-  width: 55px;
-  padding-right: 10px;
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 10em;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  transition: all .5s;
-}
-
-input[type=search]:focus {
-  width: 130px;
-  background-color: #6ab4d1;
-  border-color: #6ab4d1;
-  padding: 3px 0 3px 0;
-  margin-left: -197px;
-  -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, .5);
-  -moz-box-shadow: 0 0 5px rgba(109, 207, 246, .5);
-  box-shadow: 0 0 5px rgba(109, 207, 246, .5);
-
-}
-
-input:-moz-placeholder {
-  color: #999;
-}
-
-input::-webkit-input-placeholder {
-  color: #999;
-}
-
-/* SEARCH BAR */
-/* #demo-2 input[type=search] {
-  width: 15px;
-  padding-left: 10px;
-  color: transparent;
-  cursor: pointer;
-}
-
-#demo-2 input[type=search]:hover {
-  background-color: #fff;
-}
-
-#demo-2 input[type=search]:focus {
-  width: 200px;
-  padding-left: 32px;
-  color: #000;
-  background-color: #fff;
-  cursor: auto;
-}
-
-#demo-2 input:-moz-placeholder {
-  color: transparent;
-}
-
-#demo-2 input::-webkit-input-placeholder {
-  color: transparent;
-} */
-
-.searchbox{
-    position:relative;
-    min-width:50px;
-    width:0%;
-    height:50px;
-    float:right;
-    overflow:hidden;
-
-    -webkit-transition: width 0.3s;
-    -moz-transition: width 0.3s;
-    -ms-transition: width 0.3s;
-    -o-transition: width 0.3s;
-    transition: width 0.3s;
-}
-
-.searchbox-input{
-    top:0;
-    right:0;
-    border:0;
-    outline:0;
-    border-radius: 20px;
-    background:#fff;
-    width:90%;
-    height:80%;
-    margin:0;
-    margin-left: 14px;
-    padding:0px 55px 0px 20px;
-    font-size:20px;
-    color:#000;
-
-}
-.searchbox-input::-webkit-input-placeholder {
-    color: #000;
-}
-.searchbox-input:-moz-placeholder {
-    color: #000;
-}
-.searchbox-input::-moz-placeholder {
-    color: #000;
-}
-.searchbox-input:-ms-input-placeholder {
-    color: #000;
-}
-
-.searchbox-icon,
-.searchbox-submit{
-    width:50px;
-    height:50px;
-    display:block;
-    position:absolute;
-    top:0;
-    font-family:verdana;
-    font-size:22px;
-    right:0;
-    padding:0;
-    margin:0;
-    border:0;
-    outline:0;
-    line-height:50px;
-    text-align:center;
-    cursor:pointer;
-    color:#FFFFFF;
-    background:#6ab4d1  ;
-}
-
-.searchbox-open{
-    width:100%;
-}
 </style>
