@@ -286,7 +286,9 @@ export default {
           }
         }}
         else{
+            window.localStorage.removeItem("sessionid");
               this.$router.push('/');
+
         }
       });
     }
