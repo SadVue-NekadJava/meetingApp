@@ -161,6 +161,7 @@ export default {
   },
   mounted() {
     setInterval(this.getFriendsLoop, 2000);
+
   },
   methods: {
     getFriendsLoop() {
@@ -181,15 +182,16 @@ export default {
         fri_id: this.friId,
         msg_text: this.friendMsg1
       }).then(response => {
-          console.log(response.data);
-        if (response.data.status) {
-          for (var i = 0; i < response.data.messages.length; i++) {
-            this.friMsgs.push(response.data.messages[i]);
-          }
+          console.log(response.data.messages);
+        // if (response.data.status) {
+        //   for (var i = 0; i < response.data.messages.length; i++) {
+        //     this.friMsgs.push(response.data.messages[i]);
+        //   }
+        //
+        // }
 
-        }
       });
-
+this.friendMsg1='';
     },
     getMeetings() {
       this.isMeetings = true;
@@ -219,6 +221,7 @@ export default {
       }).then(response => {
         this.friMsgs = response.data.messages;
       });
+        setTimeout(this.funkcija,100);
     },
 
 
