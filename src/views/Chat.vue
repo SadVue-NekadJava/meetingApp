@@ -10,10 +10,10 @@
       </div>
         <!-- ********** Chatrooms *************** -->
       <div class="omotOstaliChatovi ">
-        <span @click="listChat" class="">
+        <span @click="listChat" v-for="friendChat in friendsChat" >
           <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi mb-3"><span class="pl-2">Pivo sa osnovcima</span></div>
-        </span>
+          <div class="ostaliChatovi  my-auto">{{friendChat.fri_fullname}}</div><div class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div></span>
+
 
 
       </div>
@@ -152,7 +152,8 @@ export default {
       interval: null,
       poruka: '',
       chatSelected:false,
-      isMeetings:true
+      isMeetings:true,
+      friendsChat:[]
     }
   },
   methods: {
@@ -163,6 +164,14 @@ export default {
     getFriends(){
       this.isMeetings=false;
       this.chatSelected=false;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
+        params: {
+            sid: window.localStorage.getItem("sessionid")
+        },
+      }).then(response => {
+          this.friendsChat=response.data.result;
+          console.log(this.friendsChat);
+      });
     },
     listChat(){
       this.chatSelected=true;
