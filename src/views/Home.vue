@@ -289,7 +289,7 @@ input:focus {
 }
 @keyframes signup {
   0%{
-    transform: scale(0);
+    transform: scale(0.3);
   } 100% {
     transform: scale(1);
   }
@@ -297,7 +297,7 @@ input:focus {
 
 @keyframes login {
   0%{
-    transform: scale(0);
+    transform: scale(0.3);
   } 100% {
     transform: scale(1);
   }
