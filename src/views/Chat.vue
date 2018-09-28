@@ -182,13 +182,13 @@ export default {
         fri_id: this.friId,
         msg_text: this.friendMsg1
       }).then(response => {
-          console.log(response.data.messages);
-        // if (response.data.status) {
-        //   for (var i = 0; i < response.data.messages.length; i++) {
-        //     this.friMsgs.push(response.data.messages[i]);
-        //   }
-        //
-        // }
+          console.log(response.data);
+        if (response.data.status) {
+          for (var i = 0; i < response.data.messages.length; i++) {
+            this.friMsgs.push(response.data.messages[i]);
+          }
+
+        }
 
       });
 this.friendMsg1='';
