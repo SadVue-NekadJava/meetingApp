@@ -119,11 +119,11 @@ export default {
         username: this.logUsername,
         password: this.logPassword
       }).then(response => {
-        var sid = response.data.sid;
 
-        window.localStorage.setItem("sessionid", sid);
         //console.log(response.data[0].usr_access);
         if (response.data.status) {
+          var sid = response.data.sid;
+          window.localStorage.setItem("sessionid", sid);
           this.$router.push('mainPage');
         }
         else{
