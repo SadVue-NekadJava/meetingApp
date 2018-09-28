@@ -11,7 +11,7 @@
 
     </div>
   </div>
-  <div class="container ">
+  <!-- <div class="container ">
 
 
     <div class="loginPozcija">
@@ -41,9 +41,9 @@
             <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- ************************************SIGNUP*********************************** -->
-      <div class="signup">
+      <!-- <div class="signup">
         <div class="form-group">
           <h3 class="py-3 text-center">Sign up</h3>
           <div class="input-box ">
@@ -85,12 +85,97 @@
         </div>
       </div>
     </div>
+  </div> -->
+  <div class="container">
+    <div class="loginPozcija">
+      <div class="promena mx-auto">
+        <input type="radio" id="promena_levo" name="switch_2" checked v-model="radioToggle" value="1" />
+        <label for="promena_levo">Sign in</label>
+        <input type="radio" id="promena_desno" name="switch_2" v-model="radioToggle" value="2" />
+        <label for="promena_desno">Sign up</label>
+      </div>
+      <div class="login" v-if="radioToggle=='1'">
+        <div class="form-group">
+          <h3 class="py-3 text-center">Sign in</h3>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="logUsername">
+            <label>Username</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="password" name="" required="" v-model="logPassword">
+            <label>Password</label>
+          </div>
+          <br>
+          <div class="text-center">
+            <a data-toggle="modal" data-target="#prijava">
+              <button @click="login" class="btn dugme form-control">Sign in</button>
+            </a>
+            <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
+          </div>
+        </div>
+      </div>
+<!--****************************** REFISTRACIJA************************************ -->
+<div class="signup" v-else >
+  <div class="form-group">
+    <h3 class="py-3 text-center">Sign up</h3>
+    <div class="input-box ">
+      <input class=" form-control" type="text" name="" required="" v-model="regFirstName">
+      <label>First Name </label>
+    </div>
+    <br>
+    <div class="input-box ">
+      <input class=" form-control" type="text" name="" required="" v-model="regLastName">
+      <label>Last name </label>
+    </div>
+    <br>
+    <div class="input-box ">
+      <input class=" form-control" type="text" name="" required="" v-model="regUsername">
+      <label>Username</label>
+    </div>
+    <br>
+    <div class="input-box ">
+      <input class=" form-control" type="text" name="" required="" v-model="regEmail">
+      <label>Email</label>
+    </div>
+    <br>
+    <div class="input-box ">
+      <input class=" form-control" type="password" name="" required="" v-model="regPass">
+      <label>Password</label>
+    </div>
+    <br>
+    <div class="input-box ">
+      <input class=" form-control" type="password" name="" required="" v-model="regPass2">
+      <label>Confirm password</label>
+    </div>
+    <br>
+    <div class="text-center">
+      <a data-toggle="modal" data-target="#registracija">
+        <button @click="register" class="btn form-control dugme">Register</button>
+      </a>
+          <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
+    </div>
   </div>
+</div>
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
   <footer class="fixed-bottom lead text-center">Copyright 2018 meetingApp</footer>
 </div>
 </template>
 
 <script>
+
 export default {
   name: 'home',
 
@@ -104,7 +189,8 @@ export default {
       regEmail: '',
       regPass: '',
       regPass2: '',
-      errorMessage:null
+      errorMessage:null,
+      radioToggle:'1'
 
     }
   },
@@ -159,32 +245,6 @@ export default {
   }
 
 }
-
-
-
-$(document).ready(function() {
-  $('.signup').hide();
-  $('#promena_desno').click(function() {
-    $('.login').slideUp('slow');
-    $('.signup').slideDown('slow');
-  });
-  $('#promena_levo').click(function() {
-    $('.signup').slideUp('slow');
-    $('.login').slideDown('slow');
-  });
-});
-
-$(document).ready(function() {
-  $('.mobSignup').hide();
-  $('#promena_desno_mob').click(function() {
-    $('.mobLogin').slideUp('slow');
-    $('.mobSignup').slideDown('slow');
-  });
-  $('#promena_levo_mob').click(function() {
-    $('.mobSignup').slideUp('slow');
-    $('.mobLogin').slideDown('slow');
-  });
-});
 </script>
 
 <style scoped>
@@ -204,6 +264,44 @@ input:focus {
   outline-color: #6ab4d1;
 }
 
+.signup{
+
+  animation-fill-mode: forwards;
+  animation-name: signup;
+  animation-duration: 1s;
+
+}
+.promena{
+
+  animation-fill-mode: forwards;
+  animation-name: login;
+  animation-duration: 1s;
+
+}
+
+
+.login{
+
+  animation-fill-mode: forwards;
+  animation-name: login;
+  animation-duration: 1s;
+
+}
+@keyframes signup {
+  0%{
+    transform: scale(0);
+  } 100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes login {
+  0%{
+    transform: scale(0);
+  } 100% {
+    transform: scale(1);
+  }
+}
 
 
 
@@ -242,7 +340,6 @@ input:focus {
   color: #fff;
   text-shadow: 1px 1px 5px #000;
 }
-
 
 .promena input {
   position: absolute;
@@ -283,7 +380,6 @@ input:focus {
   box-shadow: none;
   color: #fff;
 }
-
 
 .dugme {
   width: 120px;
