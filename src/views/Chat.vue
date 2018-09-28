@@ -10,9 +10,9 @@
       </div>
         <!-- ********** Chatrooms *************** -->
       <div class="omotOstaliChatovi ">
-        <span @click="listChat" v-for="friendChat in friendsChat" >
+        <span  v-for="friendChat in friendsChat" >
           <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi  my-auto">{{friendChat.fri_fullname}}</div><div class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div></span>
+          <div class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname)">{{friendChat.fri_fullname}}</div><div class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div></span>
 
 
 
@@ -28,23 +28,23 @@
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
 
-        <div v-for="msg in msgs">
-          <div class="row " v-if="msg.cht_from==ime">
+        <div v-for="friMsg in friMsgs">
+          <div class="row " v-if="friMsg.usr_id_from==0">
             <div class="col-lg-6"> </div>
             <div class="col-lg-6 text-right pr-4">
-              <div class="datum">{{msg.cht_date}}</div>
+              <div class="datum">datum</div>
               <span class="pr-2 ">Me:</span>
               <div class="ja">
-                <div>{{msg.cht_msg}}</div>
+                <div>{{friMsg.msg_text}}</div>
               </div>
             </div>
           </div>
           <div v-else class="row my-4 ">
             <div class="col-lg-6">
-              <div class="datum">{{msg.cht_date}}</div>
-              <span class="pr-2">{{msg.cht_from}}: </span>
+              <div class="datum">datum</div>
+              <span class="pr-2">{{friendName}}: </span>
               <div class="on">
-                <div>{{msg.cht_msg}}</div>
+                <div>{{friMsg.msg_text}}</div>
               </div>
             </div>
             <div class="col-lg-6"> </div>
@@ -53,8 +53,8 @@
 
         <!-- <button @click="prikazi" v-if="!prikaz" type="button" class="btn btn-danger" name="button">Pokreni</button> -->
       </div>
-      <form @submit.prevent="posaljiPoruku">
-        <input type="text" v-model="poruka" class="form-control" placeholder="Your message:" required>
+      <form @submit.prevent="sendMessage">
+        <input type="text" v-model="friendMsg" class="form-control" placeholder="Your message:" required>
       </form>
     </div>
     <div v-if="isMeetings" class="col-lg-3">
@@ -150,13 +150,27 @@ export default {
       procitanaPoruka: 1,
       msgs: [],
       interval: null,
-      poruka: '',
+      friendMsg: '',
       chatSelected:false,
       isMeetings:true,
-      friendsChat:[]
+      friendsChat:[],
+      friMsgs:[],
+      friId:0,
+      friendName:''
     }
   },
   methods: {
+    sendMessage(){
+      axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
+
+            sid: window.localStorage.getItem("sessionid"),
+            fri_id:this.friId, msg_text:this.friMsg
+
+      }).then(response => {
+
+      });
+
+    },
     getMeetings(){
       this.isMeetings=true;
       this.chatSelected=false;
@@ -173,8 +187,18 @@ export default {
           console.log(this.friendsChat);
       });
     },
-    listChat(){
+    listChat(fri_id,frName){
       this.chatSelected=true;
+      this.friId=fri_id;
+      this.friendName=frName;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendMessages", {
+        params: {
+            sid: window.localStorage.getItem("sessionid"), fri_id
+        },
+      }).then(response => {
+          this.friMsgs=response.data.messages;
+          console.log(this.friMsgs);
+      });
     },
 
     // prikazi() {
