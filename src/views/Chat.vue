@@ -5,24 +5,23 @@
     <div class="col-lg-3">
       <h3 class="text-center  mb-3"> Chat rooms</h3>
       <div class="text-center mb-3">
-        <button  class="btn dugme ":class="{'active':isMeetings}" @click="getMeetings">Meetings</button>
-        <button  class="ml-2 btn dugme" :class="{'active':!isMeetings}" @click="getFriends">Friends</button>
+        <button class="btn dugme " :class="{'active':isMeetings}" @click="getMeetings">Meetings</button>
+        <button class="ml-2 btn dugme" :class="{'active':!isMeetings}" @click="getFriends">Friends</button>
       </div>
-        <!-- ********** Chatrooms *************** -->
+      <!-- ********** Chatrooms *************** -->
       <div class="omotOstaliChatovi ">
-        <span  v-for="friendChat in friendsChat" >
+        <span v-for="(friendChat,index) in friendsChat " :key='index'>
           <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname)">{{friendChat.fri_fullname}}</div><div class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div></span>
-
-
-
+          <div class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
+          <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
+        </span>
       </div>
     </div>
     <!-- ************No chat room selected  ************ -->
-<div v-if="!chatSelected" class="col-lg-6 ">
+    <div v-if="!chatSelected" class="col-lg-6 ">
 
-  <h1 class="text-center pt-5">Pick chat room</h1>
-</div>
+      <h1 class="text-center pt-5">Pick chat room</h1>
+    </div>
     <!-- ************Chat room selected  ************ -->
     <div v-else class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
@@ -54,7 +53,7 @@
         <!-- <button @click="prikazi" v-if="!prikaz" type="button" class="btn btn-danger" name="button">Pokreni</button> -->
       </div>
       <form @submit.prevent="sendMessage">
-        <input type="text" v-model="friendMsg" class="form-control" placeholder="Your message:" required>
+        <input type="text" v-model="friendMsg1" class="form-control" placeholder="Your message:" required>
       </form>
     </div>
     <div v-if="isMeetings" class="col-lg-3">
@@ -150,111 +149,94 @@ export default {
       procitanaPoruka: 1,
       msgs: [],
       interval: null,
-      friendMsg: '',
-      chatSelected:false,
-      isMeetings:true,
-      friendsChat:[],
-      friMsgs:[],
-      friId:0,
-      friendName:''
+      friendMsg1: '',
+      chatSelected: false,
+      isMeetings: true,
+      friendsChat: [],
+      friMsgs: [],
+      friId: 0,
+      friendName: ''
+
     }
   },
+  mounted() {
+    setInterval(this.getFriendsLoop, 2000);
+  },
   methods: {
-    sendMessage(){
-      axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
-
-            sid: window.localStorage.getItem("sessionid"),
-            fri_id:this.friId, msg_text:this.friMsg
-
-      }).then(response => {
-
-      });
-
-    },
-    getMeetings(){
-      this.isMeetings=true;
-      this.chatSelected=false;
-    },
-    getFriends(){
-      this.isMeetings=false;
-      this.chatSelected=false;
+    getFriendsLoop() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
-            sid: window.localStorage.getItem("sessionid")
+          sid: window.localStorage.getItem("sessionid")
         },
       }).then(response => {
-          this.friendsChat=response.data.result;
-          console.log(this.friendsChat);
+        this.friendsChat = response.data.result;
+
       });
     },
-    listChat(fri_id,frName){
-      this.chatSelected=true;
-      this.friId=fri_id;
-      this.friendName=frName;
-      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendMessages", {
+    sendMessage() {
+      // console.log(this.friId, this.friendMsg1);
+      console.log(this.friMsgs);
+      axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
+        sid: window.localStorage.getItem("sessionid"),
+        fri_id: this.friId,
+        msg_text: this.friendMsg1
+      }).then(response => {
+          console.log(response.data);
+        if (response.data.status) {
+          for (var i = 0; i < response.data.messages.length; i++) {
+            this.friMsgs.push(response.data.messages[i]);
+          }
+
+        }
+      });
+
+    },
+    getMeetings() {
+      this.isMeetings = true;
+      this.chatSelected = false;
+    },
+    getFriends() {
+      this.isMeetings = false;
+      this.chatSelected = false;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
-            sid: window.localStorage.getItem("sessionid"), fri_id
+          sid: window.localStorage.getItem("sessionid")
         },
       }).then(response => {
-          this.friMsgs=response.data.messages;
-          console.log(this.friMsgs);
+        this.friendsChat = response.data.result;
+      });
+    },
+    listChat(fri_id, frName, index) {
+      this.chatSelected = true;
+      this.friId = fri_id;
+      this.friendName = frName;
+      this.friendsChat[index].fri_count = 0;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendMessages", {
+        params: {
+          sid: window.localStorage.getItem("sessionid"),
+          fri_id
+        },
+      }).then(response => {
+        this.friMsgs = response.data.messages;
       });
     },
 
-    // prikazi() {
-    //         this.prikaz = !this.prikaz;
-    //         if (this.prikaz) {
-    //             this.interval = setInterval(this.provera, 1000);
-    //         } else {
-    //             clearInterval(this.interval);
-    //         }
-    //         console.log(this.ime);
-    //     },
-    // provera() {
-    //     console.log("provera");
-    //     axios.get("http://712k121.mars-e1.mars-hosting.com/provera", {
-    //         params: {
-    //             soba: this.soba,
-    //             procitanaPoruka: this.procitanaPoruka
-    //         }
-    //     }).then(response => {
-    //         this.msgs = response.data;
-    //         /*this.msgs[0].poruka=response.data.data[0].cht_msg;
-    //         this.msgs[0].date=response.data.data[0].cht_date;*/
-    //         console.log(response.data);
-    //     });
-    //
-    // },
-    // posaljiPoruku(){
-    //   axios.post("http://712k121.mars-e1.mars-hosting.com/provera", {
-    //           poruka: this.poruka,
-    //           posiljalac: this.ime,
-    //           soba: 2
-    //   }).then(response => {
-    //       /*this.msgs[0].poruka=response.data.data[0].cht_msg;
-    //       this.msgs[0].date=response.data.data[0].cht_date;*/
-    //       console.log(response.data);
-    //       console.log(this.ime)
-    //   });
-    //   this.poruka='';
-    // },
+
     funkcija() {
       var objDiv = document.getElementById("divExample");
       objDiv.scrollTop = objDiv.scrollHeight;
     }
   },
-  mounted() {
-    // this.provera();
-    // setInterval(this.provera, 1000);
-    // setTimeout(this.funkcija, 100);
-  }
+
 }
 </script>
 
 <style scoped>
-.dugme.active{
+.dugme.active {
   background: green;
-},
+}
+
+,
 
 .member span:hover {
   cursor: pointer;
@@ -346,6 +328,7 @@ input:focus {
 .dugme:hover {
   border: 1px solid #aec6cf;
 }
+
 /* .dugme:focus{
   background: green;
 } */
