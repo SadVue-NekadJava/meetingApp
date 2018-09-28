@@ -17,7 +17,9 @@
 
       </div>
       <div class="col-lg-8 pl-5 text-white">
-        <router-link to="/mainPage"><h3 class="text-center text-white">LOGO</h3></router-link>
+        <router-link to="/mainPage">
+          <h3 class="text-center text-white">LOGO</h3>
+        </router-link>
       </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
 
@@ -25,7 +27,7 @@
 
         <!-- Nav bar lupa -->
         <!-- ************ MODALI *************-->
-              <!-- ************ MODAL search *************-->
+        <!-- ************ MODAL search *************-->
         <div class="modal fade text-center text-center" id="userSearchedNav" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -47,38 +49,38 @@
 
               </div>
               <div class="modal-footer">
-                <button  class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
+                <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
               </div>
             </div>
           </div>
         </div>
-          <!-- ************ MODAL MyProfile *************-->
-          <div class="modal fade text-center text-center" id="myProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    <div class="velikaSlova">
-                      <i class="fas fa-user"></i>
-                      <h5>{{myProfileInfo.usr_firstname}} {{myProfileInfo.usr_lastname}} </h5>
-                    </div>
-                  </h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body form-group ">
+        <!-- ************ MODAL MyProfile *************-->
+        <div class="modal fade text-center text-center" id="myProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <div class="velikaSlova">
+                    <i class="fas fa-user"></i>
+                    <h5>{{myProfileInfo.usr_firstname}} {{myProfileInfo.usr_lastname}} </h5>
+                  </div>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body form-group ">
 
-                  <p class="mt-2">E-mail: {{myProfileInfo.usr_email}}</p>
-                  <p class="mt-2">Username: {{myProfileInfo.usr_username}}</p>
+                <p class="mt-2">E-mail: {{myProfileInfo.usr_email}}</p>
+                <p class="mt-2">Username: {{myProfileInfo.usr_username}}</p>
 
-                </div>
-                <div class="modal-footer">
+              </div>
+              <div class="modal-footer">
 
-                </div>
               </div>
             </div>
           </div>
+        </div>
 
 
 
@@ -144,7 +146,7 @@ export default {
       foundUsers: [],
       notifications: [],
       usrInfo: [],
-      myProfileInfo:[],
+      myProfileInfo: [],
       notifSound: new Audio(require('../assets/notification.mp3'))
 
     }
@@ -152,10 +154,10 @@ export default {
   mounted() {
 
     //this.  newNotif();
-    setInterval(this.notif, 10000);
+    setInterval(this.notif, 3000);
   },
   methods: {
-    myProfile(){
+    myProfile() {
 
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
         params: {
@@ -251,44 +253,41 @@ export default {
       window.localStorage.removeItem("sessionid");
     },
 
-    // newNotif(){
-    //   // axios.get("http://760b121.mars-e1.mars-hosting.com/checkNotifications", {
-    //   //         params:{sid:localStorage.getItem("sessionid")},
-    //   //           }).then(response => {});
-    //
-    //
-    //       },
 
-
+// ********** Checking notifications and sid ********************
     notif() {
-
       axios.get("http://800q121.mars-t.mars-hosting.com/getNotifications", {
         params: {
           sid: localStorage.getItem("sessionid")
         },
       }).then(response => {
 
-        this.notifications = response.data.result;
-        if (!response.data.status) {
-          this.$router.push('/');
-        }
-        var tempNotification = false;
-        for (var i = 0; i < this.notifications.length; i++) {
-          if (this.notifications[i].not_confirm == 0) {
-            tempNotification = true;
+      if (response.data.status) {
+        if (response.data.statusResult) {
+          this.notifications = response.data.result;
 
+
+
+          var tempNotification = false;
+          for (var i = 0; i < this.notifications.length; i++) {
+            if (this.notifications[i].not_confirm == 0) {
+              tempNotification = true;
+
+            }
           }
-        }
-        if (tempNotification) {
-          if (!this.hasNotif) {
-            this.notifSound.play();
+          if (tempNotification) {
+            if (!this.hasNotif) {
+              this.notifSound.play();
+            }
+            this.hasNotif = true;
+
+          } else {
+            this.hasNotif = false;
           }
-          this.hasNotif = true;
-
-        } else {
-          this.hasNotif = false;
+        }}
+        else{
+              this.$router.push('/');
         }
-
       });
     }
   }
