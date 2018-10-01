@@ -22,8 +22,7 @@
         </router-link>
       </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
-
-
+      <router-link :to="{ name: 'meetings' }"><i class="fas fa-tasks pr-3" style="color:black;"></i></router-link>
 
         <!-- Nav bar lupa -->
         <!-- ************ MODALI *************-->
