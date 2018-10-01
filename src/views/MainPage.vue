@@ -52,6 +52,94 @@
       </div>
       <div class="row sastanak2 mb-3">
         <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
+          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
+        </div>
+        <div class=" text-right">
+          <p> 12:00 AM</p>
+        </div>
+        <div class="col-md-1">
+          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+        </div>
+      </div>
+      <div class="row sastanak2 mb-3">
+        <div class="col-md-10">
           <p class="pl-2">Lorem ipsum dolor sit amet.</p>
         </div>
         <div class=" text-right">
@@ -63,6 +151,9 @@
       </div>
 
     </div>
+
+
+    <div class="text-center noviSastanak"><button  class="btn btn-outline-primary "  type="button" name="button">Create new Meeting</button></div>
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
@@ -148,19 +239,17 @@
               <b>Time</b>   - 14:30
               </div>
               <div class="col-lg-6">
-          <h4>Members:</h4>
-          <ul >
-            <li>Nemanja</li>
-            <li>Marko</li>
-            <li>Filip</li>
-            <li>Lazar</li>
-            <li>Strahinja</li>
-          </ul>
+              <h4>Members:</h4>
+              <ul >
+                <li>Nemanja</li>
+                <li>Marko</li>
+                <li>Filip</li>
+                <li>Lazar</li>
+                <li>Strahinja</li>
+              </ul>
           </div>
-
-</div>
-    <hr>
-
+        </div>
+          <hr>
           <div id="accordion">
 						<div class="card  text-white">
 							<button href="#collapse1" data-toggle="collapse"
@@ -185,12 +274,6 @@
     </div>
   </div>
   <!-- ************ KRAJ MODALI *************-->
-
-
-
-
-
-
 
 </div>
 </template>
@@ -316,9 +399,19 @@ export default {
 .btn-outline-primary:hover {
   background: #6ab4d1;
   color:#fff;
+  border-radius: 50px;
 
 }
+.noviSastanak button {
+  transition: all 0.5s;
+   font-size: 16px;
+transition: all 0.5s;
+}
+.noviSastanak button:hover {
+  padding: 7px 20%;
+  color:#fff;
 
+}
 .sakriveno {
   visibility: hidden;
 }
