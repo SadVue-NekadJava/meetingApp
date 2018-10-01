@@ -31,7 +31,7 @@
           <div class="row " v-if="friMsg.usr_id_from==0">
             <div class="col-lg-6"> </div>
             <div class="col-lg-6 text-right pr-4">
-              <div class="datum">{{friMsg.msg_time}}</div>
+              <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
               <span class="pr-2 ">Me:</span>
               <div class="ja">
                 <div>{{friMsg.msg_text}}</div>
@@ -40,7 +40,7 @@
           </div>
           <div v-else class="row my-4 ">
             <div class="col-lg-6">
-              <div class="datum">{{friMsg.msg_time}}</div>
+              <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
               <span class="pr-2">{{friendName}}: </span>
               <div class="on">
                 <div>{{friMsg.msg_text}}</div>
@@ -134,6 +134,7 @@
 
 <script>
 import Navbar from '../components/navbar.vue';
+import moment from 'moment'
 
 
 
@@ -155,7 +156,8 @@ export default {
       friendsChat: [],
       friMsgs: [],
       friId: 0,
-      friendName: ''
+      friendName: '',
+      trenutnoVreme:null
 
     }
   },
@@ -163,6 +165,13 @@ export default {
     setInterval(this.getFriendsLoop, 2000);
 
   },
+  filters: {
+  dateFormater: function (value) {
+    value=moment.utc(value).toDate();
+      return moment(value).local().format(" Do MMM HH:mm");
+  }
+},
+
   methods: {
     getFriendsLoop() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
@@ -176,11 +185,13 @@ export default {
     },
     sendMessage() {
       // console.log(this.friId, this.friendMsg1);
+       this.trenutnoVreme= moment.utc().format("YYYY-MM-DD HH:mm:ss.S");
       console.log(this.friMsgs);
       axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
         sid: window.localStorage.getItem("sessionid"),
         fri_id: this.friId,
-        msg_text: this.friendMsg1
+        msg_text: this.friendMsg1,
+        time:this.trenutnoVreme
       }).then(response => {
           console.log(response.data);
         if (response.data.status) {
@@ -198,6 +209,7 @@ this.friendMsg1='';
       this.chatSelected = false;
     },
     getFriends() {
+        console.log(  moment.utc().format("YYYY-MM-DD HH:mm:ss.S") );
       this.isMeetings = false;
       this.chatSelected = false;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
