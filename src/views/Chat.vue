@@ -31,7 +31,7 @@
           <div class="row " v-if="friMsg.usr_id_from==0">
             <div class="col-lg-6"> </div>
             <div class="col-lg-6 text-right pr-4">
-              <div class="datum">datum</div>
+              <div class="datum">{{friMsg.msg_time}}</div>
               <span class="pr-2 ">Me:</span>
               <div class="ja">
                 <div>{{friMsg.msg_text}}</div>
@@ -40,7 +40,7 @@
           </div>
           <div v-else class="row my-4 ">
             <div class="col-lg-6">
-              <div class="datum">datum</div>
+              <div class="datum">{{friMsg.msg_time}}</div>
               <span class="pr-2">{{friendName}}: </span>
               <div class="on">
                 <div>{{friMsg.msg_text}}</div>
@@ -220,6 +220,7 @@ this.friendMsg1='';
         },
       }).then(response => {
         this.friMsgs = response.data.messages;
+
       });
         setTimeout(this.funkcija,100);
     },
