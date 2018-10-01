@@ -16,7 +16,7 @@
           <div  class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
           <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
 </template>
-        </span> 
+        </span>
       </div>
     </div>
     <!-- ************No chat room selected  ************ -->
@@ -164,6 +164,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.state.activeChat=1;
     setInterval(this.getFriendsLoop, 2000);
 
   },

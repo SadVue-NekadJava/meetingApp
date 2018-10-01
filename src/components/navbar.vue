@@ -22,7 +22,7 @@
         </router-link>
       </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
-      
+
 
         <!-- Nav bar lupa -->
         <!-- ************ MODALI *************-->
@@ -89,7 +89,7 @@
 
 
 
-        <router-link :to="{ name: 'chat' }"><i class="far fa-comments" style="color:black"></i></router-link>
+        <router-link :to="{ name: 'chat' }"><i :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:black"></i></router-link>
         <div class="dropdown ">
           <i v-if="!hasNotif" class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <i v-else class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -146,12 +146,18 @@ export default {
       notifications: [],
       usrInfo: [],
       myProfileInfo: [],
-      notifSound: new Audio(require('../assets/notification.mp3'))
+      notifSound: new Audio(require('../assets/notification.mp3')),
+      chatActive:0
     }
   },
   mounted() {
     setInterval(this.notif, 3000);
   },
+  computed:{
+      activeChat(){
+        return this.chatActive=this.$store.state.activeChat;
+      }},
+
   methods: {
     myProfile() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {

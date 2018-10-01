@@ -301,7 +301,8 @@ export default {
     }
   },
   mounted() {
-    this.friends()
+    this.friends();
+    this.chatActive=this.$store.state.activeChat=0;
     setInterval(this.friends, 10000);
     if (window.localStorage.getItem("sessionid") == null)
       this.$router.push('/');
