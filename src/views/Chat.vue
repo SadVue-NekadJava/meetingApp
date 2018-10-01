@@ -11,9 +11,11 @@
       <!-- ********** Chatrooms *************** -->
       <div class="omotOstaliChatovi ">
         <span v-for="(friendChat,index) in friendsChat " :key='index'>
-          <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
+          <template v-if="friendChat.fri_request==1">
+          <i  class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
+          <div  class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
           <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
+</template>
         </span>
       </div>
     </div>
@@ -218,6 +220,7 @@ this.friendMsg1='';
         },
       }).then(response => {
         this.friendsChat = response.data.result;
+        console.log(  this.friendsChat);
       });
     },
     listChat(fri_id, frName, index) {
