@@ -250,13 +250,15 @@ export default {
             }
           }else{
             this.notifications=[];
-            this.hasnotif=false;
+            this.hasNotif=false;
           }
         } else {
           window.localStorage.removeItem("sessionid");
           this.$router.push('/');
         }
+        
       });
+
     }
   }
 }
