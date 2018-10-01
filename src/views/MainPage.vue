@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-1">
           <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
+        </div> 
       </div>
       <div class="row sastanak2 mb-3">
         <div class="col-md-10">
