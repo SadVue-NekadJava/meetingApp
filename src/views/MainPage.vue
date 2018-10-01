@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div v-if="0==1"  class="pt-5 container">
+  <div v-if="1==1"  class="pt-5 container">
     <div class="text-center mb-3">
       <button @click="weekButtons=false" class="btn  dugme mr-3">Daily</button>
       <button @click="weekButtons=true" class="btn dugme mr-3">Weekly</button>
@@ -17,7 +17,7 @@
       <button class="btn  dugme">Sunday</button>
     </div>
     <div class="skrol">
-      <div class="row sastanak2 mb-3">
+      <div data-target="#sastanak1" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
         <div class="col-md-10 ">
           <p class="pl-2">Lorem ipsum dolor.</p>
         </div>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-1">
           <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div> 
+        </div>
       </div>
       <div class="row sastanak2 mb-3">
         <div class="col-md-10">
@@ -67,7 +67,7 @@
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
 
-    <div class="prviPutOmot">
+    <!-- <div class="prviPutOmot">
       <div v-if="!hasFriends" class="">
 
 
@@ -88,9 +88,9 @@
   <h3  class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
 <button  class="btn btn-outline-primary form-control"  type="button" name="button">Create new Meeting</button>
 </div>
+ -->
 
-
-    </div>
+    <!-- </div> -->
 
 
 
@@ -122,6 +122,68 @@
     </div>
   </div>
 
+
+
+
+  <div class="modal fade " id="sastanak1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <div class="velikaSlova">
+              <h3>Meeting info</h3>
+            </div>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  ">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, vel. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, iusto.
+          <hr>
+            <div class="row">
+              <div class="col-lg-6">
+              <b>Company</b>   - ENON <br><br><br>
+              <b>Category</b>   - Business <br><br><br>
+              <b>Time</b>   - 14:30
+              </div>
+              <div class="col-lg-6">
+          <h4>Members:</h4>
+          <ul >
+            <li>Nemanja</li>
+            <li>Marko</li>
+            <li>Filip</li>
+            <li>Lazar</li>
+            <li>Strahinja</li>
+          </ul>
+          </div>
+
+</div>
+    <hr>
+
+          <div id="accordion">
+						<div class="card  text-white">
+							<button href="#collapse1" data-toggle="collapse"
+							data-target="#collapse1" data-parent="#accordion"
+							class="btn btn-outline-primary glavni " id="heading1">
+                  <h5 class="my-auto text-center">
+									 <i id="okreni"  class="fa fa-arrow-down"></i> Meeting place
+									</h5>
+							</button>
+							<div id="collapse1" class="collapse">
+								<div class="card-body text-dark">
+                  <div class="text-center">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.3839869721273!2d20.472159615804255!3d44.81374138462888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7abb7bac8bd5%3A0xeacb210dbb3765e9!2z0JTQsNC70LzQsNGC0LjQvdGB0LrQsCAyMywg0JHQtdC-0LPRgNCw0LQ!5e0!3m2!1ssr!2srs!4v1538401580110" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  </div>
+								</div>
+							</div>
+						</div>
+				</div>
+    </div>
+
+      </div>
+    </div>
+  </div>
   <!-- ************ KRAJ MODALI *************-->
 
 
@@ -226,6 +288,23 @@ export default {
 
 
 }
+
+.glavni {
+  transition: 0.7s
+}
+
+#okreni {
+  display: none;
+  font-size: 18px;
+
+}
+
+
+.glavni:hover #okreni {
+  color:#FFF;
+    display: inline-block;
+}
+
 
 .btn-outline-primary {
   margin-top: 20px;
