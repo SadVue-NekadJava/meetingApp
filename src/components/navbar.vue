@@ -22,7 +22,7 @@
         </router-link>
       </div>
       <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
-      <router-link :to="{ name: 'meetings' }"><i class="fas fa-tasks pr-3" style="color:black;"></i></router-link>
+        <router-link :to="{ name: 'meetings' }"><i class="fas fa-tasks pr-3" style="color:black;"></i></router-link>
 
         <!-- Nav bar lupa -->
         <!-- ************ MODALI *************-->
@@ -147,17 +147,13 @@ export default {
       usrInfo: [],
       myProfileInfo: [],
       notifSound: new Audio(require('../assets/notification.mp3'))
-
     }
   },
   mounted() {
-
-    //this.  newNotif();
     setInterval(this.notif, 3000);
   },
   methods: {
     myProfile() {
-
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
         params: {
           sid: window.localStorage.getItem("sessionid"),
@@ -172,14 +168,8 @@ export default {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-
-
       });
-
-
-
     },
-
     getUserInfo(id) {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
         params: {
@@ -194,37 +184,21 @@ export default {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-
-
       });
-
-
     },
     confirmReq(id) {
       axios.post("http://800q121.mars-t.mars-hosting.com/friendConfirm", {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-
-
       });
-
-
     },
-
     statusRead(not_id) {
-
       axios.post("http://800q121.mars-t.mars-hosting.com/postNotification", {
         not_id
       }).then(response => {
-
-
       });
-
-
-
     },
-
     searchUsers() {
       if (this.keyUserSearch != '') {
         axios.get("http://800q121.mars-t.mars-hosting.com/search", {
@@ -233,7 +207,6 @@ export default {
           },
         }).then(response => {
           this.foundUsers = response.data.result;
-
         });
       } else {
         this.foundUsers = [];
@@ -244,50 +217,44 @@ export default {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {
-
       });
     },
     logout() {
 
       window.localStorage.removeItem("sessionid");
     },
-
-
-// ********** Checking notifications and sid ********************
+    // ********** Checking notifications and sid ********************
     notif() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getNotifications", {
         params: {
           sid: localStorage.getItem("sessionid")
         },
       }).then(response => {
-
-      if (response.data.status) {
-        if (response.data.statusResult) {
-          this.notifications = response.data.result;
-
-
-
-          var tempNotification = false;
-          for (var i = 0; i < this.notifications.length; i++) {
-            if (this.notifications[i].not_confirm == 0) {
-              tempNotification = true;
+        if (response.data.status) {
+          if (response.data.statusResult) {
+            this.notifications = response.data.result;
+            var tempNotification = false;
+            for (var i = 0; i < this.notifications.length; i++) {
+              if (this.notifications[i].not_confirm == 0) {
+                tempNotification = true;
+              }
+            }
+            if (tempNotification) {
+              if (!this.hasNotif) {
+                this.notifSound.play();
+              }
+              this.hasNotif = true;
+            } else {
+              this.hasNotif = false;
 
             }
+          }else{
+            this.notifications=[];
+            this.hasnotif=false;
           }
-          if (tempNotification) {
-            if (!this.hasNotif) {
-              this.notifSound.play();
-            }
-            this.hasNotif = true;
-
-          } else {
-            this.hasNotif = false;
-          }
-        }}
-        else{
-            window.localStorage.removeItem("sessionid");
-              this.$router.push('/');
-
+        } else {
+          window.localStorage.removeItem("sessionid");
+          this.$router.push('/');
         }
       });
     }
