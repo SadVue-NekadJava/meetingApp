@@ -424,14 +424,14 @@ export default {
   font-weight: 600;
   position: relative;
   overflow: hidden;
+  border-radius: 20px;
+    transition: 2s all;
 
 }
 
 .btn-outline-primary:focus {
   outline-style:none;
   box-shadow:none;
-
-
 }
 
 .btn-outline-primary::before{
@@ -451,11 +451,13 @@ export default {
   height: 1500%;
   background: #6ab4d1;
   color:#fff;
+
+
 }
 
 .btn-outline-primary:hover {
     border-radius: 50px;
-    transition: 1s background ease;
+    transition: 0.5s all ease;
 }
 .noviSastanak button {
   transition: all 0.5s;
