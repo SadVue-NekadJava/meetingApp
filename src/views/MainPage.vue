@@ -287,21 +287,7 @@
           </button>
         </div>
         <div class="modal-body form-group ">
-          <datetime v-model="date"
-                    type="datetime"
-                    input-format="DD-MM-YYYY HH:mm"
-                    wrapper-class="my-wrapper-class"
-                    input-class="my-input-class"
-                    placeholder="Select date"
-                    moment-locale="es"
-                    :i18n="{ok:'De acuerdo', cancel:'Cancelar'}"
-                    :disabled-dates="['2017-09-07', ['2017-09-25', '2017-10-05']]"
-                    max-date="2017-12-10"
-                    min-date="2017-07-10"
-                    monday-first
-                    auto-continue
-                    auto-close
-                    required></datetime>
+          
         </div>
         <div class="modal-footer">
           <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
@@ -319,14 +305,13 @@
 <script>
 
 
-import { Datetime } from 'vue-datetime';
+
 import moment from 'moment'
 import Navbar from '../components/navbar.vue'
 export default {
   name: 'mainPage',
   components: {
-    'nav-bar': Navbar,
-      datetime: Datetime
+    'nav-bar': Navbar
   },
   data() {
     return {
