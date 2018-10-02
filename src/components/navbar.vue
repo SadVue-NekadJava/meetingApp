@@ -89,7 +89,9 @@
 
 
 
-        <router-link :to="{ name: 'chat' }"><i :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:black"></i></router-link>
+        <router-link :to="{ name: 'chat' }">
+          <i v-if="!hasChatNotifications" :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:black"></i>
+          <i v-else :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:red"></i></router-link>
         <div class="dropdown ">
           <i v-if="!hasNotif" class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <i v-else class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -147,16 +149,19 @@ export default {
       usrInfo: [],
       myProfileInfo: [],
       notifSound: new Audio(require('../assets/notification.mp3')),
-      chatActive:0
+      chatActive: 0,
+      friendsChatNotification: [],
+      hasChatNotifications: false
     }
   },
   mounted() {
-    setInterval(this.notif, 3000);
+    setInterval(this.notif, 2000);
   },
-  computed:{
-      activeChat(){
-        return this.chatActive=this.$store.state.activeChat;
-      }},
+  computed: {
+    activeChat() {
+      return this.chatActive = this.$store.state.activeChat;
+    }
+  },
 
   methods: {
     myProfile() {
@@ -173,8 +178,7 @@ export default {
       axios.post("http://800q121.mars-t.mars-hosting.com/friendDenied", {
         sid: window.localStorage.getItem("sessionid"),
         id
-      }).then(response => {
-      });
+      }).then(response => {});
     },
     getUserInfo(id) {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
@@ -189,21 +193,18 @@ export default {
       axios.post("http://800q121.mars-t.mars-hosting.com/friendDenied", {
         sid: window.localStorage.getItem("sessionid"),
         id
-      }).then(response => {
-      });
+      }).then(response => {});
     },
     confirmReq(id) {
       axios.post("http://800q121.mars-t.mars-hosting.com/friendConfirm", {
         sid: window.localStorage.getItem("sessionid"),
         id
-      }).then(response => {
-      });
+      }).then(response => {});
     },
     statusRead(not_id) {
       axios.post("http://800q121.mars-t.mars-hosting.com/postNotification", {
         not_id
-      }).then(response => {
-      });
+      }).then(response => {});
     },
     searchUsers() {
       if (this.keyUserSearch != '') {
@@ -222,8 +223,7 @@ export default {
       axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
         sid: window.localStorage.getItem("sessionid"),
         id
-      }).then(response => {
-      });
+      }).then(response => {});
     },
     logout() {
 
@@ -254,9 +254,9 @@ export default {
               this.hasNotif = false;
 
             }
-          }else{
-            this.notifications=[];
-            this.hasNotif=false;
+          } else {
+            this.notifications = [];
+            this.hasNotif = false;
           }
         } else {
           window.localStorage.removeItem("sessionid");
@@ -264,7 +264,25 @@ export default {
         }
 
       });
+      setTimeout(this.getChatNotification,100);
 
+    },
+    // ****************Chat Notifications*************************
+    getChatNotification() {
+      this.hasChatNotifications = false;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
+        params: {
+          sid: window.localStorage.getItem("sessionid")
+        },
+      }).then(response => {
+        this.friendsChatNotification = response.data.result;
+        for (var i in this.friendsChatNotification ) {
+          if (this.friendsChatNotification[i].fri_count > 0) {
+            this.hasChatNotifications = true;
+          }
+        }
+
+      });
     }
   }
 }
