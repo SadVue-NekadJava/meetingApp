@@ -36,7 +36,7 @@
               <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
               <span class="pr-2 ">Me:</span>
               <div class="ja">
-                <div>{{friMsg.msg_text}}</div>
+                <div>{{friMsg.msg_text| backslashRemover}}</div>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
               <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
               <span class="pr-2">{{friendName}}: </span>
               <div class="on">
-                <div>{{friMsg.msg_text}}</div>
+                <div>{{friMsg.msg_text| backslashRemover}}</div>
               </div>
             </div>
             <div class="col-lg-6"> </div>
@@ -172,6 +172,9 @@ export default {
   dateFormater: function (value) {
     value=moment.utc(value).toDate();
       return moment(value).local().format(" Do MMM HH:mm");
+  },
+  backslashRemover:function(value){
+      return value=  value.replace(/\\/g, "");
   }
 },
 
@@ -200,6 +203,7 @@ export default {
         if (response.data.status) {
           for (var i = 0; i < response.data.messages.length; i++) {
             this.friMsgs.push(response.data.messages[i]);
+
           }
 
         }
