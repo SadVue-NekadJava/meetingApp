@@ -153,7 +153,7 @@
     </div>
 
 
-    <div class="text-center noviSastanak"><button  class="btn btn-outline-primary "  type="button" name="button">Create new Meeting</button></div>
+    <div class="text-center noviSastanak"><button  data-target="#newMeeting" data-toggle="modal"  class="btn btn-outline-primary "  type="button" name="button">Create new Meeting</button></div>
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
@@ -216,9 +216,9 @@
 
 
 
-  <div class="modal fade " id="sastanak1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+  <div class="modal fade bd-example-modal-lg " id="sastanak1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document"  >
+      <div class="modal-content ">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
             <div class="velikaSlova">
@@ -229,8 +229,8 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body  ">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, vel. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, iusto.
+        <div class="modal-body ">
+          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, vel. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, iusto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam debitis repellat dolor hic aliquid dolore ipsa sint accusamus officia minus!</p>
           <hr>
             <div class="row">
               <div class="col-lg-6">
@@ -250,11 +250,9 @@
           </div>
         </div>
           <hr>
-          <div id="accordion">
-						<div class="card  text-white">
-							<button href="#collapse1" data-toggle="collapse"
-							data-target="#collapse1" data-parent="#accordion"
-							class="btn btn-outline-primary glavni " id="heading1">
+          <div >
+						<div class="card  text-white" style="border:none">
+							<button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary mx-auto  my-auto" style="width:50%;border-radius:50px;">
                   <h5 class="my-auto text-center">
 									 <i id="okreni"  class="fa fa-arrow-down"></i> Meeting place
 									</h5>
@@ -262,7 +260,7 @@
 							<div id="collapse1" class="collapse">
 								<div class="card-body text-dark">
                   <div class="text-center">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.3839869721273!2d20.472159615804255!3d44.81374138462888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7abb7bac8bd5%3A0xeacb210dbb3765e9!2z0JTQsNC70LzQsNGC0LjQvdGB0LrQsCAyMywg0JHQtdC-0LPRgNCw0LQ!5e0!3m2!1ssr!2srs!4v1538401580110" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.3839869721273!2d20.472159615804255!3d44.81374138462888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7abb7bac8bd5%3A0xeacb210dbb3765e9!2z0JTQsNC70LzQsNGC0LjQvdGB0LrQsCAyMywg0JHQtdC-0LPRgNCw0LQ!5e0!3m2!1ssr!2srs!4v1538401580110" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
                   </div>
 								</div>
 							</div>
@@ -273,17 +271,50 @@
       </div>
     </div>
   </div>
+
+
+
+  <div class="modal fade text-center text-center" id="newMeeting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <div class="velikaSlova">
+
+schedule a new meeting
+            </div>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body form-group ">
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- ************ KRAJ MODALI *************-->
 
 </div>
 </template>
 
 <script>
+
+
+import { Datetime } from 'vue-datetime';
+import moment from 'moment'
 import Navbar from '../components/navbar.vue'
 export default {
   name: 'mainPage',
   components: {
-    'nav-bar': Navbar
+    'nav-bar': Navbar,
+      datetime: Datetime
   },
   data() {
     return {
@@ -360,6 +391,8 @@ export default {
 
   }
 }
+
+
 </script>
 
 <style scoped>
@@ -369,24 +402,18 @@ export default {
   font-size: 50px;
   width: 400px;
   background: gray;
-
-
-}
-
-.glavni {
-  transition: 0.7s
 }
 
 #okreni {
-  display: none;
+  visibility: hidden;
   font-size: 18px;
 
 }
 
 
-.glavni:hover #okreni {
+.btn-outline-primary:hover #okreni {
   color:#FFF;
-    display: inline-block;
+    visibility: visible;
 }
 
 
@@ -395,13 +422,42 @@ export default {
   border: 1px solid #6ab4d1;
   color:black;
   font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+    transition: 2s all;
+
+}
+
+.btn-outline-primary:focus {
+  outline-style:none;
+  box-shadow:none;
+}
+
+.btn-outline-primary::before{
+  position: absolute;
+  background: #6ab4d1;
+  top:50%;
+  content: '';
+  left:50%;
+  transform: translate(-50%,-50%) rotate(45deg);
+  transition: 1s all ease;
+  z-index: -1;
+  width: 100%;
+  height: 0;
+}
+
+.btn-outline-primary:hover::before{
+  height: 1500%;
+  background: #6ab4d1;
+  color:#fff;
+
+
 }
 
 .btn-outline-primary:hover {
-  background: #6ab4d1;
-  color:#fff;
-  border-radius: 50px;
-
+    border-radius: 50px;
+    transition: 0.5s all ease;
 }
 .noviSastanak button {
   transition: all 0.5s;
@@ -495,23 +551,6 @@ transition: all 0.5s;
 }
 
 
-.sastanak {
-  border-radius: 20px;
-  width: 100%;
-  color: black;
-  font-weight: 500;
-  letter-spacing: 1px;
-  border: 1px solid rgba(37, 168, 46, 1);
-  outline: 0;
-  -webkit-box-shadow: -2px 2px 14px -1px rgba(37, 168, 46, 1);
-  -moz-box-shadow: -2px 2px 14px -1px rgba(37, 168, 46, 1);
-  box-shadow: -2px 2px 14px -1px rgba(37, 168, 46, 1);
-  height: 40px;
-  font-size: 18px;
-  font-family: 'Lato', sans-serif;
-  line-height: 38px;
-}
-
 .sastanak2 {
   border-radius: 20px;
   width: 100%;
@@ -527,13 +566,15 @@ transition: all 0.5s;
   font-size: 18px;
   font-family: 'Lato', sans-serif;
   line-height: 38px;
+  transition: 0.2s all;
+}
+.sastanak2:hover {
+  cursor: pointer;
+  border: 2px solid #6ab4d1;
+  padding: 1px;
+
 }
 
-
-.sastanak i {
-  font-size: 30px;
-  line-height: 38px;
-}
 
 .sastanak2 i {
   font-size: 30px;

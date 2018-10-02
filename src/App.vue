@@ -7,6 +7,8 @@
 </template>
 
 <script>
+
+
 import FooterMeeting from './components/footerMeeting.vue'
 
 export default {
