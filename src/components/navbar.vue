@@ -90,7 +90,7 @@
 
 
         <router-link :to="{ name: 'chat' }">
-          <i v-if="!hasChatNotifications" :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:black"></i>
+          <i v-if="!colorMsgNotification" :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:black"></i>
           <i v-else :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:red"></i></router-link>
         <div class="dropdown ">
           <i v-if="!hasNotif" class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -151,7 +151,7 @@ export default {
       notifSound: new Audio(require('../assets/notification.mp3')),
       chatActive: 0,
       friendsChatNotification: [],
-      hasChatNotifications: false
+      hasChatNotifications: this.$store.state.msgNotificationNavbar
     }
   },
   mounted() {
@@ -160,6 +160,10 @@ export default {
   computed: {
     activeChat() {
       return this.chatActive = this.$store.state.activeChat;
+    },
+    colorMsgNotification(){
+
+      return this.hasChatNotifications= this.$store.state.msgNotificationNavbar;
     }
   },
 
@@ -269,7 +273,7 @@ export default {
     },
     // ****************Chat Notifications*************************
     getChatNotification() {
-      this.hasChatNotifications = false;
+    this.$store.state.msgNotificationNavbar = false;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
           sid: window.localStorage.getItem("sessionid")
@@ -278,7 +282,7 @@ export default {
         this.friendsChatNotification = response.data.result;
         for (var i in this.friendsChatNotification ) {
           if (this.friendsChatNotification[i].fri_count > 0) {
-            this.hasChatNotifications = true;
+            this.$store.state.msgNotificationNavbar = true;
           }
         }
 

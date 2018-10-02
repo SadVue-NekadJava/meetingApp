@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    activeChat:0
+    activeChat:0,
+    msgNotificationNavbar:false
   },
   mutations: {
 
