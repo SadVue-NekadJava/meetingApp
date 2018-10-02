@@ -233,10 +233,9 @@
           <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, vel. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, iusto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam debitis repellat dolor hic aliquid dolore ipsa sint accusamus officia minus!</p>
           <hr>
             <div class="row">
-              <div class="col-lg-6">
-              <b>Company</b>   - ENON <br><br><br>
-              <b>Category</b>   - Business <br><br><br>
-              <b>Time</b>   - 14:30
+              <div class="col-lg-6 gde my-auto">
+              <p class=""><i class="fas fa-building "></i> ENON </p>
+              <p class="my-auto"><i class="fas fa-clock"></i> 14:30</p>
               </div>
               <div class="col-lg-6">
               <h4>Members:</h4>
@@ -281,7 +280,6 @@
           <h5 class="modal-title" id="exampleModalLabel">
             <div class="velikaSlova">
 
-schedule a new meeting
             </div>
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -289,7 +287,21 @@ schedule a new meeting
           </button>
         </div>
         <div class="modal-body form-group ">
-
+          <datetime v-model="date"
+                    type="datetime"
+                    input-format="DD-MM-YYYY HH:mm"
+                    wrapper-class="my-wrapper-class"
+                    input-class="my-input-class"
+                    placeholder="Select date"
+                    moment-locale="es"
+                    :i18n="{ok:'De acuerdo', cancel:'Cancelar'}"
+                    :disabled-dates="['2017-09-07', ['2017-09-25', '2017-10-05']]"
+                    max-date="2017-12-10"
+                    min-date="2017-07-10"
+                    monday-first
+                    auto-continue
+                    auto-close
+                    required></datetime>
         </div>
         <div class="modal-footer">
           <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
@@ -410,6 +422,9 @@ export default {
 
 }
 
+.gde i {
+  font-size: 40px;
+}
 
 .btn-outline-primary:hover #okreni {
   color:#FFF;
@@ -425,7 +440,7 @@ export default {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-    transition: 2s all;
+  transition: 2s padding ease;
 
 }
 
@@ -566,15 +581,17 @@ transition: all 0.5s;
   font-size: 18px;
   font-family: 'Lato', sans-serif;
   line-height: 38px;
-  transition: 0.2s all;
+  transition: 0.2s background ease;
 }
 .sastanak2:hover {
   cursor: pointer;
-  border: 2px solid #6ab4d1;
-  padding: 1px;
-
+  border: 0;
+  background-color: #6ab4d1;
+  color:#fff;
 }
-
+.sastanak2:hover i {
+  color:#fff;
+}
 
 .sastanak2 i {
   font-size: 30px;
