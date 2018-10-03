@@ -3,20 +3,24 @@
 
       <div class="calendar">
           <div class="calendar-header">
-              <i class="fa fa-fw fa-chevron-left" @click="subtractMonth"></i>
+            <div class="text-center">
+
+              <span>
+              <i class="fa fa-fw fa-chevron-left pr-5" @click="subtractMonth"></i>
               <h4>{{month + ' - ' + year}}</h4>
-              <i class="fa fa-fw fa-chevron-right" @click="addMonth"></i>
+              <i class="fa fa-fw fa-chevron-right pl-5" @click="addMonth"></i></span>
+                </div>
           </div>
           <tr class="weekdays">
-
-              <td v-for="day in days">{{day}}</td>
+              <td v-for="day in days"><span>{{day}}</span></td>
           </tr>
           <tr class="dates">
               <td v-for="blank in firstDayOfMonth">&nbsp;</td>
-              <td v-for="date in daysInMonth"
-          		:class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}">{{date}}
-                  <span></span>
-             </td>
+              <div class="dates" v-for="date in daysInMonth">
+              <div class="broj" >{{date}}
+             </div>
+              <br v-show="date%7==0">
+             </div>
           </tr>
       </div>
 
@@ -95,8 +99,37 @@ export default {
 
 <style>
 
-.dates td:nth-child(7){
-  color:red;
-  
+.calendar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  min-width: 50vw;
+  min-height: 50vh;
+
 }
+
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+}
+.calendar-header span {
+  display: flex;
+  align-items: center;
+ justify-content: center;
+
+}
+.dates {
+  display: flex;
+   justify-content: space-between;
+ flex-wrap: wrap;
+
+
+}
+.dates .broj{
+ width: calc( 50vw /100 *14.1);
+
+}
+
 </style>
