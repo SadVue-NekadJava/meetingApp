@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div v-if="1==1"  class="pt-5 container">
+  <div v-if="1==1" class="pt-5 container">
     <div class="text-center mb-3">
       <button @click="weekButtons=false" class="btn  dugme mr-3">Daily</button>
       <button @click="weekButtons=true" class="btn dugme mr-3">Weekly</button>
@@ -153,12 +153,14 @@
     </div>
 
 
-    <div class="text-center noviSastanak"><button  data-target="#newMeeting" data-toggle="modal"  class="btn btn-outline-primary "  type="button" name="button">Create new Meeting</button></div>
+    <div class="text-center noviSastanak"><button class="btn btn-outline-primary " type="button" name="button">
+        <router-link to="/createMeeting">Create New Meeting</router-link>
+      </button></div>
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
 
-    <!-- <div class="prviPutOmot">
+  <!-- <div class="prviPutOmot">
       <div v-if="!hasFriends" class="">
 
 
@@ -181,7 +183,7 @@
 </div>
  -->
 
-    <!-- </div> -->
+  <!-- </div> -->
 
 
 
@@ -217,7 +219,7 @@
 
 
   <div class="modal fade bd-example-modal-lg " id="sastanak1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg " role="document"  >
+    <div class="modal-dialog modal-lg " role="document">
       <div class="modal-content ">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
@@ -230,71 +232,50 @@
           </button>
         </div>
         <div class="modal-body ">
-          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, vel. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, iusto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam debitis repellat dolor hic aliquid dolore ipsa sint accusamus officia minus!</p>
+          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, vel. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, iusto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam debitis
+            repellat dolor hic aliquid dolore ipsa sint accusamus officia minus!</p>
           <hr>
-            <div class="row">
-              <div class="col-lg-6 gde my-auto">
+          <div class="row">
+            <div class="col-lg-6 gde my-auto">
               <p class=""><i class="fas fa-building "></i> ENON </p>
               <p class="my-auto"><i class="fas fa-clock"></i> 14:30</p>
-              </div>
-              <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
               <h4>Members:</h4>
-              <ul >
+              <ul>
                 <li>Nemanja</li>
                 <li>Marko</li>
                 <li>Filip</li>
                 <li>Lazar</li>
                 <li>Strahinja</li>
               </ul>
+            </div>
+          </div>
+          <hr>
+          <div>
+            <div class="card  text-white" style="border:none">
+              <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary mx-auto  my-auto" style="width:50%;border-radius:50px;">
+                <h5 class="my-auto text-center">
+                  <i id="okreni" class="fa fa-arrow-down"></i> Meeting place
+                </h5>
+              </button>
+              <div id="collapse1" class="collapse">
+                <div class="card-body text-dark">
+                  <div class="text-center">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.3839869721273!2d20.472159615804255!3d44.81374138462888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7abb7bac8bd5%3A0xeacb210dbb3765e9!2z0JTQsNC70LzQsNGC0LjQvdGB0LrQsCAyMywg0JHQtdC-0LPRgNCw0LQ!5e0!3m2!1ssr!2srs!4v1538401580110"
+                      width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-          <hr>
-          <div >
-						<div class="card  text-white" style="border:none">
-							<button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary mx-auto  my-auto" style="width:50%;border-radius:50px;">
-                  <h5 class="my-auto text-center">
-									 <i id="okreni"  class="fa fa-arrow-down"></i> Meeting place
-									</h5>
-							</button>
-							<div id="collapse1" class="collapse">
-								<div class="card-body text-dark">
-                  <div class="text-center">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.3839869721273!2d20.472159615804255!3d44.81374138462888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7abb7bac8bd5%3A0xeacb210dbb3765e9!2z0JTQsNC70LzQsNGC0LjQvdGB0LrQsCAyMywg0JHQtdC-0LPRgNCw0LQ!5e0!3m2!1ssr!2srs!4v1538401580110" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-                  </div>
-								</div>
-							</div>
-						</div>
-				</div>
-    </div>
 
       </div>
     </div>
   </div>
 
 
-
-  <div class="modal fade text-center text-center" id="newMeeting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            <div class="velikaSlova">
-
-            </div>
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body form-group ">
-          
-        </div>
-        <div class="modal-footer">
-          <button class="btn dugme" @click="addUser(usrInfo.usr_id)" data-dismiss="modal">Add user</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
   <!-- ************ KRAJ MODALI *************-->
@@ -303,9 +284,6 @@
 </template>
 
 <script>
-
-
-
 import moment from 'moment'
 import Navbar from '../components/navbar.vue'
 export default {
@@ -324,26 +302,26 @@ export default {
       username: '',
       userId: '',
       hasFriends: false,
-      ukj:0,
-      usrInfo:[]
+      ukj: 0,
+      usrInfo: []
     }
   },
   mounted() {
     this.friends();
-    this.chatActive=this.$store.state.activeChat=0;
+    this.chatActive = this.$store.state.activeChat = 0;
     setInterval(this.friends, 10000);
     if (window.localStorage.getItem("sessionid") == null)
       this.$router.push('/');
   },
 
   methods: {
-    getUserInfo(id){
+    getUserInfo(id) {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
         params: {
           id
         },
       }).then(response => {
-            this.usrInfo=response.data.result[0];
+        this.usrInfo = response.data.result[0];
       });
     },
 
@@ -388,12 +366,10 @@ export default {
 
   }
 }
-
-
 </script>
 
 <style scoped>
-.klasaModal{
+.klasaModal {
   position: absolute;
   text-align: center;
   font-size: 50px;
@@ -412,15 +388,15 @@ export default {
 }
 
 .btn-outline-primary:hover #okreni {
-  color:#FFF;
-    visibility: visible;
+  color: #FFF;
+  visibility: visible;
 }
 
 
 .btn-outline-primary {
   margin-top: 20px;
   border: 1px solid #6ab4d1;
-  color:black;
+  color: black;
   font-weight: 600;
   position: relative;
   overflow: hidden;
@@ -430,45 +406,48 @@ export default {
 }
 
 .btn-outline-primary:focus {
-  outline-style:none;
-  box-shadow:none;
+  outline-style: none;
+  box-shadow: none;
 }
 
-.btn-outline-primary::before{
+.btn-outline-primary::before {
   position: absolute;
   background: #6ab4d1;
-  top:50%;
+  top: 50%;
   content: '';
-  left:50%;
-  transform: translate(-50%,-50%) rotate(45deg);
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
   transition: 1s all ease;
   z-index: -1;
   width: 100%;
   height: 0;
 }
 
-.btn-outline-primary:hover::before{
+.btn-outline-primary:hover::before {
   height: 1500%;
   background: #6ab4d1;
-  color:#fff;
+  color: #fff;
 
 
 }
 
 .btn-outline-primary:hover {
-    border-radius: 50px;
-    transition: 0.5s all ease;
+  border-radius: 50px;
+  transition: 0.5s all ease;
 }
+
 .noviSastanak button {
   transition: all 0.5s;
-   font-size: 16px;
-transition: all 0.5s;
+  font-size: 16px;
+  transition: all 0.5s;
 }
+
 .noviSastanak button:hover {
   padding: 7px 20%;
-  color:#fff;
+  color: #fff;
 
 }
+
 .sakriveno {
   visibility: hidden;
 }
@@ -568,14 +547,16 @@ transition: all 0.5s;
   line-height: 38px;
   transition: 0.2s background ease;
 }
+
 .sastanak2:hover {
   cursor: pointer;
   border: 0;
   background-color: #6ab4d1;
-  color:#fff;
+  color: #fff;
 }
+
 .sastanak2:hover i {
-  color:#fff;
+  color: #fff;
 }
 
 .sastanak2 i {

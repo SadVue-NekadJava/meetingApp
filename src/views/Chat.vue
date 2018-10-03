@@ -12,10 +12,10 @@
       <div class="omotOstaliChatovi ">
         <span v-for="(friendChat,index) in friendsChat " :key='index'>
           <template v-if="friendChat.fri_request==1">
-          <i  class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div  class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
-          <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
-</template>
+            <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
+            <div class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
+            <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
+          </template>
         </span>
       </div>
     </div>
@@ -159,24 +159,24 @@ export default {
       friMsgs: [],
       friId: 0,
       friendName: '',
-      trenutnoVreme:null
+      trenutnoVreme: null
 
     }
   },
   mounted() {
-    this.$store.state.activeChat=1;
+    this.$store.state.activeChat = 1;
     setInterval(this.getFriendsLoop, 2000);
 
   },
   filters: {
-  dateFormater: function (value) {
-    value=moment.utc(value).toDate();
+    dateFormater: function(value) {
+      value = moment.utc(value).toDate();
       return moment(value).local().format(" Do MMM HH:mm");
+    },
+    backslashRemover: function(value) {
+      return value = value.replace(/\\/g, "");
+    }
   },
-  backslashRemover:function(value){
-      return value=  value.replace(/\\/g, "");
-  }
-},
 
   methods: {
     getFriendsLoop() {
@@ -191,15 +191,15 @@ export default {
     },
     sendMessage() {
       // console.log(this.friId, this.friendMsg1);
-       this.trenutnoVreme= moment.utc().format("YYYY-MM-DD HH:mm:ss.S");
+      this.trenutnoVreme = moment.utc().format("YYYY-MM-DD HH:mm:ss.S");
       console.log(this.friMsgs);
       axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
         sid: window.localStorage.getItem("sessionid"),
         fri_id: this.friId,
         msg_text: this.friendMsg1,
-        time:this.trenutnoVreme
+        time: this.trenutnoVreme
       }).then(response => {
-          console.log(response.data);
+        console.log(response.data);
         if (response.data.status) {
           for (var i = 0; i < response.data.messages.length; i++) {
             this.friMsgs.push(response.data.messages[i]);
@@ -209,14 +209,14 @@ export default {
         }
 
       });
-this.friendMsg1='';
+      this.friendMsg1 = '';
     },
     getMeetings() {
       this.isMeetings = true;
       this.chatSelected = false;
     },
     getFriends() {
-        console.log(  moment.utc().format("YYYY-MM-DD HH:mm:ss.S") );
+      console.log(moment.utc().format("YYYY-MM-DD HH:mm:ss.S"));
       this.isMeetings = false;
       this.chatSelected = false;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
@@ -225,7 +225,7 @@ this.friendMsg1='';
         },
       }).then(response => {
         this.friendsChat = response.data.result;
-        console.log(  this.friendsChat);
+        console.log(this.friendsChat);
       });
     },
     listChat(fri_id, frName, index) {
@@ -242,7 +242,7 @@ this.friendMsg1='';
         this.friMsgs = response.data.messages;
 
       });
-        setTimeout(this.funkcija,100);
+      setTimeout(this.funkcija, 100);
     },
 
 
