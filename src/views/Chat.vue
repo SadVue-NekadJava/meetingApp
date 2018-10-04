@@ -220,11 +220,14 @@ export default {
     },
     getFriends() {
       console.log(moment.utc().format("YYYY-MM-DD HH:mm:ss.S"));
+      this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
+
       this.isMeetings = false;
       this.chatSelected = false;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
-          sid: window.localStorage.getItem("sessionid")
+          sid: window.localStorage.getItem("sessionid"),
+            usr_last_online:this.currentTime
         },
       }).then(response => {
         this.friendsChat = response.data.result;
