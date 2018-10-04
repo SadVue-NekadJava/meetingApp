@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     activeChat:0,
-    msgNotificationNavbar:false
+    msgNotificationNavbar:false,
+    dateClicked:''
   },
   mutations: {
 

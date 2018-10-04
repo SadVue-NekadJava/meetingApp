@@ -5,7 +5,7 @@
       <div class="col-lg-2 pl-5">
         <form class="search-box">
 
-          <input type="search" id="pretragaNav" required="" placeholder="Search" @keyup="searchUsers" v-model="keyUserSearch" class=" prviPutLista">
+          <input type="search" autocomplete="off" id="pretragaNav" required="" placeholder="Search" @keyup="searchUsers" v-model="keyUserSearch" class=" prviPutLista">
           <ul class="lista">
 
             <li data-target="#userSearchedNav" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
