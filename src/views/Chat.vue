@@ -159,7 +159,8 @@ export default {
       friMsgs: [],
       friId: 0,
       friendName: '',
-      trenutnoVreme: null
+      trenutnoVreme: null,
+      currentTime:''
 
     }
   },
@@ -180,18 +181,20 @@ export default {
 
   methods: {
     getFriendsLoop() {
+      this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
-          sid: window.localStorage.getItem("sessionid")
+          sid: window.localStorage.getItem("sessionid"),
+          usr_last_online:this.currentTime
         },
       }).then(response => {
         this.friendsChat = response.data.result;
-
+        console.log(response);
       });
     },
     sendMessage() {
       // console.log(this.friId, this.friendMsg1);
-      this.trenutnoVreme = moment.utc().format("YYYY-MM-DD HH:mm:ss.S");
+      this.trenutnoVreme = moment.utc().format("YYYY-MM-DD HH:mm:ss");
       console.log(this.friMsgs);
       axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
         sid: window.localStorage.getItem("sessionid"),

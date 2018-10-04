@@ -16,16 +16,23 @@ export default {
   components: {
     "footer-meeting": FooterMeeting
   },
+  data(){
+    return{
+      currentTime:""
+    }
+  },
   methods:{
 
     getFriendsLoop() {
+      this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
-          sid: window.localStorage.getItem("sessionid")
+          sid: window.localStorage.getItem("sessionid"),
+          usr_last_online:this.currentTime
         },
       }).then(response => {
         this.friendsChat = response.data.result;
-        console.log(this.friendsChat);
+        console.log(response);
       });
 
   }
