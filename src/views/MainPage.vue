@@ -402,6 +402,7 @@ export default {
   overflow: hidden;
   border-radius: 20px;
   transition: 2s padding ease;
+    text-decoration: none;
 
 }
 
@@ -434,6 +435,9 @@ export default {
 .btn-outline-primary:hover {
   border-radius: 50px;
   transition: 0.5s all ease;
+  text-decoration: none;
+  color:#fff;
+
 }
 
 .noviSastanak button {
