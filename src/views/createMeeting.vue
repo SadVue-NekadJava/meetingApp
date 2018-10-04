@@ -215,7 +215,7 @@ export default {
       this.duration=0;
       this.radioToggle= '0';
       this.meetingTimeStart='0';
-      this.participants=[];
+      this.participantsArray=[];
       this.description='';
       this.keyUserSearch='';
 
