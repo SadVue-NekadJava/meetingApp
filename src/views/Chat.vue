@@ -182,35 +182,28 @@ export default {
   methods: {
     getFriendsLoop() {
       this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
+      console.log(this.currentTime);
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
           sid: window.localStorage.getItem("sessionid"),
-          usr_last_online:this.currentTime
-        },
+          usr_last_online: this.currentTime
+        }
       }).then(response => {
         this.friendsChat = response.data.result;
 console.log(this.friendsChat);
 var now=moment(new Date());
  now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
-
 now=moment(now);
-
-
         for(var i=0;i<this.friendsChat.length;i++){
           var end = moment(this.friendsChat[i].time);
           var duration = moment.duration(now.diff(end));
           var seconds = duration.asSeconds();
-              if(seconds<20){
+              if(seconds<3){
                 this.friendsChat[i].isOnline=true;
-
               }
               else{
-                this.friendsChat[i].isOnline=false;
-
+              this.friendsChat[i].isOnline=false;
               }
-
-
-
         }
       });
     },

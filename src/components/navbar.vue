@@ -132,6 +132,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'home',
   data() {
@@ -151,7 +153,8 @@ export default {
       notifSound: new Audio(require('../assets/notification.mp3')),
       chatActive: 0,
       friendsChatNotification: [],
-      hasChatNotifications: this.$store.state.msgNotificationNavbar
+      hasChatNotifications: this.$store.state.msgNotificationNavbar,
+      currentTime:''
     }
   },
   mounted() {
@@ -235,6 +238,7 @@ export default {
     },
     // ********** Checking notifications and sid ********************
     notif() {
+      console.log("ulaz");
       axios.get("http://800q121.mars-t.mars-hosting.com/getNotifications", {
         params: {
           sid: localStorage.getItem("sessionid")
@@ -273,10 +277,13 @@ export default {
     },
     // ****************Chat Notifications*************************
     getChatNotification() {
+      this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
+      console.log(this.currentTime);
     this.$store.state.msgNotificationNavbar = false;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
-          sid: window.localStorage.getItem("sessionid")
+          sid: window.localStorage.getItem("sessionid"),
+          usr_last_online:this.currentTime
         },
       }).then(response => {
         this.friendsChatNotification = response.data.result;
