@@ -12,7 +12,7 @@
       <div class="omotOstaliChatovi ">
         <span v-for="(friendChat,index) in friendsChat " :key='index'>
           <template v-if="friendChat.fri_request==1">
-            <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
+            <i class="fas fa-user-tie  pr-2" :class="{'text-success':friendChat.isOnline}" style="font-size:40px;line-height:50px;"></i>
             <div class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
             <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
           </template>
@@ -160,8 +160,8 @@ export default {
       friId: 0,
       friendName: '',
       trenutnoVreme: null,
-      currentTime:''
-
+      currentTime:'',
+      friOnline:true
     }
   },
   mounted() {
@@ -189,7 +189,29 @@ export default {
         },
       }).then(response => {
         this.friendsChat = response.data.result;
-        console.log(response);
+console.log(this.friendsChat);
+var now=moment(new Date());
+ now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
+
+now=moment(now);
+
+
+        for(var i=0;i<this.friendsChat.length;i++){
+          var end = moment(this.friendsChat[i].time);
+          var duration = moment.duration(now.diff(end));
+          var seconds = duration.asSeconds();
+              if(seconds<20){
+                this.friendsChat[i].isOnline=true;
+
+              }
+              else{
+                this.friendsChat[i].isOnline=false;
+
+              }
+
+
+
+        }
       });
     },
     sendMessage() {
@@ -262,11 +284,12 @@ export default {
 </script>
 
 <style scoped>
+
 .dugme.active {
   background: green;
 }
 
-,
+
 
 .member span:hover {
   cursor: pointer;
