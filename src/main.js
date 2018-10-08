@@ -12,9 +12,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 // import moment from 'moment-timezone/data/builds/moment-timezone-with-data-2012-2022.js'
 import moment from 'moment'
 
-Vue.filter('splitTime', function (value) {
-  return value.split(' ')[1].slice(0,5) + ' ' + value.split(' ')[0].slice(5,10);
-})
+
 
 Vue.prototype.moment = moment
 import * as VueGoogleMaps from 'vue2-google-maps'

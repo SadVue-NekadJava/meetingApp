@@ -22,7 +22,7 @@
           <p class="pl-2">{{ meeting.met_title }}</p>
         </div>
         <div class=" text-right">
-          <p> {{ meeting.met_time_start | splitTime}}</p>
+          <p> {{ meeting.met_time_start | dateFormater}}</p>
         </div>
         <div class="col-md-1">
           <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
@@ -309,6 +309,15 @@ export default {
       ukj: 0,
       usrInfo: [],
       meetings:[]
+    }
+  },
+  filters: {
+    dateFormater: function(value) {
+      value = moment.utc(value).toDate();
+      return moment(value).local().format(" Do MMM HH:mm");
+    },
+    backslashRemover: function(value) {
+      return value = value.replace(/\\/g, "");
     }
   },
   mounted() {
