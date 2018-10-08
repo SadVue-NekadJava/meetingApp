@@ -17,18 +17,18 @@
       <button class="btn  dugme">Sunday</button>
     </div>
     <div class="skrol">
-      <div data-target="#sastanak1" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
+      <div v-for="meeting in meetings" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
         <div class="col-md-10 ">
-          <p class="pl-2">Lorem ipsum dolor.</p>
+          <p class="pl-2">{{ meeting.met_title }}</p>
         </div>
         <div class=" text-right">
-          <p> 12:00 AM</p>
+          <p> {{ meeting.met_time_start | splitTime}}</p>
         </div>
         <div class="col-md-1">
           <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
         </div>
       </div>
-      <div class="row sastanak2 mb-3">
+      <!-- <div class="row sastanak2 mb-3">
         <div class="col-md-10">
           <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
         </div>
@@ -148,7 +148,7 @@
         <div class="col-md-1">
           <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment"></i></p>
         </div>
-      </div>
+      </div> -->
 
     </div>
 
@@ -217,14 +217,14 @@
 
 
 
-
-  <div class="modal fade bd-example-modal-lg " id="sastanak1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div v-for="meeting in meetings">
+  <div class="modal fade bd-example-modal-lg " :id="'met_id'+ meeting.met_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg " role="document">
       <div class="modal-content ">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
             <div class="velikaSlova">
-              <h3>Meeting info</h3>
+              <h3>{{ meeting.met_title }}</h3>
             </div>
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -232,22 +232,17 @@
           </button>
         </div>
         <div class="modal-body ">
-          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, vel. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, iusto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam debitis
-            repellat dolor hic aliquid dolore ipsa sint accusamus officia minus!</p>
+          <p class="text-center">{{ meeting.met_description }}</p>
           <hr>
           <div class="row">
             <div class="col-lg-6 gde my-auto">
               <p class=""><i class="fas fa-building "></i> ENON </p>
-              <p class="my-auto"><i class="fas fa-clock"></i> 14:30</p>
+              <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|splitTime }}</p>
             </div>
             <div class="col-lg-6">
-              <h4>Members:</h4>
-              <ul>
-                <li>Nemanja</li>
-                <li>Marko</li>
-                <li>Filip</li>
-                <li>Lazar</li>
-                <li>Strahinja</li>
+              <h4>Participants:</h4>
+              <ul v-for="participant in meeting.participants">
+                <li>{{ participant.fullname }}</li>
               </ul>
             </div>
           </div>
@@ -256,7 +251,7 @@
             <div class="card  text-white" style="border:none">
               <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary mx-auto  my-auto" style="width:50%;border-radius:50px;">
                 <h5 class="my-auto text-center">
-                  <i id="okreni" class="fa fa-arrow-down"></i> Meeting place
+                  <i id="okreni" class="fa fa-arrow-down"></i> {{ meeting.met_location }}
                 </h5>
               </button>
               <div id="collapse1" class="collapse">
@@ -274,7 +269,7 @@
       </div>
     </div>
   </div>
-
+</div>
 
 
 
@@ -303,7 +298,8 @@ export default {
       userId: '',
       hasFriends: false,
       ukj: 0,
-      usrInfo: []
+      usrInfo: [],
+      meetings:[]
     }
   },
   mounted() {
@@ -312,6 +308,17 @@ export default {
     setInterval(this.friends, 10000);
     if (window.localStorage.getItem("sessionid") == null)
       this.$router.push('/');
+
+        axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
+          params: {
+            sid: window.localStorage.getItem("sessionid")
+          },
+        }).then(response => {
+          //console.log(response.data.result);
+          this.meetings = response.data.result;
+        });
+
+
   },
 
   methods: {

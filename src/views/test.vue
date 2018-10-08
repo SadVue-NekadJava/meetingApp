@@ -2,7 +2,7 @@
 <div>
 
   <h1>{{msg}}</h1>
-  <!-- <footer-meeting></footer-meeting> -->
+  <footer-meeting></footer-meeting>
 </div>
 </template>
 
