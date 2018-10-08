@@ -257,11 +257,20 @@
               <div id="collapse1" class="collapse">
                 <div class="card-body text-dark">
                   <div class="text-center">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.3839869721273!2d20.472159615804255!3d44.81374138462888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7abb7bac8bd5%3A0xeacb210dbb3765e9!2z0JTQsNC70LzQsNGC0LjQvdGB0LrQsCAyMywg0JHQtdC-0LPRgNCw0LQ!5e0!3m2!1ssr!2srs!4v1538401580110"
-                      width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <GmapMap
+                      :center="{lat:Number(meeting.met_latitude), lng:Number(meeting.met_longitude)}"
+                      :zoom="12"
+                      style="width: 100%; height: 400px"
+                    >
+                    <GmapMarker label="★" :position="{
+                          lat: Number(meeting.met_latitude),
+                          lng: Number(meeting.met_longitude)
+                        }" />
+                    </GmapMap>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -314,7 +323,7 @@ export default {
             sid: window.localStorage.getItem("sessionid")
           },
         }).then(response => {
-          //console.log(response.data.result);
+          //console.log(response.data.result[0].met_longitude);
           this.meetings = response.data.result;
         });
 
