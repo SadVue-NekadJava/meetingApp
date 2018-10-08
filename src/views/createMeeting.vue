@@ -167,15 +167,15 @@ export default {
       meetingTimeStart:'0',
       duration:0,
       description:'',
-      participantsArray:[]
+      participantsArray:[],
+      met_location:''
     }
   },
   description: 'Autocomplete Example (#164)',
   methods: {
 
     addMeeting(place) {
-
-
+      this.met_location = this.usePlace(place);
       this.usePlace(place);
       if (this.radioToggle == 1) {
         if (this.selectPriority == 1) {
@@ -205,7 +205,8 @@ export default {
           participants:this.participantsArray,
           met_longitude: this.markers[0].position.lng,
           met_latitude:this.markers[0].position.lat,
-          description:this.description
+          description:this.description,
+          met_location:this.met_location
 
       }).then(response => {
           console.log(response.data);
@@ -236,8 +237,8 @@ export default {
             lng: this.place.geometry.location.lng(),
           }
         })
+        return this.place.formatted_address;
         this.place = null;
-        console.log(this.markers[0].position.lat);
       }
     },
     searchUsers() {
