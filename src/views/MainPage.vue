@@ -156,21 +156,21 @@
       </div>
     </div>
   </div>
-  <div >
-    <div class="row">
-      <div class="col-lg-10"></div>
-      <div class="col-lg-2 text-right pr-5" >
-        <img class="slika" src="../assets/calendar.png" alt="" width="100" height="100">
-      </div>
 
-  </div>
-  </div>
 </div>
 
 
 
   <!-- ************ KRAJ MODALI *************-->
+  <div >
+    <div class="row">
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2 text-right pr-5" >
+      <router-link to="/probavam">  <img class="slika" src="../assets/calendar.png" alt="" width="100" height="100"></router-link>
+      </div>
 
+  </div>
+  </div>
 </div>
 </template>
 
