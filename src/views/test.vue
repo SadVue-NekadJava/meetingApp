@@ -1,8 +1,12 @@
 <template>
 <div>
-
-  <h1>{{msg}}</h1>
-  <footer-meeting></footer-meeting>
+  <div class="container">
+    <div class="omot">
+    <h1 class="text-center naslov">{{msg}}</h1>
+    <router-link to="/mainPage" ><div class="text-center"><button type="button" class="btn btn-outline-primary" name="button">Login</button></div></router-link>
+    <footer-meeting></footer-meeting>
+  </div>
+  </div>
 </div>
 </template>
 
@@ -34,6 +38,53 @@ export default {
 
 <style lang="scss">
 
+.naslov {
+  text-transform: uppercase;
+margin-top:30vh;
+}
+.btn-outline-primary {
+margin-top: 20px;
+border: 1px solid #6ab4d1;
+color: black;
+font-weight: 600;
+width: 100px;
+position: relative;
+overflow: hidden;
+border-radius: 20px;
+transition: 2s padding ease;
+  text-decoration: none;
+
+}
+.btn-outline-primary:focus {
+  outline-style: none;
+  box-shadow: none;
+}
+
+.btn-outline-primary::before {
+  position: absolute;
+  background: #6ab4d1;
+  top: 50%;
+  content: '';
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: 1s all ease;
+  z-index: -1;
+  width: 100%;
+  height: 0;
+}
+
+.btn-outline-primary:hover::before {
+  height: 1500%;
+  background: #6ab4d1;
+  color: #fff;
 
 
+}
+
+.btn-outline-primary:hover {
+  border-radius: 50px;
+  transition: 0.5s all ease;
+  text-decoration: none;
+  color:#fff;
+}
 </style>
