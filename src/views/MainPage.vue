@@ -2,20 +2,7 @@
 <div>
   <nav-bar></nav-bar>
   <div v-if="1==1" class="pt-5 container">
-    <div class="text-center mb-3">
-      <button @click="weekButtons=false" class="btn  dugme mr-3">Daily</button>
-      <button @click="weekButtons=true" class="btn dugme mr-3">Weekly</button>
-      <button @click="weekButtons=false" class="btn  dugme">All meetings</button>
-    </div>
-    <div v-show="weekButtons" class="text-center mb-3 dani">
-      <button class="btn  dugme mr-3">Monday</button>
-      <button class="btn  dugme mr-3">Tuesday</button>
-      <button class="btn  dugme mr-3">Wednesday</button>
-      <button class="btn  dugme mr-3">Thursday</button>
-      <button class="btn  dugme mr-3">Friday</button>
-      <button class="btn  dugme mr-3">Saturday</button>
-      <button class="btn  dugme">Sunday</button>
-    </div>
+    <h3 class="text-center mb-3">All meetings</h3>
     <div class="skrol">
       <div v-for="meeting in meetings" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
         <div class="col-md-9 ">
@@ -29,11 +16,11 @@
         </div>
       </div>
     </div>
-    <div class="text-center noviSastanak">
-      <button class="btn btn-outline-primary " type="button" name="button">
+    <!-- <div class="text-center noviSastanak">
+      <button disabled class="btn btn-outline-primary " type="button" name="button">
         <router-link to="/createMeeting">Create New Meeting</router-link>
       </button>
-    </div>
+    </div> -->
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
@@ -127,7 +114,7 @@
           <hr>
           <div>
             <div class="card  text-white" style="border:none">
-              <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary mx-auto  my-auto" style="width:50%;border-radius:50px;">
+              <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary buttonWidth  " >
                 <h5 class="my-auto text-center">
                   <i id="okreni" class="fa fa-arrow-down"></i> {{ meeting.met_location }}
                 </h5>
@@ -163,13 +150,20 @@
 
   <!-- ************ KRAJ MODALI *************-->
   <div >
-    <div class="row">
+    <div class="row" v-if="listaKalendar==1">
       <div class="col-lg-10"></div>
       <div class="col-lg-2 text-right pr-5" >
-      <router-link to="/probavam">  <img class="slika" src="../assets/calendar.png" alt="" width="100" height="100"></router-link>
+      <router-link to="/probavam">  <img @click="listaKalendar=2" class="slika" src="../assets/calendar.png" alt="" width="100" height="100"></router-link>
       </div>
 
   </div>
+  <div class="row" v-else>
+    <div class="col-lg-10"></div>
+    <div class="col-lg-2 text-right pr-5" >
+    <router-link to="/probavam"> <img @click="listaKalendar=1" class="slika" src="../assets/lista.png" alt="" width="100" height="100"></router-link>
+    </div>
+
+</div>
   </div>
 </div>
 </template>
@@ -195,7 +189,8 @@ export default {
       hasFriends: false,
       ukj: 0,
       usrInfo: [],
-      meetings:[]
+      meetings:[],
+      listaKalendar:1
     }
   },
   filters: {
@@ -281,6 +276,18 @@ export default {
 </script>
 
 <style scoped>
+.buttonWidth {
+  width: 50%;
+  margin:auto;
+  transition: 0.2s all;
+}
+.buttonWidth:hover {
+  width: 100%;
+
+}
+.slika {
+  transition: 0.3s all;
+}
 .slika:hover {
   cursor: pointer;
   transform: scale(1.2);
@@ -353,7 +360,6 @@ export default {
   transition: 0.5s all ease;
   text-decoration: none;
   color:#fff;
-
 }
 
 .noviSastanak button {
