@@ -18,144 +18,22 @@
     </div>
     <div class="skrol">
       <div v-for="meeting in meetings" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
-        <div class="col-md-10 ">
+        <div class="col-md-9 ">
           <p class="pl-2">{{ meeting.met_title }}</p>
         </div>
-        <div class=" text-right">
+        <div class=" text-right col-md-2">
           <p> {{ meeting.met_time_start | dateFormater}}</p>
         </div>
         <div class="col-md-1">
           <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
         </div>
       </div>
-      <!-- <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, culpa.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
-        </div>
-      </div>
-      <div class="row sastanak2 mb-3">
-        <div class="col-md-10">
-          <p class="pl-2">Lorem ipsum dolor sit amet.</p>
-        </div>
-        <div class=" text-right">
-          <p> 12:00 AM</p>
-        </div>
-        <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-dice" data-toggle="tooltip" data-placement="top" title="Entertainment"></i></p>
-        </div>
-      </div> -->
-
     </div>
-
-
-    <div class="text-center noviSastanak"><button class="btn btn-outline-primary " type="button" name="button">
+    <div class="text-center noviSastanak">
+      <button class="btn btn-outline-primary " type="button" name="button">
         <router-link to="/createMeeting">Create New Meeting</router-link>
-      </button></div>
+      </button>
+    </div>
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
@@ -278,6 +156,15 @@
       </div>
     </div>
   </div>
+  <div >
+    <div class="row">
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2 text-right pr-5" >
+        <img class="slika" src="../assets/calendar.png" alt="" width="100" height="100">
+      </div>
+
+  </div>
+  </div>
 </div>
 
 
@@ -394,6 +281,10 @@ export default {
 </script>
 
 <style scoped>
+.slika:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
 .klasaModal {
   position: absolute;
   text-align: center;
