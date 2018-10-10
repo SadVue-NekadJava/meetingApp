@@ -197,7 +197,6 @@ export default {
     setInterval(this.friends, 10000);
     if (window.localStorage.getItem("sessionid") == null)
       this.$router.push('/');
-
     axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
       params: {
         sid: window.localStorage.getItem("sessionid")
@@ -206,10 +205,7 @@ export default {
       //console.log(response.data.result[0].met_longitude);
       this.meetings = response.data.result;
     });
-
-
   },
-
   methods: {
     getUserInfo(id) {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
@@ -243,23 +239,17 @@ export default {
           },
         }).then(response => {
           this.foundUsers = response.data.result;
-
         });
       } else {
         this.foundUsers = [];
       }
     },
-
     addUser(id) {
-
       axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
         sid: window.localStorage.getItem("sessionid"),
         id
-      }).then(response => {
-
-      });
+      }).then(response => {});
     }
-
   }
 }
 </script>

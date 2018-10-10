@@ -84,11 +84,6 @@
 
 
         <!-- ************ KRAJ MODALI *************-->
-
-
-
-
-
         <router-link :to="{ name: 'chat' }">
           <i v-if="!colorMsgNotification" :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:black"></i>
           <i v-else :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:red"></i></router-link>
@@ -158,14 +153,14 @@ export default {
     }
   },
   mounted() {
-    setInterval(this.notif, 2000);
+    this.notif();
+    setInterval(this.notif, 20000);
   },
   computed: {
     activeChat() {
       return this.chatActive = this.$store.state.activeChat;
     },
     colorMsgNotification(){
-
       return this.hasChatNotifications= this.$store.state.msgNotificationNavbar;
     }
   },
@@ -175,7 +170,6 @@ export default {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
         params: {
           sid: window.localStorage.getItem("sessionid"),
-
         },
       }).then(response => {
         this.myProfileInfo = response.data.result[0];
@@ -238,7 +232,6 @@ export default {
     },
     // ********** Checking notifications and sid ********************
     notif() {
-      console.log("ulaz");
       axios.get("http://800q121.mars-t.mars-hosting.com/getNotifications", {
         params: {
           sid: localStorage.getItem("sessionid")
@@ -278,7 +271,6 @@ export default {
     // ****************Chat Notifications*************************
     getChatNotification() {
       this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
-      console.log(this.currentTime);
     this.$store.state.msgNotificationNavbar = false;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
