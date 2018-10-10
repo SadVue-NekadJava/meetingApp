@@ -110,7 +110,7 @@
                 <p ><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
                 <p ><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
                 <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
-                
+
               </div>
               <div class="col-lg-6">
                 <h4>Participants:</h4>
@@ -555,6 +555,7 @@ border: 1px solid black;
   position: relative;
   border-radius: 10px;
   transition: 0.2s background;
+  padding:0 10px;
 
 
 

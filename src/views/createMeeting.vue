@@ -275,6 +275,9 @@ export default {
           username: username
         })
       }
+      this.keyUserSearch="";
+      this.foundUsers=""
+      t
     },
     removeParticipant(index) {
       this.participants.splice(index, 1);
