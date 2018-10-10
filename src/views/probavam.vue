@@ -558,6 +558,7 @@ border: 1px solid black;
   transition: 0.2s background;
   padding:0 10px;
   overflow: auto;
+  overflow-x: hidden;
 
 
 
