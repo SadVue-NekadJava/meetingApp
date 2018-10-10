@@ -8,27 +8,38 @@
         <button class="btn dugme " :class="{'active':isMeetings}" @click="getMeetings">Meetings</button>
         <button class="ml-2 btn dugme" :class="{'active':!isMeetings}" @click="getFriends">Friends</button>
       </div>
-      <!-- ********** Chatrooms *************** -->
-      <div class="omotOstaliChatovi ">
+
+      <!-- ************ Chatroom List *************** -->
+      <!-- ****************Chatroom Friends List****************** -->
+      <div v-if="!isMeetings" class="omotOstaliChatovi ">
         <span v-for="(friendChat,index) in friendsChat " :key='index'>
           <template v-if="friendChat.fri_request==1">
             <i class="fas fa-user-tie  pr-2" :class="{'text-success':friendChat.isOnline}" style="font-size:40px;line-height:50px;"></i>
-            <div class="ostaliChatovi  my-auto" @click="listChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
+            <div class="ostaliChatovi  my-auto" @click="listFriendChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
             <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
           </template>
         </span>
       </div>
+
+      <!-- ****************Chatroom Meetings List****************** -->
+      <div v-else class="omotOstaliChatovi ">
+        <span v-for="(meetingChat,index) in meetingsChat " :key='index'>
+          <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
+          <div class="ostaliChatovi  my-auto" @click="listMeetingChat(meetingChat.fri_id,meetingChat.fri_fullname,index)">{{meetingChat.met_title}}</div>
+          <div v-show.visible="meetingChat.meeting_count!=0" class="kolikoNovihPoruka my-auto">{{meetingChat.meeting_count}}</div>
+        </span>
+      </div>
     </div>
     <!-- ************No chat room selected  ************ -->
-    <div v-if="!chatSelected" class="col-lg-6 ">
+    <div v-if="chatSelected==0" class="col-lg-6 ">
 
       <h1 class="text-center pt-5">Pick chat room</h1>
     </div>
-    <!-- ************Chat room selected  ************ -->
-    <div v-else class="col-lg-6 ">
+    <!-- ************Chat room Friend selected  ************ -->
+    <div v-else-if="chatSelected==1" class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
-
+        <button @click="loadMoreMsgs" type="button" class="btn btn-primary" name="button">Load more messages</button>
         <div v-for="friMsg in friMsgs">
           <div class="row " v-if="friMsg.usr_id_from==0">
             <div class="col-lg-6"> </div>
@@ -52,32 +63,64 @@
           </div>
         </div>
 
-        <!-- <button @click="prikazi" v-if="!prikaz" type="button" class="btn btn-danger" name="button">Pokreni</button> -->
       </div>
       <form @submit.prevent="sendMessage">
         <input type="text" v-model="friendMsg1" class="form-control" placeholder="Your message:" required>
       </form>
     </div>
-    <div v-if="isMeetings" class="col-lg-3">
+    <!-- ************Chat room Meeting selected  ************ -->
+    <div v-else-if="chatSelected==2" class="col-lg-6 ">
+      <h3 class="text-center  mb-3"> Chat window</h3>
+      <div class="omotChat " id="divExample">
+        <button @click="loadMoreMsgs" type="button" class="btn btn-primary" name="button">Load more messages</button>
+        <div v-for="friMsg in friMsgs">
+          <div class="row " v-if="friMsg.usr_id_from==0">
+            <div class="col-lg-6"> </div>
+            <div class="col-lg-6 text-right pr-4">
+              <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
+              <span class="pr-2 ">Me:</span>
+              <div class="ja">
+                <div>{{friMsg.msg_text| backslashRemover}}</div>
+              </div>
+            </div>
+          </div>
+          <div v-else class="row my-4 ">
+            <div class="col-lg-6">
+              <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
+              <span class="pr-2">{{friendName}}: </span>
+              <div class="on">
+                <div>{{friMsg.msg_text| backslashRemover}}</div>
+              </div>
+            </div>
+            <div class="col-lg-6"> </div>
+          </div>
+        </div>
+
+      </div>
+      <form @submit.prevent="sendMessage">
+        <input type="text" v-model="friendMsg1" class="form-control" placeholder="Your message:" required>
+      </form>
+    </div>
+
+
+
+
+
+
+
+    <!-- *******************Meeting options********************* -->
+    <div v-if="chatSelected ==2" class="col-lg-3">
       <h3 class="text-center  mb-3"> Chat members</h3>
       <div class="omotOstaliChatovi members">
-        <h4 class="text-center">Pivo sa osnovcima</h4>
+        <h4 class="text-center">{{meetingsChat[this.indexMeeting].met_title}}</h4>
         <p class="lead">Members: </p>
         <a data-toggle="modal" title="Nazad" data-target="#add" class="mx-auto">
-          <p style="font-size:20px;cursor:pointer"><i class="fas fa-plus" style="color:#6ab4d1"></i> Add member</p>
+          <!-- <p style="font-size:20px;cursor:pointer"><i class="fas fa-plus" style="color:#6ab4d1"></i> Add member</p> -->
         </a>
-        <div class="member">
-          <a data-toggle="modal" title="Info" data-target="#member" class="mx-auto"><span><i class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:red"></i>
-              <p>Lazar</p>
-            </span></a>
-          <span><i class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:green"></i>
-            <p>Marko</p>
-          </span>
-          <span><i class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:red"></i>
-            <p>Filip</p>
-          </span>
-          <span><i class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:green"></i>
-            <p>Nemanja</p>
+        <div v-for="participant in meetingsChat[this.indexMeeting].participants" class="member">
+          <span><i v-if="!participant.isOnline"  class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:red"></i>
+            <i v-else  class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:green"></i>
+            <p>{{participant.usr_fullname}}</p>
           </span>
         </div>
       </div>
@@ -153,20 +196,24 @@ export default {
       msgs: [],
       interval: null,
       friendMsg1: '',
-      chatSelected: false,
+      chatSelected: 0,
       isMeetings: true,
       friendsChat: [],
       friMsgs: [],
       friId: 0,
       friendName: '',
       trenutnoVreme: null,
-      currentTime:'',
-      friOnline:true
+      currentTime: '',
+      friOnline: true,
+      loadedMsgs: 1,
+      meetingsChat: [],
+      indexMeeting: 0
     }
   },
   mounted() {
     this.$store.state.activeChat = 1;
-    setInterval(this.getFriendsLoop, 2000);
+    setInterval(this.getFriendsLoop, 1000);
+    this.getFriendsLoop();
 
   },
   filters: {
@@ -180,77 +227,118 @@ export default {
   },
 
   methods: {
+    loadMoreMsgs() {
+      this.loadedMsgs++;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendMessagesLazy", {
+        params: {
+          sid: window.localStorage.getItem("sessionid"),
+          fri_id: this.friId,
+          brojac: this.loadedMsgs
+        },
+      }).then(response => {});
+    },
     getFriendsLoop() {
       this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
-      console.log(this.currentTime);
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
         params: {
           sid: window.localStorage.getItem("sessionid"),
           usr_last_online: this.currentTime
         }
       }).then(response => {
+
         this.friendsChat = response.data.result;
-        console.log(this.friendsChat);
-        var now=moment(new Date());
-         now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
-        now=moment(now);
-        for(var i=0;i<this.friendsChat.length;i++){
+        this.meetingsChat = response.data.meetings;
+        var now = moment(new Date());
+        now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
+        now = moment(now);
+        for (var i = 0; i < this.friendsChat.length; i++) {
           var end = moment(this.friendsChat[i].time);
           var duration = moment.duration(now.diff(end));
           var seconds = duration.asSeconds();
-              if(seconds<11){
-                this.friendsChat[i].isOnline=true;
-              }
-              else{
-              this.friendsChat[i].isOnline=false;
-              }
+          if (seconds < 3) {
+            this.friendsChat[i].isOnline = true;
+          } else {
+            this.friendsChat[i].isOnline = false;
+          }
+        }
+        for (var i = 0; i < this.meetingsChat.length; i++) {
+          for (var j = 0; j < this.meetingsChat[i].participants.length; j++) {
+            var end = moment(this.meetingsChat[i].participants[j].usr_last_online);
+            var duration = moment.duration(now.diff(end));
+            var seconds = duration.asSeconds();
+            if (seconds < 3) {
+              this.meetingsChat[i].participants[j].isOnline = true;
+            } else {
+              this.meetingsChat[i].participants[j].isOnline = false;
+            }
+          }
         }
       });
+
     },
+    getFriends() {
+      this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
+      if (this.isMeetings)
+        this.chatSelected = 0;
+      this.isMeetings = false;
+
+      // axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
+      //   params: {
+      //     sid: window.localStorage.getItem("sessionid"),
+      //     usr_last_online: this.currentTime
+      //   },
+      // }).then(response => {
+      //   this.friendsChat = response.data.result;
+      //   var now = moment(new Date());
+      //   now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
+      //   now = moment(now);
+      //   for (var i = 0; i < this.friendsChat.length; i++) {
+      //     var end = moment(this.friendsChat[i].time);
+      //     var duration = moment.duration(now.diff(end));
+      //     var seconds = duration.asSeconds();
+      //     if (seconds < 11) {
+      //       this.friendsChat[i].isOnline = true;
+      //     } else {
+      //       this.friendsChat[i].isOnline = false;
+      //     }
+      //   }
+      // });
+
+    },
+
     sendMessage() {
       // console.log(this.friId, this.friendMsg1);
       this.trenutnoVreme = moment.utc().format("YYYY-MM-DD HH:mm:ss");
-      console.log(this.friMsgs);
       axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
         sid: window.localStorage.getItem("sessionid"),
         fri_id: this.friId,
         msg_text: this.friendMsg1,
         time: this.trenutnoVreme
       }).then(response => {
-        console.log(response.data);
         if (response.data.status) {
           for (var i = 0; i < response.data.messages.length; i++) {
             this.friMsgs.push(response.data.messages[i]);
-
           }
-
         }
-
       });
       this.friendMsg1 = '';
     },
     getMeetings() {
+      if (!this.isMeetings)
+        this.chatSelected = 0;
       this.isMeetings = true;
-      this.chatSelected = false;
-    },
-    getFriends() {
-      console.log(moment.utc().format("YYYY-MM-DD HH:mm:ss.S"));
-      this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
 
-      this.isMeetings = false;
-      this.chatSelected = false;
-      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
-        params: {
-          sid: window.localStorage.getItem("sessionid"),
-            usr_last_online:this.currentTime
-        },
-      }).then(response => {
-        this.friendsChat = response.data.result;
-        console.log(this.friendsChat);
-      });
+
+
     },
-    listChat(fri_id, frName, index) {
-      this.chatSelected = true;
+    listMeetingChat(id, name, index) {
+      this.indexMeeting = index;
+      this.chatSelected = 2;
+
+
+    },
+    listFriendChat(fri_id, frName, index) {
+      this.chatSelected = 1;
       this.friId = fri_id;
       this.friendName = frName;
       this.friendsChat[index].fri_count = 0;
@@ -261,23 +349,18 @@ export default {
         },
       }).then(response => {
         this.friMsgs = response.data.messages;
-
       });
       setTimeout(this.funkcija, 100);
     },
-
-
     funkcija() {
       var objDiv = document.getElementById("divExample");
       objDiv.scrollTop = objDiv.scrollHeight;
     }
   },
-
 }
 </script>
 
 <style scoped>
-
 .dugme.active {
   background: green;
 }
