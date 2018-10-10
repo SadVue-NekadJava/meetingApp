@@ -371,7 +371,7 @@ export default {
 
 .navChat i {
   cursor: pointer;
-  font-size: 28px;
+  font-size: 30px;
   transition: all 0.1s;
 }
 
