@@ -12,15 +12,12 @@
           <p> {{ meeting.met_time_start | dateFormater}}</p>
         </div>
         <div class="col-md-1">
-          <p class="text-right pr-3"><i class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i></p>
+          <p class="text-right pr-3"><i v-if="meeting.met_priority<3"class="fas fa-briefcase" data-toggle="tooltip" data-placement="top" title="Business"></i>
+          <i v-else class="fas fa-dice text-warning" data-toggle="tooltip" data-placement="top" title="Entertainment"></i></p>
         </div>
       </div>
     </div>
-    <!-- <div class="text-center noviSastanak">
-      <button disabled class="btn btn-outline-primary " type="button" name="button">
-        <router-link to="/createMeeting">Create New Meeting</router-link>
-      </button>
-    </div> -->
+    <!-- -->
   </div>
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
@@ -82,77 +79,82 @@
 
 
 
-  <div v-for="meeting in meetings">
-    <div class="modal fade bd-example-modal-lg " :id="'met_id'+ meeting.met_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg " role="document">
-        <div class="modal-content ">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              <div class="velikaSlova">
-                <h3>{{ meeting.met_title }}</h3>
-              </div>
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body ">
-            <p class="text-center">{{ meeting.met_description }}</p>
-            <hr>
-            <div class="row">
-              <div class="col-lg-6 gde my-auto">
-                <p class=""><i class="fas fa-building "></i> ENON </p>
-                <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
-              </div>
-              <div class="col-lg-6">
-                <h4>Participants:</h4>
-                <ul v-for="participant in meeting.participants">
-                  <li>{{ participant.fullname }}</li>
-                </ul>
-              </div>
+<div v-for="meeting in meetings">
+  <div class="modal fade bd-example-modal-lg " :id="'met_id'+ meeting.met_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <div class="velikaSlova">
+              <h3>{{ meeting.met_title }}</h3>
             </div>
-            <hr>
-            <div>
-              <div class="card  text-white" style="border:none">
-                <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary buttonWidth  ">
-                  <h5 class="my-auto text-center">
-                    <i id="okreni" class="fa fa-arrow-down"></i> {{ meeting.met_location }}
-                  </h5>
-                </button>
-                <div id="collapse1" class="collapse">
-                  <div class="card-body text-dark">
-                    <div class="text-center">
-                      <GmapMap :center="{lat:Number(meeting.met_latitude), lng:Number(meeting.met_longitude)}" :zoom="12" style="width: 100%; height: 400px">
-                        <GmapMarker label="★" :position="{
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ">
+          <p class="text-center">{{ meeting.met_description }}</p>
+          <hr>
+          <div class="row">
+            <div class="col-lg-6 gde my-auto">
+              <p class=""><i class="fas fa-building "></i> ENON </p>
+              <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
+            </div>
+            <div class="col-lg-6">
+              <h4>Participants:</h4>
+              <ul v-for="participant in meeting.participants">
+                <li>{{ participant.fullname }}</li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+          <div>
+            <div class="card  text-white" style="border:none">
+              <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary buttonWidth  " >
+                <h5 class="my-auto text-center">
+                  <i id="okreni" class="fa fa-arrow-down"></i> {{ meeting.met_location }}
+                </h5>
+              </button>
+              <div id="collapse1" class="collapse">
+                <div class="card-body text-dark">
+                  <div class="text-center">
+                    <GmapMap
+                      :center="{lat:Number(meeting.met_latitude), lng:Number(meeting.met_longitude)}"
+                      :zoom="12"
+                      style="width: 100%; height: 400px"
+                    >
+                    <GmapMarker label="★" :position="{
                           lat: Number(meeting.met_latitude),
                           lng: Number(meeting.met_longitude)
                         }" />
-                      </GmapMap>
-                    </div>
+                    </GmapMap>
                   </div>
                 </div>
-
               </div>
+
             </div>
           </div>
-
         </div>
+
       </div>
     </div>
-
   </div>
+
+</div>
 
 
 
   <!-- ************ KRAJ MODALI *************-->
 
-  <div class="row">
-    <div class="col-lg-10"></div>
-    <div class="col-lg-2 text-right pr-5">
-      <router-link to="/probavam"> <img class="slika" src="../assets/calendar.png" alt="" width="100" height="100"></router-link>
-    </div>
+    <div class="row" >
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2 text-right pr-5" >
+      <router-link to="/probavam">  <img @click="listaKalendar=2" class="slika" src="../assets/calendar.png" alt="" width="100" height="100"></router-link>
+      </div>
 
   </div>
+
 
 </div>
 </template>
@@ -178,8 +180,8 @@ export default {
       hasFriends: false,
       ukj: 0,
       usrInfo: [],
-      meetings: [],
-      listaKalendar: 1
+      meetings:[],
+      listaKalendar:1
     }
   },
   filters: {
@@ -197,15 +199,20 @@ export default {
     setInterval(this.friends, 10000);
     if (window.localStorage.getItem("sessionid") == null)
       this.$router.push('/');
-    axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
-      params: {
-        sid: window.localStorage.getItem("sessionid")
-      },
-    }).then(response => {
-      //console.log(response.data.result[0].met_longitude);
-      this.meetings = response.data.result;
-    });
+
+        axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
+          params: {
+            sid: window.localStorage.getItem("sessionid")
+          },
+        }).then(response => {
+          //console.log(response.data.result[0].met_longitude);
+          this.meetings = response.data.result;
+          console.log(response.data);
+        });
+
+
   },
+
   methods: {
     getUserInfo(id) {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
@@ -239,17 +246,23 @@ export default {
           },
         }).then(response => {
           this.foundUsers = response.data.result;
+
         });
       } else {
         this.foundUsers = [];
       }
     },
+
     addUser(id) {
+
       axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
         sid: window.localStorage.getItem("sessionid"),
         id
-      }).then(response => {});
+      }).then(response => {
+
+      });
     }
+
   }
 }
 </script>
@@ -257,24 +270,20 @@ export default {
 <style scoped>
 .buttonWidth {
   width: 50%;
-  margin: auto;
+  margin:auto;
   transition: 0.2s all;
 }
-
 .buttonWidth:hover {
   width: 100%;
 
 }
-
 .slika {
   transition: 0.3s all;
 }
-
 .slika:hover {
   cursor: pointer;
   transform: scale(1.2);
 }
-
 .klasaModal {
   position: absolute;
   text-align: center;
@@ -308,7 +317,7 @@ export default {
   overflow: hidden;
   border-radius: 20px;
   transition: 2s padding ease;
-  text-decoration: none;
+    text-decoration: none;
 
 }
 
@@ -342,7 +351,7 @@ export default {
   border-radius: 50px;
   transition: 0.5s all ease;
   text-decoration: none;
-  color: #fff;
+  color:#fff;
 }
 
 .noviSastanak button {
