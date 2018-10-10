@@ -22,7 +22,7 @@
           <div v-if="index<3">
             <div v-if="meetingHtml.inv_id==1" class="klasaBlinka" :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
               {{meetingHtml.text}} </div>
-            <div v-else-if="meetingHtml.inv_id==2" :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
+            <div v-else :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
               {{meetingHtml.text}} </div>
           </div>
           <div v-if="index==3" class="lead kolikoJos"><em>and {{duzina(meetingsHtml[date])-3}} more</em></div>
@@ -143,7 +143,7 @@
               </div>
             </div>
           </div>
-          <div v-else-if="meetingHtml.inv_id==2" class="modal-body ">
+          <div v-else class="modal-body ">
             <p class="text-center">{{ meeting.met_description }}</p>
             <hr>
             <div class="row">
