@@ -195,7 +195,9 @@ export default {
               this.participantsArray.push(this.participants[i].id);
             }
 
-
+            var now = moment(new Date());
+            now = moment(now).utc().format('YYYY-MM-DD HH:mm:ss')
+            now=moment(now);
       axios.post("http://800q121.mars-t.mars-hosting.com/postMeeting", {
 
           sid: window.localStorage.getItem("sessionid"),
@@ -208,7 +210,8 @@ export default {
           met_latitude:this.markers[0].position.lat,
           description:this.description,
           met_location:this.met_location,
-          current_time:  moment(new Date()).utc().format('YYYY-MM-DD HH:mm:ss')
+          current_time:now
+
 
       }).then(response => {
           console.log(response.data);
