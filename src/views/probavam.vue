@@ -20,7 +20,7 @@
         </div>
         <div v-for="(meetingHtml, index) in meetingsHtml[date]">
           <div v-if="index<3">
-            <div v-if="meetingHtml.inv_id==null" class="bg-primary">
+            <div v-if="meetingHtml.inv_id==1" class="klasaBlinka" :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
               {{meetingHtml.text}} </div>
             <div v-else :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
               {{meetingHtml.text}} </div>
@@ -37,11 +37,30 @@
 
 
 
+
+
+
+
   <div class="modal fade text-center text-center" id="nesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog" role="document">
+      <div v-if="meetingsByDate.length==0" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body form-group ">
 
-      <div class="modal-content">
+          <h4>You have no meeting for this day!</h4>
+          <button class="btn btn-outline-primary">Create New Meeting</button>
+
+        </div>
+
+      </div>
+      <div v-else class="modal-content">
         <div class="modal-header">
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -49,87 +68,79 @@
           </button>
         </div>
         <div class="modal-body form-group ">
-            <div v-for="meetingByDate in meetingsByDate"  >
-
-
-  <div :data-target="'#met_id'+meetingByDate.met_id" data-toggle="modal"
-   class="row sastanak2 mb-3" style="cursor:pointer"
-   :class="{klasa1: meetingByDate.met_priority==1,klasa2: meetingByDate.met_priority==2, klasa0: meetingByDate.met_priority==3}">
-    {{meetingByDate.met_title}} - {{meetingByDate.met_time_start|dateFormater}}
-  </div>
-        </div>
-        <div class="modal-footer">
-          <button @click="createNewMeeting" class="btn dugme" data-dismiss="modal">Add New Meeting</button>
-        </div>
-
-    </div>
-  </div>
-</div>
-</div>
-
-<div v-for="meeting in meetingsByDate">
-  <div class="modal fade bd-example-modal-lg " :id="'met_id'+ meeting.met_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg " role="document">
-      <div class="modal-content ">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            <div class="velikaSlova">
-              <h3>{{ meeting.met_title }}</h3>
-            </div>
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body ">
-          <p class="text-center">{{ meeting.met_description }}</p>
-          <hr>
-          <div class="row">
-            <div class="col-lg-6 gde my-auto">
-              <p class=""><i class="fas fa-building "></i> ENON </p>
-              <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
-            </div>
-            <div class="col-lg-6">
-              <h4>Participants:</h4>
-              <ul v-for="participant in meeting.participants">
-                <li>{{ participant.fullname }}</li>
-              </ul>
+          <div v-for="meetingByDate in meetingsByDate">
+            <div :data-target="'#met_id'+meetingByDate.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer" :class="{klasa1: meetingByDate.met_priority==1,klasa2: meetingByDate.met_priority==2, klasa0: meetingByDate.met_priority==3}">
+              {{meetingByDate.met_title}} - {{meetingByDate.met_time_start|dateFormater}}
             </div>
           </div>
-          <hr>
-          <div>
-            <div class="card  text-white" style="border:none">
-              <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary buttonWidth  " >
-                <h5 class="my-auto text-center">
-                  <i id="okreni" class="fa fa-arrow-down"></i> {{ meeting.met_location }}
-                </h5>
-              </button>
-              <div id="collapse1" class="collapse">
-                <div class="card-body text-dark">
-                  <div class="text-center">
-                    <GmapMap
-                      :center="{lat:Number(meeting.met_latitude), lng:Number(meeting.met_longitude)}"
-                      :zoom="12"
-                      style="width: 100%; height: 400px"
-                    >
-                    <GmapMarker label="★" :position="{
-                          lat: Number(meeting.met_latitude),
-                          lng: Number(meeting.met_longitude)
-                        }" />
-                    </GmapMap>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+          <div class="modal-footer">
+            <div class="mx-auto"> <button @click="createNewMeeting" class="btn btn-outline-primary" data-dismiss="modal">Add New Meeting</button></div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
 
-</div>
+  <div v-for="meeting in meetingsByDate">
+    <div class="modal fade bd-example-modal-lg " :id="'met_id'+ meeting.met_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content ">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <div class="velikaSlova">
+                <h3>{{ meeting.met_title }}</h3>
+              </div>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body ">
+            <p class="text-center">{{ meeting.met_description }}</p>
+            <hr>
+            <div class="row">
+              <div class="col-lg-6 gde my-auto">
+                <p class=""><i class="fas fa-building "></i> ENON </p>
+                <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
+              </div>
+              <div class="col-lg-6">
+                <h4>Participants:</h4>
+                <ul v-for="participant in meeting.participants">
+                  <li>{{ participant.fullname }}</li>
+                </ul>
+              </div>
+            </div>
+            <hr>
+            <div>
+              <div class="card  text-white" style="border:none">
+                <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary buttonWidth  ">
+                  <h5 class="my-auto text-center">
+                    <i id="okreni" class="fa fa-arrow-down"></i> {{ meeting.met_location }}
+                  </h5>
+                </button>
+                <div id="collapse1" class="collapse">
+                  <div class="card-body text-dark">
+                    <div class="text-center">
+                      <GmapMap :center="{lat:Number(meeting.met_latitude), lng:Number(meeting.met_longitude)}" :zoom="12" style="width: 100%; height: 400px">
+                        <GmapMarker label="★" :position="{
+                          lat: Number(meeting.met_latitude),
+                          lng: Number(meeting.met_longitude)
+                        }" />
+                      </GmapMap>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <!-- *************MODALI KRAJ************ -->
 </div>
@@ -192,6 +203,7 @@ export default {
   mounted() {
     this.meetingsCalendar();
 
+
   },
   filters: {
     dateFormater: function(value) {
@@ -238,10 +250,10 @@ export default {
   },
 
   methods: {
-createNewMeeting(){
-    console.log(this.$store.state.dateClicked);
+    createNewMeeting() {
+      console.log(this.$store.state.dateClicked);
       this.$router.push('/createMeeting');
-},
+    },
     meetingsCalendar() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
         params: {
@@ -256,15 +268,16 @@ createNewMeeting(){
       });
     },
     checkDate(date, year) {
-      this.meetingsByDate=[];
+      this.meetingsByDate = [];
       for (var i = 0; i < this.allMeetingsResults.length; i++) {
         if (this.allMeetingsResults[i].day == date) {
           this.meetingsByDate.push(this.allMeetingsResults[i]);
         }
       }
+      console.log(this.meetingsByDate);
 
-        this.$store.state.dateClicked = year + '-' + this.month + '-' + date;
-        this.$store.state.dateClicked = moment(this.$store.state.dateClicked).format('YYYY-MM-DD');
+      this.$store.state.dateClicked = year + '-' + this.month + '-' + date;
+      this.$store.state.dateClicked = moment(this.$store.state.dateClicked).format('YYYY-MM-DD');
 
 
 
@@ -297,6 +310,7 @@ createNewMeeting(){
 .gde i {
   font-size: 40px;
 }
+
 .btn-outline-primary:hover #okreni {
   color: #FFF;
   visibility: visible;
@@ -312,7 +326,7 @@ createNewMeeting(){
   overflow: hidden;
   border-radius: 20px;
   transition: 2s padding ease;
-    text-decoration: none;
+  text-decoration: none;
 
 }
 
@@ -346,13 +360,15 @@ createNewMeeting(){
   border-radius: 50px;
   transition: 0.5s all ease;
   text-decoration: none;
-  color:#fff;
+  color: #fff;
 }
+
 #okreni {
   visibility: hidden;
   font-size: 18px;
 
 }
+
 .klasaModal {
   position: absolute;
   text-align: center;
@@ -360,46 +376,74 @@ createNewMeeting(){
   width: 400px;
   background: gray;
 }
+
 .buttonWidth {
   width: 50%;
-  margin:auto;
+  margin: auto;
   transition: 0.2s all;
 }
+
 .buttonWidth:hover {
   width: 100%;
 
 }
-.kolikoJos{
+
+.kolikoJos {
 
   font-size: 15px;
 }
-.klasa1 {
-    cursor: pointer;
-  margin-bottom: 2px;
-  background: red;
-animation: blinking 0.6s infinite;
 
+/* unconfirmed */
+.klasaBlinka {
+
+  animation: AnimationName 1s ease infinite;
 }
 
-@keyframes blinking {
-  from{
-opacity: 1;
+@keyframes AnimationName {
+  0% {
+    color: black
   }
-    to{
-      opacity: 0;
-    }
+
+  100% {
+    color: white
+  }
 }
+
+.klasaBlinka:hover {
+
+  -webkit-animation-play-state: paused;
+  -moz-animation-play-state: paused;
+  -o-animation-play-state: paused;
+  animation-play-state: paused;
+
+}
+
+/* END  unconfirmed */
+
+.klasa1 {
+  cursor: pointer;
+  margin-bottom: 2px;
+  border-radius: 20px;
+  background: #d12727;
+  color: white;
+}
+
+
 
 .klasa2 {
   cursor: pointer;
-    margin-bottom: 2px;
-  background: #f1b1f1;
+  margin-bottom: 2px;
+  background: #a56363;
+  border-radius: 20px;
+  color: white;
 }
 
 .klasa0 {
   cursor: pointer;
-    margin-bottom: 2px;
-  background: #f1f1b1;
+  margin-bottom: 2px;
+  background: #55b3db;
+  border-radius: 20px;
+  color: white;
 }
 
 .omot {
@@ -417,7 +461,7 @@ opacity: 1;
 
 .omot:hover {
   cursor: pointer;
-  background: #f1f1f1;
+  background: #fcfcfc;
 
 }
 
@@ -466,7 +510,7 @@ opacity: 1;
   color: red;
 }
 
-.omot:nth-child(7n),
+
 .omot:nth-child(15),
 .omot:nth-child(22),
 .omot:nth-child(29),
