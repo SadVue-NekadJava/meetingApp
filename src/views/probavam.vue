@@ -534,7 +534,7 @@ border: 1px solid black;
 .klasa1:hover {
 border: 1px solid black;
 }
-.klasa0  :hover {
+.klasa0:hover {
 border: 1px solid black;
 }
 
@@ -545,6 +545,7 @@ border: 1px solid black;
   border-radius: 20px;
   color: white;
     width: 90%;
+
 }
 
 .omot {
@@ -556,6 +557,7 @@ border: 1px solid black;
   border-radius: 10px;
   transition: 0.2s background;
   padding:0 10px;
+  overflow: auto;
 
 
 

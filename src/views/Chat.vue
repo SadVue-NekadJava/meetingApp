@@ -198,7 +198,7 @@ now=moment(now);
           var end = moment(this.friendsChat[i].time);
           var duration = moment.duration(now.diff(end));
           var seconds = duration.asSeconds();
-              if(seconds<3){
+              if(seconds<11){
                 this.friendsChat[i].isOnline=true;
               }
               else{
