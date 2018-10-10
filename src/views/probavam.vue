@@ -107,7 +107,7 @@
             <hr>
             <div class="row">
               <div class="col-lg-6 gde my-auto">
-                <p class=""><i class="fas fa-building "></i> ENON </p>
+                <p class=""><i class="fas fa-building "></i> {{meeting.organisator.fullname}} </p>
                 <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
               </div>
               <div class="col-lg-6">
@@ -146,7 +146,7 @@
             <hr>
             <div class="row">
               <div class="col-lg-6 gde my-auto">
-                <p class=""><i class="fas fa-building "></i> ENON </p>
+                <p class=""><i class="fas fa-building "></i> {{meeting.organisator.fullname}} </p>
                 <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
               </div>
               <div class="col-lg-6">
