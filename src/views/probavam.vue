@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div class="calendar">
+  <div class="calendar"style="z-index:200;">
     <div class="dates text-center calendar-header mb-3">
       <i class="fa fa-fw fa-chevron-left mr-5 my-auto" @click="subtractMonth"></i>
       <h4 class="d-inline my-auto pb-2">{{month + ' - ' + year}}</h4>
@@ -55,7 +55,7 @@
         <div class="modal-body form-group ">
 
           <h4>You have no meeting for this day!</h4>
-          <button class="btn btn-outline-primary">Create New Meeting</button>
+          <button @click="createNewMeeting" class="btn btn-outline-primary" data-dismiss="modal">Create New Meeting</button>
 
         </div>
 
@@ -143,6 +143,13 @@
   </div>
 
   <!-- *************MODALI KRAJ************ -->
+  <div class="row" style="z-index:-200;">
+    <div class="col-lg-10"></div>
+    <div class="col-lg-2 text-right pr-5" >
+    <router-link to="/mainPage"> <img  class="slika" src="../assets/lista.png" alt="" width="100" height="100"></router-link>
+    </div>
+
+</div>
 </div>
 </template>
 
@@ -428,7 +435,15 @@ export default {
   color: white;
 }
 
+.slika {
+  transition: 0.3s all;
+  margin-top: 75vh;
 
+}
+.slika:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
 
 .klasa2 {
   cursor: pointer;
