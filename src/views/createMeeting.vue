@@ -208,7 +208,7 @@ export default {
           met_latitude:this.markers[0].position.lat,
           description:this.description,
           met_location:this.met_location,
-          current_time:  moment().utc().format('YYYY-MM-DD HH:mm:ss')
+          current_time:  moment(new Date()).utc().format('YYYY-MM-DD HH:mm:ss')
 
       }).then(response => {
           console.log(response.data);
