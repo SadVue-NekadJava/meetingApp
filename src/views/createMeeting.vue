@@ -188,7 +188,8 @@ export default {
         this.metPriority = 3;
       }
         this.meetingTimeStart=moment(this.$store.state.dateClicked+' '+this.meetingTimeStart);
-            this.meetingTimeStart=moment(  this.meetingTimeStart).utc().format('YYYY-MM-DD HH:mm:ss');
+        this.meetingTimeStart=moment(  this.meetingTimeStart).utc().format('YYYY-MM-DD HH:mm:ss');
+        moment().utc().format('YYYY-MM-DD HH:mm:ss');
           console.log(  this.meetingTitle);
             for(var i=0;i<this.participants.length;i++){
               this.participantsArray.push(this.participants[i].id);
@@ -206,7 +207,8 @@ export default {
           met_longitude: this.markers[0].position.lng,
           met_latitude:this.markers[0].position.lat,
           description:this.description,
-          met_location:this.met_location
+          met_location:this.met_location,
+          current_time:  moment().utc().format('YYYY-MM-DD HH:mm:ss')
 
       }).then(response => {
           console.log(response.data);
@@ -219,7 +221,7 @@ export default {
       this.participantsArray=[];
       this.description='';
       this.keyUserSearch='';
-
+      this.$router.push('/mainPage');
     },
 
     setDescription(description) {
