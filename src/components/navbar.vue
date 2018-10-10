@@ -92,10 +92,10 @@
         <router-link :to="{ name: 'chat' }">
           <i v-if="!colorMsgNotification" :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:black"></i>
           <i v-else :class="{ 'fas fa-comments': activeChat, 'far fa-comments': !activeChat }" style="color:red"></i></router-link>
-        <div class="dropdown ">
+        <div class="dropdown visinaNotifikacije">
           <i v-if="!hasNotif" class="far fa-bell px-3 my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <i v-else class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-          <div class="dropdown-menu pozadinaPadajuci " aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu pozadinaPadajuciNotif " aria-labelledby="dropdownMenuButton">
             <ul>
               <div v-for="notification in notifications">
                 <li @click="statusRead(notification.not_id)" class="dropdown-item " v-bind:class="[notification.not_confirm ? 'text-white' :'text-danger'] ">
@@ -322,7 +322,6 @@ export default {
 }
 
 
-
 .lista li {
   padding: 3px;
   list-style: none;
@@ -397,8 +396,19 @@ a {
   text-align: center;
   border-radius: 0 0 20px 20px;
   border: 0;
-}
 
+}
+.pozadinaPadajuciNotif {
+  background: #6ab4d1;
+  margin-right: 530px;
+  margin-top: 1vh;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+  border: 0;
+  height: 30vh;
+  overflow: auto;
+}
 .dropdown-item:hover {
   background: #49a7cc;
   display: inherit;

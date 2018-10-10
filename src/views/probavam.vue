@@ -96,7 +96,52 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body ">
+          <div v-if="meeting.inv_id==1" class="modal-body ">
+            <div class="text-center">
+            <h5>Accept this meeting</h5>
+            <i class=" acceptMeeting fas fa-check text-success" data-dismiss="modal"  @click="acceptedMeeting(meeting.met_id, response=1)" ></i><i data-dismiss="modal" @click="acceptedMeeting(meeting.met_id, response=0)" class=" acceptMeeting text-danger fas fa-times ml-5" ></i>
+            </div>
+            <hr>
+
+            <p class="text-center"><b>Description:</b> <br> {{ meeting.met_description }}</p>
+            <hr>
+            <div class="row">
+              <div class="col-lg-6 gde my-auto">
+                <p class=""><i class="fas fa-building "></i> ENON </p>
+                <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
+              </div>
+              <div class="col-lg-6">
+                <h4>Participants:</h4>
+                <ul v-for="participant in meeting.participants">
+                  <li>{{ participant.fullname }}</li>
+                </ul>
+              </div>
+            </div>
+            <hr>
+            <div>
+              <div class="card  text-white" style="border:none">
+                <button href="#collapse1" data-toggle="collapse" class="btn btn-outline-primary buttonWidth  ">
+                  <h5 class="my-auto text-center">
+                    <i id="okreni" class="fa fa-arrow-down"></i> {{ meeting.met_location }}
+                  </h5>
+                </button>
+                <div id="collapse1" class="collapse">
+                  <div class="card-body text-dark">
+                    <div class="text-center">
+                      <GmapMap :center="{lat:Number(meeting.met_latitude), lng:Number(meeting.met_longitude)}" :zoom="12" style="width: 100%; height: 400px">
+                        <GmapMarker label="★" :position="{
+                          lat: Number(meeting.met_latitude),
+                          lng: Number(meeting.met_longitude)
+                        }" />
+                      </GmapMap>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div v-else class="modal-body ">
             <p class="text-center">{{ meeting.met_description }}</p>
             <hr>
             <div class="row">
@@ -261,6 +306,20 @@ export default {
       console.log(this.$store.state.dateClicked);
       this.$router.push('/createMeeting');
     },
+  acceptedMeeting(met_id, response){
+    axios.post("http://800q121.mars-t.mars-hosting.com/meetingResponse", {
+
+        sid: window.localStorage.getItem("sessionid"),
+        met_id,
+        response
+    }).then(response => {
+      //console.log(response.data.result[0].met_longitude);
+      console.log(response.data);
+
+
+    });
+    location.reload();
+  },
     meetingsCalendar() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
         params: {
@@ -314,6 +373,18 @@ export default {
 </script>
 
 <style scoped>
+
+
+.acceptMeeting {
+  font-size: 25px;
+  cursor: pointer;
+
+}
+.acceptMeeting:hover {
+  transform: scale(1.3);
+
+}
+
 .gde i {
   font-size: 40px;
 }
@@ -437,7 +508,7 @@ export default {
 
 .slika {
   transition: 0.3s all;
-  margin-top: 75vh;
+  margin-top: 72vh;
 
 }
 .slika:hover {
