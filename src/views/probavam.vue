@@ -202,7 +202,8 @@
   <div class="legenda" >
     <div ></div><span>Business-Important</span>
     <div ></div><span>Business-Regular</span>
-    <div></div>Entertainment
+    <div></div><span>Entertainment</span>
+
   </div>
 </div>
 </div>
