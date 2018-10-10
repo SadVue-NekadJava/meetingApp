@@ -504,6 +504,7 @@ export default {
   border-radius: 20px;
   background: #d12727;
   color: white;
+  width: 90%;
 }
 
 .slika {
@@ -522,6 +523,16 @@ export default {
   background: #a56363;
   border-radius: 20px;
   color: white;
+    width: 90%;
+}
+.klasa2:hover {
+border: 1px solid black;
+}
+.klasa1:hover {
+border: 1px solid black;
+}
+.klasa0:hover {
+border: 1px solid black;
 }
 
 .klasa0 {
@@ -530,6 +541,7 @@ export default {
   background: #55b3db;
   border-radius: 20px;
   color: white;
+    width: 90%;
 }
 
 .omot {
