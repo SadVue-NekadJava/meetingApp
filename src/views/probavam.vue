@@ -107,8 +107,10 @@
             <hr>
             <div class="row">
               <div class="col-lg-6 gde my-auto">
-                <p class=""><i class="fas fa-building "></i> {{meeting.organisator.fullname}} </p>
-                <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
+                <p ><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
+                <p ><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
+                <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
+                
               </div>
               <div class="col-lg-6">
                 <h4>Participants:</h4>
@@ -146,8 +148,9 @@
             <hr>
             <div class="row">
               <div class="col-lg-6 gde my-auto">
-                <p class=""><i class="fas fa-building "></i> {{meeting.organisator.fullname}} </p>
-                <p class="my-auto"><i class="fas fa-clock"></i>{{ meeting.met_time_start|dateFormater }}</p>
+                <p ><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
+                <p ><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
+                <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
               </div>
               <div class="col-lg-6">
                 <h4>Participants:</h4>
@@ -531,7 +534,7 @@ border: 1px solid black;
 .klasa1:hover {
 border: 1px solid black;
 }
-.klasa0:hover {
+.klasa0  :hover {
 border: 1px solid black;
 }
 

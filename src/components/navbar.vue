@@ -1,8 +1,8 @@
 <template>
 <div>
   <div class="navChat">
-    <div class="row pt-3">
-      <div class="col-lg-2 pl-5">
+    <div class="row ">
+      <div class="col-lg-2 pl-5 my-auto">
         <form class="search-box">
 
           <input type="search" autocomplete="off" id="pretragaNav" required="" placeholder="Search" @keyup="searchUsers" v-model="keyUserSearch" class=" prviPutLista">
@@ -16,12 +16,12 @@
         </form>
 
       </div>
-      <div class="col-lg-8 pl-5 text-white">
+      <div class="col-lg-8 pl-5  text-white">
         <router-link to="/mainPage">
-          <h3 class="text-center text-white">LOGO</h3>
+          <h3 class="text-center pt-2"><img src="../assets/logo.png" height="50" alt=""></h3>
         </router-link>
       </div>
-      <div class="col-lg-2 pozicijaIkoniceNav " style="display: flex;">
+      <div class="col-lg-2 my-auto pozicijaIkoniceNav " style="display: flex;">
 
 
         <!-- Nav bar lupa -->
