@@ -69,7 +69,7 @@
         </div>
         <div class="modal-body form-group ">
           <div v-for="meetingByDate in meetingsByDate">
-            <div :data-target="'#met_id'+meetingByDate.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer" :class="{klasa1: meetingByDate.met_priority==1,klasa2: meetingByDate.met_priority==2, klasa0: meetingByDate.met_priority==3}">
+            <div :data-target="'#met_id'+meetingByDate.met_id" data-toggle="modal" class="row sastanak2 mb-3   " style="cursor:pointer" :class="{klasa1: meetingByDate.met_priority==1,klasa2: meetingByDate.met_priority==2, klasa0: meetingByDate.met_priority==3}">
               {{meetingByDate.met_title}} - {{meetingByDate.met_time_start|dateFormater}}
             </div>
           </div>
@@ -198,6 +198,13 @@
     </div>
 
 </div>
+<div class="container">
+  <div class="legenda" >
+    <div ></div><span>Business-Important</span>
+    <div ></div><span>Business-Regular</span>
+    <div></div>Entertainment
+  </div>
+</div>
 </div>
 </template>
 
@@ -218,37 +225,7 @@ export default {
       today: moment(),
       dateContext: moment(),
       days: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
-      meetingsHtml: {
-        // 15: {
-        //   0: {text:'asd',vreme:14, priority: 1},
-        //   1: {text:'asd',vreme:15, priority: 2},
-        //   2: {text:'asd',vreme:16, priority: 1},
-        //   3: {text:'asd',vreme:18, priority: 0}
-        // },
-        // 16: {
-        //   0: {text:'asd',vreme:14, priority: 1},
-        //   1: {text:'asd',vreme:15, priority: 2},
-        //   2: {text:'asd',vreme:16, priority: 1},
-        //   3: {text:'asd',vreme:18, priority: 0}
-        // },
-        // 19: {
-        //   0: {text:'asd',vreme:14, priority: 1},
-        //   1: {text:'asd',vreme:15, priority: 2},
-        //   2: {text:'asd',vreme:16, priority: 1},
-        //   3: {text:'asd',vreme:18, priority: 0},
-        //   4: {text:'asd',vreme:18, priority: 0},
-        //   5: {text:'asd',vreme:18, priority: 0},
-        //   6: {text:'asd',vreme:18, priority: 0},
-        //   7: {text:'asd',vreme:18, priority: 0},
-        //   8: {text:'asd',vreme:18, priority: 0}
-        // },
-        // 1: {
-        //   0: {text:'asd',vreme:14, priority: 1},
-        //   1: {text:'asd',vreme:15, priority: 2},
-        //   2: {text:'asd',vreme:16, priority: 1},
-        //   3: {text:'asd',vreme:18, priority: 0}
-        // }
-      },
+      meetingsHtml: {},
       int: 0,
       allMeetingsResults: {},
       meetingsByDate: []
@@ -500,6 +477,38 @@ export default {
 }
 
 /* END  unconfirmed */
+
+.legenda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legenda div:nth-of-type(1){
+  height: 20px;
+  width: 20px;
+  background: #d12727;
+  border-radius: 50%;
+
+}
+.legenda div:nth-of-type(2){
+  height: 20px;
+  width: 20px;
+  background:  #a56363;
+  border-radius: 50%;
+
+}
+.legenda div:nth-of-type(3){
+  height: 20px;
+  width: 20px;
+  background:  #55b3db;
+  border-radius: 50%;
+
+}
+.legenda span {
+  margin-right: 30px;
+}
+
 
 .klasa1 {
   cursor: pointer;

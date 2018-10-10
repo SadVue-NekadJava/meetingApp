@@ -190,10 +190,10 @@ export default {
         }
       }).then(response => {
         this.friendsChat = response.data.result;
-console.log(this.friendsChat);
-var now=moment(new Date());
- now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
-now=moment(now);
+        console.log(this.friendsChat);
+        var now=moment(new Date());
+         now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
+        now=moment(now);
         for(var i=0;i<this.friendsChat.length;i++){
           var end = moment(this.friendsChat[i].time);
           var duration = moment.duration(now.diff(end));
