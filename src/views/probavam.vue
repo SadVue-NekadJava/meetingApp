@@ -3,9 +3,9 @@
   <nav-bar></nav-bar>
   <div class="calendar"style="z-index:200;">
     <div class="dates text-center calendar-header mb-3">
-      <i class="fa fa-fw fa-chevron-left mr-5 my-auto" @click="subtractMonth"></i>
+      <!-- <i class="fa fa-fw fa-chevron-left mr-5 my-auto" @click="subtractMonth"></i> -->
       <h4 class="d-inline my-auto pb-2">{{month + ' - ' + year}}</h4>
-      <i class="fa fa-fw fa-chevron-right ml-5 my-auto" @click="addMonth"></i>
+      <!-- <i class="fa fa-fw fa-chevron-right ml-5 my-auto" @click="addMonth"></i> -->
     </div>
     <div class="dates dayNames" style="border-bottom: 2px solid lightgray">
       <div class="omot omot2 text-center my-auto" v-for="day in days">
