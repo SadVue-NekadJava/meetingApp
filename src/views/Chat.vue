@@ -385,7 +385,8 @@ export default {
 </script>
 <style scoped>
 .dugme.active {
-  background: green;
+  background: rgb(239,221,203);
+  border: none;
 }
 
 .member span:hover {
@@ -475,9 +476,7 @@ input:focus {
   border: 1px solid #aec6cf;
 }
 
-/* .dugme:focus{
-  background: green;
-} */
+
 .ostaliChatovi {
   height: 50px;
   width: 90%;
@@ -529,7 +528,7 @@ input:focus {
   display: flex;
 }
 
-pozadinaNav {
+.pozadinaNav {
   background: #6ab4d1;
   width: 100%;
   height: 60px;
