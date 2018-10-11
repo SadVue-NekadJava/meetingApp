@@ -207,14 +207,15 @@ export default {
 
     axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
       params: {
-        sid: window.localStorage.getItem("sessionid")
+        sid: window.localStorage.getItem("sessionid"),
+          current_time: moment.utc().format('YYYY-MM-DD')
       },
     }).then(response => {
       //console.log(response.data.result[0].met_longitude);
       this.meetings = response.data.result;
       console.log(response.data);
       this.hasMeetings = response.data.status;
-      console.log(response.data.result);
+
     });
 
 

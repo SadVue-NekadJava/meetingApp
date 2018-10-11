@@ -278,7 +278,6 @@ export default {
 
   methods: {
     createNewMeeting() {
-      console.log(this.$store.state.dateClicked);
       this.$router.push('/createMeeting');
     },
     acceptedMeeting(met_id, response) {
@@ -294,10 +293,10 @@ export default {
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
         params: {
           sid: window.localStorage.getItem("sessionid"),
-          currentTime: moment.utc().format('YYYY-MM-DD')
+          current_time: moment.utc().format('YYYY-MM-DD')
         },
       }).then(response => {
-        //console.log(response.data.result[0].met_longitude);
+
         console.log(response.data);
         this.meetingsHtml = response.data.format;
         this.allMeetingsResults = response.data.result;
@@ -316,7 +315,7 @@ export default {
           this.meetingsByDate.push(this.allMeetingsResults[i]);
         }
       }
-      console.log(this.meetingsByDate);
+
 
       this.$store.state.dateClicked = year + '-' + this.month + '-' + date;
       this.$store.state.dateClicked = moment(this.$store.state.dateClicked).format('YYYY-MM-DD');
@@ -325,7 +324,6 @@ export default {
 
       var t = this;
       t.dateContext = moment(t.dateContext).add(1, 'month');
-      console.log(this.dateContext);
     },
     subtractMonth: function() {
       var t = this;
