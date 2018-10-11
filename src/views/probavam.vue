@@ -230,7 +230,8 @@ export default {
       meetingsHtml: {},
       int: 0,
       allMeetingsResults: [],
-      meetingsByDate: []
+      meetingsByDate: [],
+      izbaci: []
 
     }
   },
@@ -294,12 +295,7 @@ export default {
         sid: window.localStorage.getItem("sessionid"),
         met_id,
         response
-      }).then(response => {
-        //console.log(response.data.result[0].met_longitude);
-        console.log(response.data);
-
-
-      });
+      }).then(response => {});
       location.reload();
     },
     meetingsCalendar() {
@@ -309,14 +305,14 @@ export default {
         },
       }).then(response => {
         //console.log(response.data.result[0].met_longitude);
-        //  console.log(response.data);
+        console.log(response.data);
         this.meetingsHtml = response.data.format;
         this.allMeetingsResults = response.data.result;
         for (var i = 0; i < this.allMeetingsResults.length; i++) {
-          if (this.allMeetingsResults[i].inv_id == 3) {
-            this.allMeetingsResults.splice(i, i + 1);
-            --i;
-          }
+          if (this.allMeetingsResults[i].inv_id == 3) this.izbaci.push(i);
+        }
+        for (var i = this.izbaci.length - 1; i >= 0; i--) {
+          this.allMeetingsResults.splice(this.izbaci[i], 1);
         }
       });
     },
@@ -331,9 +327,6 @@ export default {
 
       this.$store.state.dateClicked = year + '-' + this.month + '-' + date;
       this.$store.state.dateClicked = moment(this.$store.state.dateClicked).format('YYYY-MM-DD');
-
-
-
     },
     addMonth: function() {
 
