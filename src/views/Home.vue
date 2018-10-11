@@ -34,8 +34,8 @@
           </div>
         </div>
       </div> -->
-      <!-- ************************************SIGNUP*********************************** -->
-      <!-- <div class="signup">
+  <!-- ************************************SIGNUP*********************************** -->
+  <!-- <div class="signup">
         <div class="form-group">
           <h3 class="py-3 text-center">Sign up</h3>
           <div class="input-box ">
@@ -107,48 +107,48 @@
           </div>
         </div>
       </div>
-<!--****************************** REFISTRACIJA************************************ -->
-<div class="signup" v-else >
-  <div class="form-group">
-    <h3 class="py-3 text-center">Sign up</h3>
-    <div class="input-box ">
-      <input class=" form-control" type="text" name="" required="" v-model="regFirstName">
-      <label>First Name </label>
-    </div>
-    <br>
-    <div class="input-box ">
-      <input class=" form-control" type="text" name="" required="" v-model="regLastName">
-      <label>Last name </label>
-    </div>
-    <br>
-    <div class="input-box ">
-      <input class=" form-control" type="text" name="" required="" v-model="regUsername">
-      <label>Username</label>
-    </div>
-    <br>
-    <div class="input-box ">
-      <input class=" form-control" type="text" name="" required="" v-model="regEmail">
-      <label>Email</label>
-    </div>
-    <br>
-    <div class="input-box ">
-      <input class=" form-control" type="password" name="" required="" v-model="regPass">
-      <label>Password</label>
-    </div>
-    <br>
-    <div class="input-box ">
-      <input class=" form-control" type="password" name="" required="" v-model="regPass2">
-      <label>Confirm password</label>
-    </div>
-    <br>
-    <div class="text-center">
-      <a data-toggle="modal" data-target="#registracija">
-        <button @click="register" class="btn form-control dugme">Register</button>
-      </a>
-          <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
-    </div>
-  </div>
-</div>
+      <!--****************************** REFISTRACIJA************************************ -->
+      <div class="signup" v-else>
+        <div class="form-group">
+          <h3 class="py-3 text-center">Sign up</h3>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regFirstName">
+            <label>First Name </label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regLastName">
+            <label>Last name </label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regUsername">
+            <label>Username</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="text" name="" required="" v-model="regEmail">
+            <label>Email</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="password" name="" required="" v-model="regPass">
+            <label>Password</label>
+          </div>
+          <br>
+          <div class="input-box ">
+            <input class=" form-control" type="password" name="" required="" v-model="regPass2">
+            <label>Confirm password</label>
+          </div>
+          <br>
+          <div class="text-center">
+            <a data-toggle="modal" data-target="#registracija">
+              <button @click="register" class="btn form-control dugme">Register</button>
+            </a>
+            <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
+          </div>
+        </div>
+      </div>
 
 
 
@@ -167,7 +167,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'home',
 
@@ -181,16 +180,16 @@ export default {
       regEmail: '',
       regPass: '',
       regPass2: '',
-      errorMessage:null,
-      radioToggle:'1'
+      errorMessage: null,
+      radioToggle: '1'
 
     }
   },
-   mounted() {
+  mounted() {
 
-      if (window.localStorage.getItem("sessionid") != null)
-        this.$router.push('/mainPage');
-    },
+    if (window.localStorage.getItem("sessionid") != null)
+      this.$router.push('/mainPage');
+  },
   methods: {
     login() {
       axios.post("http://800q121.mars-t.mars-hosting.com/login", {
@@ -203,10 +202,11 @@ export default {
           var sid = response.data.sid;
           window.localStorage.setItem("sessionid", sid);
           this.$router.push('mainPage');
-        }
-        else{
-          this.errorMessage=response.data.msg;
-            setTimeout(()=>{this.errorMessage=null},2000);
+        } else {
+          this.errorMessage = response.data.msg;
+          setTimeout(() => {
+            this.errorMessage = null
+          }, 2000);
         }
       });
 
@@ -221,14 +221,13 @@ export default {
         passwordCheck: this.regPass2
 
       }).then(response => {
-      console.log(response.data.msg);
+        console.log(response.data.msg);
         if (response.data.status) {
 
           alert("Uspesna registracija");
           location.reload();
-        }
-        else{
-          this.errorMessage=response.data.msg;
+        } else {
+          this.errorMessage = response.data.msg;
           // setTimeout(()=>{this.errorMessage=null},2000);
         }
       });
@@ -256,14 +255,15 @@ input:focus {
   outline-color: #6ab4d1;
 }
 
-.signup{
+.signup {
 
   animation-fill-mode: forwards;
   animation-name: signup;
   animation-duration: 1s;
 
 }
-.promena{
+
+.promena {
 
   animation-fill-mode: forwards;
   animation-name: login;
@@ -272,25 +272,30 @@ input:focus {
 }
 
 
-.login{
+.login {
 
   animation-fill-mode: forwards;
   animation-name: login;
   animation-duration: 1s;
 
 }
+
 @keyframes signup {
-  0%{
+  0% {
     transform: scale(0.3);
-  } 100% {
+  }
+
+  100% {
     transform: scale(1);
   }
 }
 
 @keyframes login {
-  0%{
+  0% {
     transform: scale(0.3);
-  } 100% {
+  }
+
+  100% {
     transform: scale(1);
   }
 }
