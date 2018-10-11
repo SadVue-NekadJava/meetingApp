@@ -98,7 +98,7 @@
             <p class="text-center"><b>Description:</b> <br> {{ meeting.met_description }}</p>
             <hr>
             <div class="row">
-              <div class="col-lg-6 gde my-auto">
+              <div class="col-lg-6" style="border-right:1px solid lightgrey;">
                 <p><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
                 <p><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
                 <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
@@ -136,15 +136,17 @@
             </div>
           </div>
           <div v-else class="modal-body ">
+            <h4 class="text-center">Meeting description: </h4>
             <p class="text-center">{{ meeting.met_description }}</p>
             <hr>
             <div class="row">
-              <div class="col-lg-6 gde my-auto">
+              <div class="col-lg-6 pl-5" style="border-right:1px solid lightgrey;">
+                <h4 class="pb-2">Meeting details:</h4>
                 <p><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
                 <p><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
                 <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-6 pl-5">
                 <h4>Participants:</h4>
                 <ul v-for="participant in meeting.participants">
                   <li>{{ participant.fullname }}</li>
