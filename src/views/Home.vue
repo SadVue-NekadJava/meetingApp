@@ -1,15 +1,7 @@
 <template>
 <div>
   <div class="navChat">
-    <div class="row pt-3">
-      <div class="col-lg-6">
-        <div class="pl-5" style="height:50px;width:50px;background:grey;"></div>
-      </div>
-      <div class="col-lg-6">
-        <p class="text-right text-white display-4 pr-5" style="line-height:50px;">Meeting App</p>
-      </div>
-
-    </div>
+    <div class="text-center pt-2"><img src="../assets/logo.png" height="70" style="line-height:80px;" alt=""></div>
   </div>
   <!-- <div class="container ">
 
