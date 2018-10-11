@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div class="calendar"style="z-index:200;">
+  <div class="calendar" style="z-index:200;">
     <div class="dates text-center calendar-header mb-3">
       <!-- <i class="fa fa-fw fa-chevron-left mr-5 my-auto" @click="subtractMonth"></i> -->
       <h4 class="d-inline my-auto pb-2">{{month + ' - ' + year}}</h4>
@@ -22,7 +22,7 @@
           <div v-if="index<3">
             <div v-if="meetingHtml.inv_id==1" class="klasaBlinka" :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
               {{meetingHtml.text}} </div>
-            <div v-else :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
+            <div v-else-if="meetingHtml.inv_id==2||meetingHtml.inv_id==null " :class="{klasa1: meetingHtml.priority==1,klasa2: meetingHtml.priority==2, klasa0: meetingHtml.priority==3}">
               {{meetingHtml.text}} </div>
           </div>
           <div v-if="index==3" class="lead kolikoJos"><em>and {{duzina(meetingsHtml[date])-3}} more</em></div>
@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  
+
 
   <footer-meeting></footer-meeting>
 
@@ -99,8 +99,8 @@
           </div>
           <div v-if="meeting.inv_id==1" class="modal-body ">
             <div class="text-center">
-            <h5>Accept this meeting</h5>
-            <i class=" acceptMeeting fas fa-check text-success" data-dismiss="modal"  @click="acceptedMeeting(meeting.met_id, response=1)" ></i><i data-dismiss="modal" @click="acceptedMeeting(meeting.met_id, response=0)" class=" acceptMeeting text-danger fas fa-times ml-5" ></i>
+              <h5>Accept this meeting</h5>
+              <i class=" acceptMeeting fas fa-check text-success" data-dismiss="modal" @click="acceptedMeeting(meeting.met_id, response=1)"></i><i data-dismiss="modal" @click="acceptedMeeting(meeting.met_id, response=0)" class=" acceptMeeting text-danger fas fa-times ml-5"></i>
             </div>
             <hr>
 
@@ -108,8 +108,8 @@
             <hr>
             <div class="row">
               <div class="col-lg-6 gde my-auto">
-                <p ><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
-                <p ><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
+                <p><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
+                <p><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
                 <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
 
               </div>
@@ -149,8 +149,8 @@
             <hr>
             <div class="row">
               <div class="col-lg-6 gde my-auto">
-                <p ><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
-                <p ><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
+                <p><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
+                <p><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
                 <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
               </div>
               <div class="col-lg-6">
@@ -194,19 +194,19 @@
   <!-- *************MODALI KRAJ************ -->
   <div class="row" style="z-index:-200;">
     <div class="col-lg-10"></div>
-    <div class="col-lg-2 text-right pr-5" >
-    <router-link to="/mainPage"> <img  class="slika" src="../assets/lista.png" alt="" width="100" height="100"></router-link>
+    <div class="col-lg-2 text-right pr-5">
+      <router-link to="/mainPage"> <img class="slika" src="../assets/lista.png" alt="" width="100" height="100"></router-link>
     </div>
 
-</div>
-<div class="container">
-  <div class="legenda" >
-    <div ></div><span>Business-Important</span>
-    <div ></div><span>Business-Regular</span>
-    <div></div><span>Entertainment</span>
-
   </div>
-</div>
+  <div class="container">
+    <div class="legenda">
+      <div></div><span>Business-Important</span>
+      <div></div><span>Business-Regular</span>
+      <div></div><span>Entertainment</span>
+
+    </div>
+  </div>
 </div>
 </template>
 
@@ -229,7 +229,7 @@ export default {
       days: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
       meetingsHtml: {},
       int: 0,
-      allMeetingsResults: {},
+      allMeetingsResults: [],
       meetingsByDate: []
 
     }
@@ -288,20 +288,20 @@ export default {
       console.log(this.$store.state.dateClicked);
       this.$router.push('/createMeeting');
     },
-  acceptedMeeting(met_id, response){
-    axios.post("http://800q121.mars-t.mars-hosting.com/meetingResponse", {
+    acceptedMeeting(met_id, response) {
+      axios.post("http://800q121.mars-t.mars-hosting.com/meetingResponse", {
 
         sid: window.localStorage.getItem("sessionid"),
         met_id,
         response
-    }).then(response => {
-      //console.log(response.data.result[0].met_longitude);
-      console.log(response.data);
+      }).then(response => {
+        //console.log(response.data.result[0].met_longitude);
+        console.log(response.data);
 
 
-    });
-    location.reload();
-  },
+      });
+      location.reload();
+    },
     meetingsCalendar() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
         params: {
@@ -309,10 +309,15 @@ export default {
         },
       }).then(response => {
         //console.log(response.data.result[0].met_longitude);
-        console.log(response.data);
+        //  console.log(response.data);
         this.meetingsHtml = response.data.format;
         this.allMeetingsResults = response.data.result;
-
+        for (var i = 0; i < this.allMeetingsResults.length; i++) {
+          if (this.allMeetingsResults[i].inv_id == 3) {
+            this.allMeetingsResults.splice(i, i + 1);
+            --i;
+          }
+        }
       });
     },
     checkDate(date, year) {
@@ -355,13 +360,12 @@ export default {
 </script>
 
 <style scoped>
-
-
 .acceptMeeting {
   font-size: 25px;
   cursor: pointer;
 
 }
+
 .acceptMeeting:hover {
   transform: scale(1.3);
 
@@ -486,27 +490,30 @@ export default {
   justify-content: center;
 }
 
-.legenda div:nth-of-type(1){
+.legenda div:nth-of-type(1) {
   height: 20px;
   width: 20px;
   background: #d12727;
   border-radius: 50%;
 
 }
-.legenda div:nth-of-type(2){
+
+.legenda div:nth-of-type(2) {
   height: 20px;
   width: 20px;
-  background:  #a56363;
+  background: #a56363;
   border-radius: 50%;
 
 }
-.legenda div:nth-of-type(3){
+
+.legenda div:nth-of-type(3) {
   height: 20px;
   width: 20px;
-  background:  #55b3db;
+  background: #55b3db;
   border-radius: 50%;
 
 }
+
 .legenda span {
   margin-right: 30px;
 }
@@ -526,6 +533,7 @@ export default {
   margin-top: 72vh;
 
 }
+
 .slika:hover {
   cursor: pointer;
   transform: scale(1.2);
@@ -537,16 +545,19 @@ export default {
   background: #a56363;
   border-radius: 20px;
   color: white;
-    width: 90%;
+  width: 90%;
 }
+
 .klasa2:hover {
-border: 1px solid black;
+  border: 1px solid black;
 }
+
 .klasa1:hover {
-border: 1px solid black;
+  border: 1px solid black;
 }
+
 .klasa0:hover {
-border: 1px solid black;
+  border: 1px solid black;
 }
 
 .klasa0 {
@@ -555,7 +566,7 @@ border: 1px solid black;
   background: #55b3db;
   border-radius: 20px;
   color: white;
-    width: 90%;
+  width: 90%;
 
 }
 
@@ -567,7 +578,7 @@ border: 1px solid black;
   position: relative;
   border-radius: 10px;
   transition: 0.2s background;
-  padding:0 10px ;
+  padding: 0 10px;
   overflow: auto;
   overflow-x: hidden;
 
