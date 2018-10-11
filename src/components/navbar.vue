@@ -379,7 +379,9 @@ a {
   color: #69C;
   text-decoration: none;
 }
-
+ul {
+  padding: 0;
+}
 .pozadinaPadajuci {
   background: #6ab4d1;
   margin-right: 120px;
@@ -398,8 +400,9 @@ a {
   text-align: center;
   border-radius: 0 0 20px 20px;
   border: 0;
-  height: 30vh;
+  max-height: 30vh;
   overflow: auto;
+  cursor: pointer;
 }
 .dropdown-item:hover {
   background: #49a7cc;

@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div v-if="meetings.length>0" class="pt-5 container">
+  <div v-if="hasMeetings" class="pt-5 container">
     <h3 class="text-center mb-3">All meetings</h3>
     <div class="skrol">
       <div v-for="meeting in meetings" v-if="meeting.inv_id==1||meeting.inv_id==2||meeting.inv_id==null" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
@@ -43,7 +43,7 @@
 </div>
 <div v-else class="text-center form-group">
   <h3  class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
-<button  class="btn btn-outline-primary form-control"  type="button" name="button">Create new Meeting</button>
+<router-link to="/probavam"><button  class="btn btn-outline-primary form-control"  type="button" name="button">Create new Meeting</button></router-link>
 </div>
 
 
@@ -155,7 +155,7 @@
 
   <!-- ************ KRAJ MODALI *************-->
 
-    <div v-if="meetings.length>0" class="row" >
+    <div v-if="hasMeetings"  class="row" >
       <div class="col-lg-10"></div>
       <div class="col-lg-2 text-right pr-5" >
       <router-link to="/probavam">  <img @click="listaKalendar=2" class="slika" src="../assets/calendar.png" alt="" width="100" height="100"></router-link>
@@ -189,7 +189,8 @@ export default {
       ukj: 0,
       usrInfo: [],
       meetings:[],
-      listaKalendar:1
+      listaKalendar:1,
+      hasMeetings:false
     }
   },
   filters: {
@@ -216,6 +217,8 @@ export default {
           //console.log(response.data.result[0].met_longitude);
           this.meetings = response.data.result;
           console.log(response.data);
+          this.hasMeetings=response.data.status;
+          console.log(response.data.result);
         });
 
 
@@ -254,6 +257,7 @@ export default {
           },
         }).then(response => {
           this.foundUsers = response.data.result;
+          console.log(response.data);
 
         });
       } else {
