@@ -84,7 +84,7 @@
           <div v-else class="row my-4 ">
             <div class="col-lg-6">
               <div class="datum">{{metMsg.msg_time|dateFormater}}</div>
-              <span class="pr-2">{{metMsg.msg_from.usr_fullname}}: </span>
+              <span class="pr-2">{{metMsg.msg_from}}: </span>
               <div class="on">
                 <div>{{metMsg.msg_text| backslashRemover}}</div>
               </div>
@@ -257,8 +257,9 @@ export default {
         },
       }).then(response => {
         this.friMsgs = response.data.messages;
+        console.log(response.data);
       });
-      if (this.friMsgs.length < (this.loadedMsgs - 1) * 10) {
+      if (this.friMsgs.length%10!=0) {
         this.hideLazyLoadButton = true;
       }
     },
