@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div v-if="!hasMeetings" class="pt-5 container">
+  <div v-if="hasMeetings" class="pt-5 container">
     <h3 class="text-center mb-3">All meetings</h3>
     <div class="skrol">
       <div v-for="meeting in meetings" v-if="meeting.inv_id==1||meeting.inv_id==2||meeting.inv_id==null" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
@@ -211,9 +211,9 @@ export default {
           current_time: moment.utc().format('YYYY-MM-DD')
       },
     }).then(response => {
-      //console.log(response.data.result[0].met_longitude);
+    this.hasMeetings =response.data.status;
+    console.log(this.hasMeetings);
       this.meetings = response.data.result;
-      console.log(response.data);
       this.hasMeetings = response.data.status;
 
     });
@@ -254,8 +254,6 @@ export default {
           },
         }).then(response => {
           this.foundUsers = response.data.result;
-          console.log(response.data);
-
         });
       } else {
         this.foundUsers = [];

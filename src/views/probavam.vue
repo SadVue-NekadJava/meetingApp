@@ -296,8 +296,8 @@ export default {
           current_time: moment.utc().format('YYYY-MM-DD')
         },
       }).then(response => {
-
-        console.log(response.data);
+        console.log(response.data.status);
+        if (response.data.status) {
         this.meetingsHtml = response.data.format;
         this.allMeetingsResults = response.data.result;
         for (var i = 0; i < this.allMeetingsResults.length; i++) {
@@ -305,7 +305,7 @@ export default {
         }
         for (var i = this.izbaci.length - 1; i >= 0; i--) {
           this.allMeetingsResults.splice(this.izbaci[i], 1);
-        }
+        }}
       });
     },
     checkDate(date, year) {
@@ -315,13 +315,10 @@ export default {
           this.meetingsByDate.push(this.allMeetingsResults[i]);
         }
       }
-
-
       this.$store.state.dateClicked = year + '-' + this.month + '-' + date;
       this.$store.state.dateClicked = moment(this.$store.state.dateClicked).format('YYYY-MM-DD');
     },
     addMonth: function() {
-
       var t = this;
       t.dateContext = moment(t.dateContext).add(1, 'month');
     },
