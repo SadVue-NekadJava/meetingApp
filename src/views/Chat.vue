@@ -22,7 +22,7 @@
       <!-- ****************Chatroom Meetings List****************** -->
       <div v-else class="omotOstaliChatovi ">
         <span v-for="(meetingChat,index) in meetingsChat " :key='index'>
-          <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
+          <i class="fas fa-users  pr-2" style="font-size:40px;line-height:50px;"></i>
           <div class="ostaliChatovi  my-auto" @click="listMeetingChat(meetingChat.met_id,index)">{{meetingChat.met_title}}</div>
           <div v-show.visible="meetingChat.meeting_count!=0" class="kolikoNovihPoruka my-auto">{{meetingChat.meeting_count}}</div>
         </span>
