@@ -382,7 +382,7 @@ a {
 
 .pozadinaPadajuci {
   background: #6ab4d1;
-  margin-right: 530px;
+  margin-right: 120px;
   margin-top: 1vh;
   padding: 10px 20px;
   text-align: center;
@@ -392,7 +392,7 @@ a {
 }
 .pozadinaPadajuciNotif {
   background: #6ab4d1;
-  margin-right: 530px;
+  margin-right: 270px;
   margin-top: 1vh;
   padding: 10px 20px;
   text-align: center;
