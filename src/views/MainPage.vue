@@ -96,6 +96,7 @@
           </button>
         </div>
         <div class="modal-body ">
+          <p class="text-center"><b >Meeting description: </b></p>
           <p class="text-center">{{ meeting.met_description }}</p>
           <hr>
           <div class="row">
