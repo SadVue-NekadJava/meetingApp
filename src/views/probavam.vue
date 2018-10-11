@@ -31,16 +31,9 @@
     </div>
   </div>
 
-
   <footer-meeting></footer-meeting>
 
   <!-- *************MODALI************ -->
-
-
-
-
-
-
 
   <div class="modal fade text-center text-center" id="nesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -57,9 +50,7 @@
 
           <h4>You have no meeting for this day!</h4>
           <button @click="createNewMeeting" class="btn btn-outline-primary" data-dismiss="modal">Create New Meeting</button>
-
         </div>
-
       </div>
       <div v-else class="modal-content">
         <div class="modal-header">
@@ -231,7 +222,8 @@ export default {
       int: 0,
       allMeetingsResults: [],
       meetingsByDate: [],
-      izbaci: []
+      izbaci: [],
+      currentTime:''
 
     }
   },
@@ -301,7 +293,8 @@ export default {
     meetingsCalendar() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
         params: {
-          sid: window.localStorage.getItem("sessionid")
+          sid: window.localStorage.getItem("sessionid"),
+          currentTime: moment.utc().format('YYYY-MM-DD')
         },
       }).then(response => {
         //console.log(response.data.result[0].met_longitude);
