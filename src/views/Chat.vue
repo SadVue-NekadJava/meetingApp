@@ -37,7 +37,7 @@
     <div v-else-if="chatSelected==1" class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
-        <button v-if="!hideLazyLoadButton" @click="loadMoreMsgs" type="button" class="btn btn-primary" name="button">Load more messages</button>
+        <div class="text-center"><button v-if="!hideLazyLoadButton" @click="loadMoreMsgs" type="button" class="btn btn-outline-primary" name="button">Load more messages</button></div>
         <div v-for="friMsg in friMsgs">
           <div class="row " v-if="friMsg.usr_id_from==0">
             <div class="col-lg-6"> </div>
@@ -69,7 +69,7 @@
     <div v-else-if="chatSelected==2" class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
-        <button v-if="!hideLazyLoadButton"   @click="loadMoreMsgsMeeting" type="button" class="btn btn-primary" name="button">Load more messages</button>
+        <div class="text-center">  <button v-if="!hideLazyLoadButton"   @click="loadMoreMsgsMeeting" type="button" class="btn btn-outline-primary" name="button">Load more messages</button></div>
         <div v-for="metMsg in meetMsgs">
           <div class="row " v-if="metMsg.msg_from==0">
             <div class="col-lg-6"> </div>
