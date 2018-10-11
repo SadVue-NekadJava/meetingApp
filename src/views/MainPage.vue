@@ -1,13 +1,13 @@
 <template>
 <div>
-  <nav-bar></nav-bar>
+  <nav-bar ></nav-bar>
 
 
   <!-- *************************HAS MEETINGS MAIN PAGE********************* -->
   <div v-if="hasMeetings" class="pt-5 container">
     <h3 class="text-center mb-3">All meetings</h3>
     <div class="skrol">
-      <div v-for="meeting in meetings" v-if="meeting.inv_id==1||meeting.inv_id==2||meeting.inv_id==null" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
+      <div v-for="meeting in meetings" v-if="meeting.inv_id==2||meeting.inv_id==null" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
         <div class="col-md-9 ">
           <p class="pl-2">{{ meeting.met_title }}</p>
         </div>
