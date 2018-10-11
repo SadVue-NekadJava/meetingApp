@@ -155,7 +155,7 @@
 
   <!-- ************ KRAJ MODALI *************-->
 
-    <div class="row" >
+    <div v-if="meetings.length>0" class="row" >
       <div class="col-lg-10"></div>
       <div class="col-lg-2 text-right pr-5" >
       <router-link to="/probavam">  <img @click="listaKalendar=2" class="slika" src="../assets/calendar.png" alt="" width="100" height="100"></router-link>
