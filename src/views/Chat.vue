@@ -8,7 +8,6 @@
         <button class="btn dugme " :class="{'active':isMeetings}" @click="getMeetings">Meetings</button>
         <button class="ml-2 btn dugme" :class="{'active':!isMeetings}" @click="getFriends">Friends</button>
       </div>
-
       <!-- ************ Chatroom List *************** -->
       <!-- ****************Chatroom Friends List****************** -->
       <div v-if="!isMeetings" class="omotOstaliChatovi ">
@@ -20,12 +19,11 @@
           </template>
         </span>
       </div>
-
       <!-- ****************Chatroom Meetings List****************** -->
       <div v-else class="omotOstaliChatovi ">
         <span v-for="(meetingChat,index) in meetingsChat " :key='index'>
           <i class="fas fa-user-tie  pr-2" style="font-size:40px;line-height:50px;"></i>
-          <div class="ostaliChatovi  my-auto" @click="listMeetingChat(meetingChat.fri_id,meetingChat.fri_fullname,index)">{{meetingChat.met_title}}</div>
+          <div class="ostaliChatovi  my-auto" @click="listMeetingChat(meetingChat.met_id,index)">{{meetingChat.met_title}}</div>
           <div v-show.visible="meetingChat.meeting_count!=0" class="kolikoNovihPoruka my-auto">{{meetingChat.meeting_count}}</div>
         </span>
       </div>
@@ -39,7 +37,7 @@
     <div v-else-if="chatSelected==1" class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
-        <button @click="loadMoreMsgs" type="button" class="btn btn-primary" name="button">Load more messages</button>
+        <button v-if="!hideLazyLoadButton" @click="loadMoreMsgs" type="button" class="btn btn-primary" name="button">Load more messages</button>
         <div v-for="friMsg in friMsgs">
           <div class="row " v-if="friMsg.usr_id_from==0">
             <div class="col-lg-6"> </div>
@@ -62,7 +60,6 @@
             <div class="col-lg-6"> </div>
           </div>
         </div>
-
       </div>
       <form @submit.prevent="sendMessage">
         <input type="text" v-model="friendMsg1" class="form-control" placeholder="Your message:" required>
@@ -72,42 +69,34 @@
     <div v-else-if="chatSelected==2" class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
-        <button @click="loadMoreMsgs" type="button" class="btn btn-primary" name="button">Load more messages</button>
-        <div v-for="friMsg in friMsgs">
-          <div class="row " v-if="friMsg.usr_id_from==0">
+        <button v-if="!hideLazyLoadButton"   @click="loadMoreMsgsMeeting" type="button" class="btn btn-primary" name="button">Load more messages</button>
+        <div v-for="metMsg in meetMsgs">
+          <div class="row " v-if="metMsg.msg_from==0">
             <div class="col-lg-6"> </div>
             <div class="col-lg-6 text-right pr-4">
-              <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
+              <div class="datum">{{metMsg.msg_time|dateFormater}}</div>
               <span class="pr-2 ">Me:</span>
               <div class="ja">
-                <div>{{friMsg.msg_text| backslashRemover}}</div>
+                <div>{{metMsg.msg_text| backslashRemover}}</div>
               </div>
             </div>
           </div>
           <div v-else class="row my-4 ">
             <div class="col-lg-6">
-              <div class="datum">{{friMsg.msg_time|dateFormater}}</div>
-              <span class="pr-2">{{friendName}}: </span>
+              <div class="datum">{{metMsg.msg_time|dateFormater}}</div>
+              <span class="pr-2">{{metMsg.msg_from.usr_fullname}}: </span>
               <div class="on">
-                <div>{{friMsg.msg_text| backslashRemover}}</div>
+                <div>{{metMsg.msg_text| backslashRemover}}</div>
               </div>
             </div>
             <div class="col-lg-6"> </div>
           </div>
         </div>
-
       </div>
-      <form @submit.prevent="sendMessage">
-        <input type="text" v-model="friendMsg1" class="form-control" placeholder="Your message:" required>
+      <form @submit.prevent="sendMessageMeet">
+        <input type="text" v-model="meetMessageOne" class="form-control" placeholder="Your message:" required>
       </form>
     </div>
-
-
-
-
-
-
-
     <!-- *******************Meeting options********************* -->
     <div v-if="chatSelected ==2" class="col-lg-3">
       <h3 class="text-center  mb-3"> Chat members</h3>
@@ -118,8 +107,8 @@
           <!-- <p style="font-size:20px;cursor:pointer"><i class="fas fa-plus" style="color:#6ab4d1"></i> Add member</p> -->
         </a>
         <div v-for="participant in meetingsChat[this.indexMeeting].participants" class="member">
-          <span><i v-if="!participant.isOnline"  class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:red"></i>
-            <i v-else  class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:green"></i>
+          <span><i v-if="!participant.isOnline" class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:red"></i>
+            <i v-else class="fas fa-circle pt-2 pr-2" style="font-size:10px;color:green"></i>
             <p>{{participant.usr_fullname}}</p>
           </span>
         </div>
@@ -143,7 +132,6 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-
         </div>
       </div>
     </div>
@@ -162,27 +150,21 @@
           <i class="fas fa-user"></i>
           <h4>Lazar Markovic</h4>
           <hr>
-
           <p style="cursor:pointer">E-mail: nkjnkjn@gmail.com</p>
           <p class="">Bio: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa labore consectetur cumque alias impedit, fugit facere atque cupiditate, deserunt nisi aliquam accusantium ut quo expedita est provident excepturi nulla nam.</p>
           <button class="btn dugme">Visit profile</button>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-
         </div>
       </div>
     </div>
   </div>
 </div>
 </template>
-
 <script>
 import Navbar from '../components/navbar.vue';
 import moment from 'moment'
-
-
-
 export default {
   props: ['ime'],
   components: {
@@ -207,14 +189,17 @@ export default {
       friOnline: true,
       loadedMsgs: 1,
       meetingsChat: [],
-      indexMeeting: 0
+      indexMeeting: 0,
+      meetMsgs: [],
+      meetMessageOne: '',
+      meetId: 0,
+      hideLazyLoadButton: false
     }
   },
   mounted() {
     this.$store.state.activeChat = 1;
     setInterval(this.getFriendsLoop, 1000);
     this.getFriendsLoop();
-
   },
   filters: {
     dateFormater: function(value) {
@@ -225,8 +210,43 @@ export default {
       return value = value.replace(/\\/g, "");
     }
   },
-
   methods: {
+    sendMessageMeet() {
+      this.trenutnoVreme = moment.utc().format("YYYY-MM-DD HH:mm:ss");
+      axios.post("http://800q121.mars-t.mars-hosting.com/postMeetingMessages", {
+        sid: window.localStorage.getItem("sessionid"),
+        met_id: this.meetId,
+        msg_text: this.meetMessageOne,
+        time: this.trenutnoVreme
+      }).then(response => {
+        if (response.data.status) {
+          for (var i = 0; i < response.data.messages.length; i++) {
+            this.meetMsgs.push(response.data.messages[i]);
+          }
+        }
+      });
+      this.meetMessageOne = '';
+      setTimeout(this.goToBottomChat, 100);
+    },
+    loadMoreMsgsMeeting(){
+        this.loadedMsgs++;
+      this.hideLazyLoadButton = true;
+
+      axios.get("http://800q121.mars-t.mars-hosting.com/getMeetingMessagesLazy", {
+        params: {
+          sid: window.localStorage.getItem("sessionid"),
+          met_id: this.meetId,
+          brojac: this.loadedMsgs
+        },
+      }).then(response => {
+        this.meetMsgs = response.data.messages;
+            console.log(response.data);
+      });
+      if (this.meetMsgs.length < (this.loadedMsgs - 1) * 10) {
+        this.hideLazyLoadButton = true;
+      }
+
+    },
     loadMoreMsgs() {
       this.loadedMsgs++;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendMessagesLazy", {
@@ -235,7 +255,12 @@ export default {
           fri_id: this.friId,
           brojac: this.loadedMsgs
         },
-      }).then(response => {});
+      }).then(response => {
+        this.friMsgs = response.data.messages;
+      });
+      if (this.friMsgs.length < (this.loadedMsgs - 1) * 10) {
+        this.hideLazyLoadButton = true;
+      }
     },
     getFriendsLoop() {
       this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
@@ -245,7 +270,6 @@ export default {
           usr_last_online: this.currentTime
         }
       }).then(response => {
-
         this.friendsChat = response.data.result;
         this.meetingsChat = response.data.meetings;
         var now = moment(new Date());
@@ -274,7 +298,6 @@ export default {
           }
         }
       });
-
     },
     getFriends() {
       this.currentTime = moment.utc().format("YYYY-MM-DD HH:mm:ss");
@@ -282,32 +305,8 @@ export default {
         this.chatSelected = 0;
       this.isMeetings = false;
 
-      // axios.get("http://800q121.mars-t.mars-hosting.com/getFriendsChat", {
-      //   params: {
-      //     sid: window.localStorage.getItem("sessionid"),
-      //     usr_last_online: this.currentTime
-      //   },
-      // }).then(response => {
-      //   this.friendsChat = response.data.result;
-      //   var now = moment(new Date());
-      //   now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
-      //   now = moment(now);
-      //   for (var i = 0; i < this.friendsChat.length; i++) {
-      //     var end = moment(this.friendsChat[i].time);
-      //     var duration = moment.duration(now.diff(end));
-      //     var seconds = duration.asSeconds();
-      //     if (seconds < 11) {
-      //       this.friendsChat[i].isOnline = true;
-      //     } else {
-      //       this.friendsChat[i].isOnline = false;
-      //     }
-      //   }
-      // });
-
     },
-
     sendMessage() {
-      // console.log(this.friId, this.friendMsg1);
       this.trenutnoVreme = moment.utc().format("YYYY-MM-DD HH:mm:ss");
       axios.post("http://800q121.mars-t.mars-hosting.com/postFriendMessages", {
         sid: window.localStorage.getItem("sessionid"),
@@ -322,22 +321,41 @@ export default {
         }
       });
       this.friendMsg1 = '';
+      setTimeout(this.goToBottomChat, 100);
     },
     getMeetings() {
       if (!this.isMeetings)
         this.chatSelected = 0;
       this.isMeetings = true;
-
-
-
     },
-    listMeetingChat(id, name, index) {
+    listMeetingChat(met_id, index) {
+      if (this.meetId != met_id) {
+        this.loadedMsgs = 1;
+      }
+        this.hideLazyLoadButton = false;
       this.indexMeeting = index;
       this.chatSelected = 2;
-
-
+      this.meetId = met_id;
+      this.meetingsChat[index].meeting_count = 0;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getMeetingMessages", {
+        params: {
+          sid: window.localStorage.getItem("sessionid"),
+          met_id
+        },
+      }).then(response => {
+        this.meetMsgs = response.data.messages;
+        console.log(response.data);
+        if (this.meetMsgs.length < 10) {
+          this.hideLazyLoadButton = true;
+        }
+      });
+      setTimeout(this.goToBottomChat, 100);
     },
     listFriendChat(fri_id, frName, index) {
+      this.hideLazyLoadButton = false;
+      if (this.fri_id != fri_id) {
+        this.loadedMsgs = 1;
+      }
       this.chatSelected = 1;
       this.friId = fri_id;
       this.friendName = frName;
@@ -349,23 +367,25 @@ export default {
         },
       }).then(response => {
         this.friMsgs = response.data.messages;
+        if (this.friMsgs.length < 10) {
+          this.hideLazyLoadButton = true;
+        }
       });
-      setTimeout(this.funkcija, 100);
+
+
+      setTimeout(this.goToBottomChat, 100);
     },
-    funkcija() {
+    goToBottomChat() {
       var objDiv = document.getElementById("divExample");
       objDiv.scrollTop = objDiv.scrollHeight;
     }
   },
 }
 </script>
-
 <style scoped>
 .dugme.active {
   background: green;
 }
-
-
 
 .member span:hover {
   cursor: pointer;
@@ -381,7 +401,6 @@ export default {
   width: 100vw;
   height: 80px;
   box-shadow: 1px 1px 5px #6ab4d1;
-
 }
 
 input {
@@ -398,7 +417,6 @@ input:focus {
   font-weight: 100;
   opacity: 0.8;
   color: blue;
-
 }
 
 .omotChat {
@@ -409,7 +427,6 @@ input:focus {
   width: 100%;
   padding: 50px;
   border-top: 1px solid #f1f1f1;
-
 }
 
 .ja {
@@ -444,7 +461,6 @@ input:focus {
   width: 100%;
   padding: 50px;
   /* border: 1px solid #f1f1f1; */
-
 }
 
 .dugme {
@@ -461,8 +477,6 @@ input:focus {
 /* .dugme:focus{
   background: green;
 } */
-
-
 .ostaliChatovi {
   height: 50px;
   width: 90%;
@@ -474,14 +488,12 @@ input:focus {
   white-space: nowrap;
   overflow: hidden;
   border-radius: 20px;
-
 }
 
 .ostaliChatovi:hover {
   background-color: #cccccc;
   cursor: pointer;
 }
-
 
 .kolikoNovihPoruka {
   height: 30px;
@@ -497,18 +509,14 @@ input:focus {
   width: 10px;
 }
 
-
-
 /* Track */
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.5);
 }
 
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: darkgrey;
-
 }
 
 /* Handle on hover */
