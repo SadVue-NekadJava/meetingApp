@@ -358,6 +358,7 @@ export default {
   margin-left: 2vw;
   padding: 0;
   text-align: center;
+  z-index: 300;
 }
 
 
