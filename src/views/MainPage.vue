@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar></nav-bar>
-  <div v-if="1==1" class="pt-5 container">
+  <div v-if="meetings.length>0" class="pt-5 container">
     <h3 class="text-center mb-3">All meetings</h3>
     <div class="skrol">
       <div v-for="meeting in meetings" v-if="meeting.inv_id==1||meeting.inv_id==2||meeting.inv_id==null" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
@@ -24,7 +24,7 @@
 
   <!-- *************************** PRVI PUT NA STRANI ***************-->
 
-  <!-- <div class="prviPutOmot">
+  <div v-else class="prviPutOmot">
       <div v-if="!hasFriends" class="">
 
 
@@ -45,9 +45,9 @@
   <h3  class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
 <button  class="btn btn-outline-primary form-control"  type="button" name="button">Create new Meeting</button>
 </div>
- -->
 
-  <!-- </div> -->
+
+  </div>
 
 
 
