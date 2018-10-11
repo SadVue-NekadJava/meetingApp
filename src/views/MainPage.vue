@@ -1,12 +1,13 @@
 <template>
 <div>
   <nav-bar></nav-bar>
+
+
+  <!-- *************************HAS MEETINGS MAIN PAGE********************* -->
   <div v-if="hasMeetings" class="pt-5 container">
     <h3 class="text-center mb-3">All meetings</h3>
     <div class="skrol">
       <div v-for="meeting in meetings" v-if="meeting.inv_id==1||meeting.inv_id==2||meeting.inv_id==null" :data-target="'#met_id'+meeting.met_id" data-toggle="modal" class="row sastanak2 mb-3" style="cursor:pointer">
-
-
         <div class="col-md-9 ">
           <p class="pl-2">{{ meeting.met_title }}</p>
         </div>
@@ -26,18 +27,12 @@
 
   <div v-else class="prviPutOmot">
     <div v-if="!hasFriends" class="">
-
-
-
-
       <h3 class="lead display-4">Welcome to meeting app! <br> Connect with your friends...</h3>
       <input @keyup="searchUsers" v-model="keyUserSearch" type="search" class=" prviPutLista" placeholder="Search users by mail">
       <div class="text-center">
         <ul class="lista">
-
           <li data-target="#userSearched" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
             {{user.usr_email}}</li>
-
         </ul>
       </div>
     </div>
@@ -45,11 +40,7 @@
       <h3 class="lead display-4">Welcome to meeting app! <br> You have no meetings !</h3>
       <router-link to="/probavam"><button class="btn btn-outline-primary form-control" type="button" name="button">Create new Meeting</button></router-link>
     </div>
-
-
   </div>
-
-
 
   <!-- ************ MODALI *************-->
   <div class="modal fade text-center text-center" id="userSearched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -78,9 +69,6 @@
       </div>
     </div>
   </div>
-
-
-
   <div v-for="meeting in meetings">
     <div class="modal fade bd-example-modal-lg " :id="'met_id'+ meeting.met_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg " role="document">
@@ -146,11 +134,7 @@
     </div>
 
   </div>
-
-
-
   <!-- ************ KRAJ MODALI *************-->
-
   <div v-if="hasMeetings" class="row">
     <div class="col-lg-10"></div>
     <div class="col-lg-2 text-right pr-5">
@@ -158,11 +142,8 @@
     </div>
 
   </div>
-
-
 </div>
 </template>
-
 <script>
 import moment from 'moment'
 import Navbar from '../components/navbar.vue'
@@ -204,7 +185,6 @@ export default {
     setInterval(this.friends, 10000);
     if (window.localStorage.getItem("sessionid") == null)
       this.$router.push('/');
-
     axios.get("http://800q121.mars-t.mars-hosting.com/getMeetings", {
       params: {
         sid: window.localStorage.getItem("sessionid"),
@@ -215,12 +195,8 @@ export default {
     console.log(this.hasMeetings);
       this.meetings = response.data.result;
       this.hasMeetings = response.data.status;
-
     });
-
-
   },
-
   methods: {
     getUserInfo(id) {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
@@ -231,7 +207,6 @@ export default {
         this.usrInfo = response.data.result[0];
       });
     },
-
     friends() {
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriends", {
         params: {
@@ -259,7 +234,6 @@ export default {
         this.foundUsers = [];
       }
     },
-
     addUser(id) {
 
       axios.post("http://800q121.mars-t.mars-hosting.com/friendRequest", {
@@ -269,7 +243,6 @@ export default {
 
       });
     }
-
   }
 }
 </script>
