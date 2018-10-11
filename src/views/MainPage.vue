@@ -96,17 +96,21 @@
           </button>
         </div>
         <div class="modal-body ">
-          <p class="text-center"><b >Meeting description: </b></p>
+          <h4 class="text-center">Meeting description: </h4>
           <p class="text-center">{{ meeting.met_description }}</p>
           <hr>
           <div class="row">
-            <div class="col-lg-6 gde my-auto">
-              <p ><b>Organiser: </b> {{meeting.organisator.fullname}} </p>
-              <p ><b>Meeting starts: </b>{{ meeting.met_time_start|dateFormater }}</p>
-              <p v-if="meeting.met_priority<3"><b>Meeting ends: </b>{{ meeting.met_time_end|dateFormater }}</p>
+            <div class="col-lg-6 pl-5" style="border-right:1px solid lightgrey;">
+              <h4 class="pb-2">Meeting details:</h4>
+
+              <p ><b>Organiser: </b> <br>{{meeting.organisator.fullname}} </p>
+              <p ><b>Meeting starts: </b> <br>{{ meeting.met_time_start|dateFormater }}</p>
+
+              <p v-if="meeting.met_priority<3"><b> Meeting ends: <br></b>{{ meeting.met_time_end|dateFormater }}</p>
             </div>
-            <div class="col-lg-6">
-              <h4>Participants:</h4>
+
+            <div class="col-lg-6 pl-5">
+              <h4 class="pb-2">Participants:</h4>
               <ul v-for="participant in meeting.participants">
                 <li>{{ participant.fullname }}</li>
               </ul>
@@ -281,6 +285,7 @@ export default {
   width: 100%;
 
 }
+
 .slika {
   transition: 0.3s all;
 }

@@ -63,14 +63,14 @@
       </div>
       <div v-else class="modal-content">
         <div class="modal-header">
-
+          <h5>Daily meetings</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body form-group ">
           <div v-for="meetingByDate in meetingsByDate">
-            <div :data-target="'#met_id'+meetingByDate.met_id" data-toggle="modal" class="row sastanak2 mb-3   " style="cursor:pointer" :class="{klasa1: meetingByDate.met_priority==1,klasa2: meetingByDate.met_priority==2, klasa0: meetingByDate.met_priority==3}">
+            <div :data-target="'#met_id'+meetingByDate.met_id" data-toggle="modal" class="row sastanak2 mb-3  mx-auto " style="cursor:pointer" :class="{klasa1: meetingByDate.met_priority==1,klasa2: meetingByDate.met_priority==2, klasa0: meetingByDate.met_priority==3}">
               {{meetingByDate.met_title}} - {{meetingByDate.met_time_start|dateFormater}}
             </div>
           </div>
@@ -542,15 +542,15 @@ export default {
 }
 
 .klasa2:hover {
-  border: 1px solid black;
+  transform: scale(1.1);
 }
 
 .klasa1:hover {
-  border: 1px solid black;
+  transform: scale(1.1);
 }
 
 .klasa0:hover {
-  border: 1px solid black;
+  transform: scale(1.1);
 }
 
 .klasa0 {
