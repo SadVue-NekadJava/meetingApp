@@ -230,7 +230,7 @@ export default {
     },
     loadMoreMsgsMeeting(){
         this.loadedMsgs++;
-      this.hideLazyLoadButton = true;
+      this.hideLazyLoadButton = false;
 
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetingMessagesLazy", {
         params: {
