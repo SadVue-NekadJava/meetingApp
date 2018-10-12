@@ -145,7 +145,6 @@ export default {
       notifications: [],
       usrInfo: [],
       myProfileInfo: [],
-      notifSound: new Audio(require('../assets/notification.mp3')),
       chatActive: 0,
       friendsChatNotification: [],
       hasChatNotifications: this.$store.state.msgNotificationNavbar,
@@ -247,9 +246,6 @@ export default {
               }
             }
             if (tempNotification) {
-              if (!this.hasNotif) {
-                this.notifSound.play();
-              }
               this.hasNotif = true;
             } else {
               this.hasNotif = false;

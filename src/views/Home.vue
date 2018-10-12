@@ -2,7 +2,7 @@
 <div>
     <div class="bg">
   <div class="navChat">
-    <div class="text-center pt-2"><img src="../assets/logo.png" height="70" style="line-height:80px;" alt=""></div>
+    <div class="text-center pt-2"><img src="../assets/logoHOme.png" height="70" style="line-height:80px;" alt=""></div>
   </div>
   <div class="container">
     <div class="loginPozcija">
@@ -167,14 +167,14 @@ export default {
 
 <style scoped>
 .bg{
-  background-image: url("../assets/bg.jpg");
+  background-image: url("../assets/bg2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
 }
 .navChat {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.7);
   width: 100vw;
   height: 80px;
 
