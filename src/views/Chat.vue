@@ -14,7 +14,7 @@
         <span v-for="(friendChat,index) in friendsChat " :key='index'>
           <template v-if="friendChat.fri_request==1">
             <i class="fas fa-user-tie  pr-2" :class="{'text-success':friendChat.isOnline}" style="font-size:40px;line-height:50px;"></i>
-            <div class="ostaliChatovi  my-auto" @click="listFriendChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}</div>
+            <div class="ostaliChatovi  my-auto" @click="listFriendChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}<em class="lastOnline" v-if="!friendChat.isOnline"> last online: {{friendChat.wasOnline}}</em></div>
             <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
           </template>
         </span>
@@ -278,6 +278,10 @@ export default {
         now = moment(now);
         for (var i = 0; i < this.friendsChat.length; i++) {
           var end = moment(this.friendsChat[i].time);
+          var date = moment.utc(end).format('YYYY-MM-DD HH:mm:ss');
+          var stillUtc = moment.utc(date).toDate();
+          var local = moment(stillUtc).local().format('YYYY-MM-DD HH:mm:ss');
+          this.friendsChat[i].wasOnline=moment.utc(local).fromNow();
           var duration = moment.duration(now.diff(end));
           var seconds = duration.asSeconds();
           if (seconds < 3) {
@@ -384,6 +388,9 @@ export default {
 }
 </script>
 <style scoped>
+.lastOnline{
+  font-size: 15px;
+}
 .dugme.active {
   background: rgb(239,221,203);
   border: none;
@@ -483,10 +490,9 @@ input:focus {
   font-size: 20px;
   line-height: 50px;
   color: black;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 20px;
 }
 
