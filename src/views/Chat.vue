@@ -254,7 +254,7 @@ export default {
         },
       }).then(response => {
         this.meetMsgs = response.data.messages;
-        
+
         console.log(response.data);
       });
       if (this.meetMsgs.length < (this.loadedMsgs - 1) * 10) {
@@ -319,7 +319,7 @@ export default {
           this.friendsChat[i].wasOnline = moment.utc(local).fromNow();
           var duration = moment.duration(now.diff(end));
           var seconds = duration.asSeconds();
-          if (seconds < 10 ) {
+          if (seconds < 37 ) {
             this.friendsChat[i].isOnline = true;
           } else {
             this.friendsChat[i].isOnline = false;
@@ -330,7 +330,7 @@ export default {
             var end = moment(this.meetingsChat[i].participants[j].usr_last_online);
             var duration = moment.duration(now.diff(end));
             var seconds = duration.asSeconds();
-            if (seconds < 3) {
+            if (seconds < 37) {
               this.meetingsChat[i].participants[j].isOnline = true;
             } else {
               this.meetingsChat[i].participants[j].isOnline = false;
