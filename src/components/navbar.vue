@@ -10,11 +10,8 @@
 
             <li data-target="#userSearchedNav" data-toggle="modal" class="pb-2" v-for="user in foundUsers" @click="getUserInfo(user.usr_id)" id="padajuciUseri"><span class="ime">{{user.usr_firstname}} {{user.usr_lastname}}</span>
               {{user.usr_email}}</li>
-
-
           </ul>
         </form>
-
       </div>
       <div class="col-lg-8 pl-5  text-white">
         <router-link to="/mainPage">
@@ -22,7 +19,6 @@
         </router-link>
       </div>
       <div class="col-lg-2 my-auto pozicijaIkoniceNav " style="display: flex;">
-
 
         <!-- Nav bar lupa -->
         <!-- ************ MODALI *************-->
@@ -92,13 +88,13 @@
           <i v-else class="fas fa-bell px-3 " style="color:red; my-auto" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <div class="dropdown-menu pozadinaPadajuciNotif " aria-labelledby="dropdownMenuButton">
             <ul>
-              <div v-for="notification in notifications">
-                <li @click="statusRead(notification.not_id)" class="dropdown-item " v-bind:class="[notification.not_confirm ? 'text-white' :'text-danger'] ">
+              <div v-for="(notification,index) in notifications">
+                <li @click="statusRead(notification.not_id,index)" class="dropdown-item " v-bind:class="[notification.not_confirm ? 'text-white' :'text-danger'] ">
                   {{notification.usr_firstname}} {{notification.usr_lastname}}
                   {{notification.nst_text}}
                   <div v-if="notification.nst_id==1" class="friend-req">
-                    <i id="da" @click="confirmReq(notification.usr_id_send)" class="fas fa-check"></i>
-                    <i id="ne" @click="denyReq(notification.usr_id_send)" class="pl-5 fas fa-times"></i>
+                    <i id="da" @click="confirmReq(notification.usr_id_send,index)" class="fas fa-check"></i>
+                    <i id="ne" @click="denyReq(notification.usr_id_send,index)" class="pl-5 fas fa-times"></i>
                   </div>
 
                 </li>
@@ -112,8 +108,8 @@
           <div class="dropdown-menu pozadinaPadajuci" aria-labelledby="dropdownMenuButton">
             <a data-target="#myProfile" data-toggle="modal" @click="myProfile" class="dropdown-item text-white" href="#">Profile</a>
             <hr>
-            <a class="dropdown-item text-white" href="#">Settings</a>
-            <hr>
+            <!-- <a class="dropdown-item text-white" href="#">Settings</a>
+            <hr> -->
             <label @click="logout">
               <router-link to="/" class="dropdown-item text-white">Logout</router-link>
             </label>
@@ -174,12 +170,6 @@ export default {
         this.myProfileInfo = response.data.result[0];
       });
     },
-    denyReq(id) {
-      axios.post("http://800q121.mars-t.mars-hosting.com/friendDenied", {
-        sid: window.localStorage.getItem("sessionid"),
-        id
-      }).then(response => {});
-    },
     getUserInfo(id) {
       axios.get("http://800q121.mars-t.mars-hosting.com/getUserProfile", {
         params: {
@@ -189,19 +179,27 @@ export default {
         this.usrInfo = response.data.result[0];
       });
     },
-    denyReq(id) {
+    denyReq(id,index) {
+      this.notifications[index].nst_id=2;
+      console.log(this.notifications[index]);
       axios.post("http://800q121.mars-t.mars-hosting.com/friendDenied", {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {});
     },
-    confirmReq(id) {
+    confirmReq(id,index) {
+      this.notifications[index].nst_id=2;
+      console.log(this.notifications[index]);
       axios.post("http://800q121.mars-t.mars-hosting.com/friendConfirm", {
         sid: window.localStorage.getItem("sessionid"),
         id
       }).then(response => {});
     },
-    statusRead(not_id) {
+    statusRead(not_id,index) {
+      this.notifications[index].not_confirm=true;
+      if(  this.notifications[index].nst_text=="has invited you to a meeting."||this.notifications[index].nst_text=="has accepted your meeting invitation."){
+        this.$router.push('/probavam');
+      }
       axios.post("http://800q121.mars-t.mars-hosting.com/postNotification", {
         not_id
       }).then(response => {});
