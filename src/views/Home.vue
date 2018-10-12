@@ -1,83 +1,9 @@
 <template>
 <div>
+    <div class="bg">
   <div class="navChat">
     <div class="text-center pt-2"><img src="../assets/logo.png" height="70" style="line-height:80px;" alt=""></div>
   </div>
-  <!-- <div class="container ">
-
-
-    <div class="loginPozcija">
-      <div class="promena mx-auto">
-        <input type="radio" id="promena_levo" name="switch_2" checked />
-        <label for="promena_levo">Sign in</label>
-        <input type="radio" id="promena_desno" name="switch_2" />
-        <label for="promena_desno">Sign up</label>
-      </div>
-      <div class="login">
-        <div class="form-group">
-          <h3 class="py-3 text-center">Sign in</h3>
-          <div class="input-box ">
-            <input class=" form-control" type="text" name="" required="" v-model="logUsername">
-            <label>Username</label>
-          </div>
-          <br>
-          <div class="input-box ">
-            <input class=" form-control" type="password" name="" required="" v-model="logPassword">
-            <label>Password</label>
-          </div>
-          <br>
-          <div class="text-center">
-            <a data-toggle="modal" data-target="#prijava">
-              <button @click="login" class="btn dugme form-control">Sign in</button>
-            </a>
-            <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
-          </div>
-        </div>
-      </div> -->
-  <!-- ************************************SIGNUP*********************************** -->
-  <!-- <div class="signup">
-        <div class="form-group">
-          <h3 class="py-3 text-center">Sign up</h3>
-          <div class="input-box ">
-            <input class=" form-control" type="text" name="" required="" v-model="regFirstName">
-            <label>First Name </label>
-          </div>
-          <br>
-          <div class="input-box ">
-            <input class=" form-control" type="text" name="" required="" v-model="regLastName">
-            <label>Last name </label>
-          </div>
-          <br>
-          <div class="input-box ">
-            <input class=" form-control" type="text" name="" required="" v-model="regUsername">
-            <label>Username</label>
-          </div>
-          <br>
-          <div class="input-box ">
-            <input class=" form-control" type="text" name="" required="" v-model="regEmail">
-            <label>Email</label>
-          </div>
-          <br>
-          <div class="input-box ">
-            <input class=" form-control" type="password" name="" required="" v-model="regPass">
-            <label>Password</label>
-          </div>
-          <br>
-          <div class="input-box ">
-            <input class=" form-control" type="password" name="" required="" v-model="regPass2">
-            <label>Confirm password</label>
-          </div>
-          <br>
-          <div class="text-center">
-            <a data-toggle="modal" data-target="#registracija">
-              <button @click="register" class="btn form-control dugme">Register</button>
-            </a>
-                <p class="pt-3 text-center text-danger">{{errorMessage}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <div class="container">
     <div class="loginPozcija">
       <div class="promena mx-auto">
@@ -163,6 +89,7 @@
 
 
   <footer class="fixed-bottom lead text-center">Copyright 2018 meetingApp</footer>
+  </div>
 </div>
 </template>
 
@@ -239,11 +166,18 @@ export default {
 </script>
 
 <style scoped>
+.bg{
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
 .navChat {
-  background: #6ab4d1;
+  background: rgba(255,255,255,0.2);
   width: 100vw;
   height: 80px;
-  box-shadow: 1px 1px 5px #6ab4d1;
+
 
 }
 
@@ -312,6 +246,7 @@ input:focus {
   box-shadow: -3px 2px 25px 3px rgba(0, 0, 0, 0.75);
   padding: 50px 60px;
   border-radius: 20px;
+    background: rgba(255,255,255,0.2);
 
 }
 
