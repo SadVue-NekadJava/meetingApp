@@ -1,5 +1,8 @@
 <template>
 <div>
+  <div class="navChat">
+    <div class="text-center pt-2"><img src="../assets/logoHOme.png" height="70" style="line-height:80px;" alt=""></div>
+  </div>
   <div class="container">
     <div class="omot">
     <h1 class="text-center naslov">{{msg}}</h1>
@@ -11,7 +14,13 @@
 </template>
 
 <script>
+
+import Navbar from '../components/navbar.vue'
+
 export default {
+  components:{
+    'nav-bar': Navbar
+  },
   data() {
     return {
       hash: '',
@@ -37,7 +46,13 @@ export default {
 </script>
 
 <style scoped>
+.navChat {
 
+  width: 100vw;
+  height: 80px;
+
+
+}
 .naslov {
   text-transform: uppercase;
 margin-top:30vh;
