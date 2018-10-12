@@ -14,7 +14,21 @@
     </div>
     <div class="dates">
       <div class="omot " v-for="blank in firstDayOfMonth"></div>
-      <div class="omot text-center" v-for="date in daysInMonth" data-target="#nesto" @click="checkDate(date,year)" data-toggle="modal">
+      <template  v-for="date in daysInMonth">
+
+        <div v-if="currentDate>date" class="omot text-center bg-secondary" style="cursor:not-allowed">
+          <div class="datum">{{date}}
+
+          </div>
+        </div>
+
+        <div v-else-if="currentDate==date" class="omot text-center bg-primary" data-target="#nesto" @click="checkDate(date,year)" data-toggle="modal" >
+          <div class="datum">{{date}}
+
+          </div>
+        </div>
+
+      <div v-else class="omot text-center"  data-target="#nesto" @click="checkDate(date,year)" data-toggle="modal">
         <div class="datum">{{date}}
 
         </div>
@@ -28,6 +42,7 @@
           <div v-if="index==3" class="lead kolikoJos"><em>and {{duzina(meetingsHtml[date])-3}} more</em></div>
         </div>
       </div>
+    </template>
     </div>
   </div>
 
