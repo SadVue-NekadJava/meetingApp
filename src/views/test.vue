@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped>
 
 .naslov {
   text-transform: uppercase;

@@ -14,7 +14,7 @@
         <span v-for="(friendChat,index) in friendsChat " :key='index'>
           <template v-if="friendChat.fri_request==1">
             <i class="fas fa-user-tie  pr-2" :class="{'text-success':friendChat.isOnline}" style="font-size:40px;line-height:50px;"></i>
-            <div class="ostaliChatovi  my-auto" @click="listFriendChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}}<em class="lastOnline" v-if="!friendChat.isOnline"> last online: {{friendChat.wasOnline}}</em></div>
+            <div class="ostaliChatovi   " @click="listFriendChat(friendChat.fri_id,friendChat.fri_fullname,index)">{{friendChat.fri_fullname}} <p> <em class="lastOnline" v-if="!friendChat.isOnline"> last online: {{friendChat.wasOnline}}</em></p></div>
             <div v-show.visible="friendChat.fri_count!=0" class="kolikoNovihPoruka my-auto">{{friendChat.fri_count}}</div>
           </template>
         </span>
@@ -69,7 +69,7 @@
     <div v-else-if="chatSelected==2" class="col-lg-6 ">
       <h3 class="text-center  mb-3"> Chat window</h3>
       <div class="omotChat " id="divExample">
-        <div class="text-center">  <button v-if="!hideLazyLoadButton"   @click="loadMoreMsgsMeeting" type="button" class="btn btn-outline-primary" name="button">Load more messages</button></div>
+        <div class="text-center"> <button v-if="!hideLazyLoadButton" @click="loadMoreMsgsMeeting" type="button" class="btn btn-outline-primary" name="button">Load more messages</button></div>
         <div v-for="metMsg in meetMsgs">
           <div class="row " v-if="metMsg.msg_from==0">
             <div class="col-lg-6"> </div>
@@ -228,8 +228,8 @@ export default {
       this.meetMessageOne = '';
       setTimeout(this.goToBottomChat, 100);
     },
-    loadMoreMsgsMeeting(){
-        this.loadedMsgs++;
+    loadMoreMsgsMeeting() {
+      this.loadedMsgs++;
       this.hideLazyLoadButton = false;
 
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetingMessagesLazy", {
@@ -240,7 +240,7 @@ export default {
         },
       }).then(response => {
         this.meetMsgs = response.data.messages;
-            console.log(response.data);
+        console.log(response.data);
       });
       if (this.meetMsgs.length < (this.loadedMsgs - 1) * 10) {
         this.hideLazyLoadButton = true;
@@ -259,7 +259,7 @@ export default {
         this.friMsgs = response.data.messages;
         console.log(response.data);
       });
-      if (this.friMsgs.length%10!=0) {
+      if (this.friMsgs.length % 10 != 0) {
         this.hideLazyLoadButton = true;
       }
     },
@@ -281,7 +281,7 @@ export default {
           var date = moment.utc(end).format('YYYY-MM-DD HH:mm:ss');
           var stillUtc = moment.utc(date).toDate();
           var local = moment(stillUtc).local().format('YYYY-MM-DD HH:mm:ss');
-          this.friendsChat[i].wasOnline=moment.utc(local).fromNow();
+          this.friendsChat[i].wasOnline = moment.utc(local).fromNow();
           var duration = moment.duration(now.diff(end));
           var seconds = duration.asSeconds();
           if (seconds < 3) {
@@ -337,7 +337,7 @@ export default {
       if (this.meetId != met_id) {
         this.loadedMsgs = 1;
       }
-        this.hideLazyLoadButton = false;
+      this.hideLazyLoadButton = false;
       this.indexMeeting = index;
       this.chatSelected = 2;
       this.meetId = met_id;
@@ -388,13 +388,13 @@ export default {
 }
 </script>
 <style scoped>
-.lastOnline{
-  font-size: 15px;
+.lastOnline {
+  font-size: 13px;
+  line-height: 13px;
+  color:blue;
 }
-.dugme.active {
-  background: rgb(239,221,203);
-  border: none;
-}
+
+
 
 .member span:hover {
   cursor: pointer;
@@ -467,32 +467,38 @@ input:focus {
   height: 60vh;
   overflow: auto;
   overflow-x: hidden;
-  width: 100%;
+  width: 80%;
   padding: 50px;
   /* border: 1px solid #f1f1f1; */
 }
 
 .dugme {
   width: 120px;
-  background: #6ab4d1;
+  background: rgb(239, 221, 203);
   color: #fff;
   outline: 0;
 }
+.dugme.active {
+  background:#6ab4d1 ;
 
+  border: none;
+}
 .dugme:hover {
   border: 1px solid #aec6cf;
 }
 
 
 .ostaliChatovi {
-  height: 50px;
+  padding-top: 7px;
+  padding-left: 10px;
+  min-height: 20px;
   width: 90%;
   font-size: 20px;
-  line-height: 50px;
+  line-height: 20px;
   color: black;
   text-overflow: ellipsis;
   white-space: nowrap;
-  /* overflow: hidden; */
+  overflow: hidden;
   border-radius: 20px;
 }
 
