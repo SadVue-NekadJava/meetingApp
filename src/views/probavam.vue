@@ -16,13 +16,13 @@
       <div class="omot " v-for="blank in firstDayOfMonth"></div>
       <template  v-for="date in daysInMonth">
 
-        <div v-if="currentDate>date" class="omot text-center bg-secondary" style="cursor:not-allowed">
+        <div v-if="currentDate>date" class="omot text-center prosloVreme" style="cursor:not-allowed">
           <div class="datum">{{date}}
 
           </div>
         </div>
 
-        <div v-else-if="currentDate==date" class="omot text-center bg-primary" data-target="#nesto" @click="checkDate(date,year)" data-toggle="modal" >
+        <div v-else-if="currentDate==date" class="omot text-center danas" data-target="#nesto" @click="checkDate(date,year)" data-toggle="modal" >
           <div class="datum">{{date}}
 
           </div>
@@ -358,6 +358,10 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
 .acceptMeeting {
   font-size: 25px;
   cursor: pointer;
@@ -571,7 +575,7 @@ export default {
 .omot {
   height: 11vh;
   width: 10vw;
-  border: 1px solid #f1f1f1;
+  border:1px solid #f1f1f1;
   display: inline-block;
   position: relative;
   border-radius: 10px;
@@ -602,6 +606,15 @@ export default {
   text-align: right;
   margin: 5px;
 
+}
+.prosloVreme{
+  cursor: not-allowed;
+  background-color: #f1f1f1;
+  border: 1px solid white ;
+}
+
+.danas {
+  border: 1px solid #6ab4d1;
 }
 
 .calendar {
