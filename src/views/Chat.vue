@@ -193,12 +193,14 @@ export default {
       meetMsgs: [],
       meetMessageOne: '',
       meetId: 0,
-      hideLazyLoadButton: false
+      hideLazyLoadButton: false,
+      loadMoreMsgsChat:null,
+      loadMoreMsgsMeetingInterval :null
     }
   },
   mounted() {
     this.$store.state.activeChat = 1;
-    setInterval(this.getFriendsLoop, 1000);
+    setInterval(this.getFriendsLoop, 10000);
     this.getFriendsLoop();
   },
   filters: {
@@ -228,10 +230,22 @@ export default {
       this.meetMessageOne = '';
       setTimeout(this.goToBottomChat, 100);
     },
-    loadMoreMsgsMeeting() {
-      this.loadedMsgs++;
-      this.hideLazyLoadButton = false;
-
+    friendsIntervalMessages(){
+      axios.get("http://800q121.mars-t.mars-hosting.com/getFriendMessagesLazy", {
+        params: {
+          sid: window.localStorage.getItem("sessionid"),
+          fri_id: this.friId,
+          brojac: this.loadedMsgs
+        },
+      }).then(response => {
+        this.friMsgs = response.data.messages;
+        console.log(response.data);
+      });
+      if (this.friMsgs.length % 10 != 0) {
+        this.hideLazyLoadButton = true;
+      }
+    },
+    meetingsIntervalMessages(){
       axios.get("http://800q121.mars-t.mars-hosting.com/getMeetingMessagesLazy", {
         params: {
           sid: window.localStorage.getItem("sessionid"),
@@ -247,8 +261,27 @@ export default {
       }
 
     },
+    loadMoreMsgsMeeting() {
+      this.loadedMsgs++;
+      axios.get("http://800q121.mars-t.mars-hosting.com/getMeetingMessagesLazy", {
+        params: {
+          sid: window.localStorage.getItem("sessionid"),
+          met_id: this.meetId,
+          brojac: this.loadedMsgs
+        },
+      }).then(response => {
+        this.meetMsgs = response.data.messages;
+        console.log(response.data);
+      });
+      if (this.meetMsgs.length < (this.loadedMsgs - 1) * 10) {
+        this.hideLazyLoadButton = true;
+      }
+
+    },
+
     loadMoreMsgs() {
       this.loadedMsgs++;
+        this.hideLazyLoadButton = false;
       axios.get("http://800q121.mars-t.mars-hosting.com/getFriendMessagesLazy", {
         params: {
           sid: window.localStorage.getItem("sessionid"),
@@ -354,6 +387,9 @@ export default {
           this.hideLazyLoadButton = true;
         }
       });
+      clearInterval(this.friendsIntervalMessages);
+      this.loadMoreMsgsMeetingInterval=setInterval(this.meetingsIntervalMessages,5000);
+
       setTimeout(this.goToBottomChat, 100);
     },
     listFriendChat(fri_id, frName, index) {
@@ -376,7 +412,8 @@ export default {
           this.hideLazyLoadButton = true;
         }
       });
-
+        clearInterval(this.meetingsIntervalMessages);
+this.loadMoreMsgsChat=setInterval(this.friendsIntervalMessages,5000);
 
       setTimeout(this.goToBottomChat, 100);
     },
