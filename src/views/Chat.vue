@@ -200,7 +200,7 @@ export default {
   },
   mounted() {
     this.$store.state.activeChat = 1;
-    setInterval(this.getFriendsLoop, 10000);
+    setInterval(this.getFriendsLoop, 2000);
     this.getFriendsLoop();
   },
   filters: {
@@ -254,6 +254,7 @@ export default {
         },
       }).then(response => {
         this.meetMsgs = response.data.messages;
+        
         console.log(response.data);
       });
       if (this.meetMsgs.length < (this.loadedMsgs - 1) * 10) {
@@ -306,6 +307,7 @@ export default {
       }).then(response => {
         this.friendsChat = response.data.result;
         this.meetingsChat = response.data.meetings;
+        console.log(response.data);
         var now = moment(new Date());
         now = moment.utc(now).format("YYYY-MM-DD HH:mm:ss");
         now = moment(now);
@@ -317,7 +319,7 @@ export default {
           this.friendsChat[i].wasOnline = moment.utc(local).fromNow();
           var duration = moment.duration(now.diff(end));
           var seconds = duration.asSeconds();
-          if (seconds < 3) {
+          if (seconds < 10 ) {
             this.friendsChat[i].isOnline = true;
           } else {
             this.friendsChat[i].isOnline = false;
